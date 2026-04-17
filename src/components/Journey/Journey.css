@@ -39,7 +39,7 @@
 
 .timeline-row {
     display: flex;
-    align-items: center;
+    align-items: start;
     margin-bottom: 80px;
     position: relative;
 }
