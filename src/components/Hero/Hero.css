@@ -1,0 +1,158 @@
+/* HERO SECTION */
+
+.hero {
+    min-height: 90vh;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: linear-gradient(135deg,
+            #020617 0%,
+            #0f172a 40%,
+            #1e293b 100%);
+
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+/* INNER CONTAINER */
+
+.hero-inner {
+    max-width: 800px;
+    width: 100%;
+}
+
+/* TITLE */
+
+.hero-title {
+    font-size: 20px;
+    font-weight: 500;
+    color: #039b4a;
+    margin-bottom: 10px;
+}
+
+/* NAME */
+
+.hero-name {
+    font-size: 15vh;
+    font-weight: 700;
+    margin-bottom: 15px;
+
+    background: linear-gradient(90deg, #38bdf8, #6366f1, #a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    /* text-shadow:
+        1px 0 0 #58beea,
+        -1px 0 0 #58beea,
+        0 1px 0 #58beea,
+        0 -1px 0 #58beea;
+*/
+}
+
+/* SUBTITLE */
+
+.hero-subtitle {
+    font-size: 18px;
+    color: #cbd5f5;
+    margin-bottom: 35px;
+}
+
+/* BUTTON WRAPPER */
+
+.hero-actions {
+    display: flex;
+    width: 60%;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin: auto;
+}
+
+/* PRIMARY BUTTON */
+
+.btn-primary {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+
+    background: linear-gradient(135deg, #8dc6e4, #1f6083);
+    color: black;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+
+    transform: translateY(-2px);
+}
+
+/* OUTLINE BUTTON */
+
+.btn-outline {
+    padding: 12px 24px;
+    border-radius: 8px;
+
+    border: 1px solid #8dc6e4;
+    background: transparent;
+
+    color: #8dc6e4;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+    background: #8dc6e4;
+    color: black;
+}
+
+/* ========================= */
+/* RESPONSIVE DESIGN */
+/* ========================= */
+
+/* Tablets */
+
+@media (max-width: 768px) {
+
+    .hero-name {
+        font-size: 40px;
+    }
+
+    .hero-title {
+        font-size: 18px;
+    }
+
+    .hero-subtitle {
+        font-size: 16px;
+    }
+
+}
+
+/* Mobile */
+
+@media (max-width: 480px) {
+
+    .hero-name {
+        font-size: 32px;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .btn-primary,
+    .btn-outline {
+        width: 100%;
+    }
+
+}
