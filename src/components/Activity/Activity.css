@@ -1,0 +1,365 @@
+.activity-section {
+    padding: 110px 20px 40px;
+    background:
+        radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 30%),
+        radial-gradient(circle at top right, rgba(99, 102, 241, 0.18), transparent 28%),
+        linear-gradient(135deg, #020617 0%, #0f172a 40%, #1e293b 100%);
+    color: white;
+}
+
+.activity-shell {
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
+.activity-kicker {
+    margin: 0 0 10px;
+    text-align: center;
+    font-size: 15px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #38bdf8;
+}
+
+.activity-title {
+    margin: 0;
+    text-align: center;
+    font-size: clamp(38px, 6vw, 68px);
+    font-weight: 700;
+    background: linear-gradient(90deg, #e2e8f0, #38bdf8 45%, #818cf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.activity-subtitle {
+    max-width: 760px;
+    margin: 18px auto 60px;
+    text-align: center;
+    color: #94a3b8;
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+.activity-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
+}
+
+.activity-card {
+    position: relative;
+    padding: 28px;
+    border-radius: 28px;
+    background: rgba(15, 23, 42, 0.72);
+    border: 1px solid rgba(148, 163, 184, 0.16);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 24px 60px rgba(2, 6, 23, 0.45);
+    overflow: hidden;
+}
+
+.activity-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(56, 189, 248, 0.08), transparent 35%, rgba(129, 140, 248, 0.08));
+    pointer-events: none;
+}
+
+.activity-card>* {
+    position: relative;
+    z-index: 1;
+}
+
+.activity-card-head {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.activity-card-head h3 {
+    margin: 4px 0 0;
+    font-size: 28px;
+}
+
+.activity-icon {
+    display: grid;
+    place-items: center;
+    width: 58px;
+    height: 58px;
+    border-radius: 18px;
+    font-size: 28px;
+}
+
+.github-icon {
+    background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(15, 23, 42, 0.8));
+    color: #e2e8f0;
+    box-shadow: 0 0 28px rgba(56, 189, 248, 0.18);
+}
+
+.leetcode-icon {
+    background: linear-gradient(135deg, rgba(251, 146, 60, 0.22), rgba(15, 23, 42, 0.8));
+    color: #f59e0b;
+    box-shadow: 0 0 28px rgba(245, 158, 11, 0.18);
+}
+
+.activity-label {
+    margin: 0;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 12px;
+}
+
+.activity-status {
+    margin: 18px 0 6px;
+    color: #cbd5e1;
+    font-size: 15px;
+}
+
+.error-text {
+    color: #fca5a5;
+}
+
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.stat-chip {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 18px;
+    border-radius: 20px;
+    background: rgba(30, 41, 59, 0.72);
+    border: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+.chip-icon {
+    font-size: 20px;
+    color: #38bdf8;
+    margin-top: 3px;
+}
+
+.stat-chip strong,
+.difficulty-card strong,
+.summary-row strong,
+.leetcode-foot strong {
+    display: block;
+    font-size: 28px;
+    font-weight: 700;
+    color: #f8fafc;
+}
+
+.stat-chip p,
+.difficulty-card p {
+    margin: 4px 0 0;
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+.activity-heatmap {
+    margin-top: 24px;
+    padding: 18px;
+    border-radius: 22px;
+    background: rgba(15, 23, 42, 0.76);
+    border: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+.heatmap-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 14px;
+    color: #94a3b8;
+    font-size: 13px;
+}
+
+.heatmap-grid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.heatmap-cell {
+    aspect-ratio: 1;
+    border-radius: 10px;
+    background: rgba(148, 163, 184, 0.1);
+    border: 1px solid rgba(148, 163, 184, 0.06);
+}
+
+.heatmap-cell.level-1 {
+    background: rgba(34, 211, 238, 0.22);
+}
+
+.heatmap-cell.level-2 {
+    background: rgba(34, 211, 238, 0.42);
+}
+
+.heatmap-cell.level-3 {
+    background: rgba(56, 189, 248, 0.72);
+}
+
+.heatmap-cell.level-4 {
+    background: rgba(129, 140, 248, 0.9);
+}
+
+.leetcode-top {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 24px;
+    align-items: center;
+}
+
+.progress-ring {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    padding: 14px;
+    box-shadow: inset 0 0 30px rgba(15, 23, 42, 0.85), 0 0 32px rgba(56, 189, 248, 0.1);
+}
+
+.progress-ring-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: rgba(2, 6, 23, 0.92);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.progress-ring-inner strong {
+    font-size: 40px;
+}
+
+.progress-ring-inner span,
+.summary-row span,
+.leetcode-foot span {
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+.leetcode-summary {
+    display: grid;
+    gap: 12px;
+}
+
+.summary-row,
+.leetcode-foot {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.summary-row {
+    align-items: center;
+    padding: 14px 16px;
+    border-radius: 18px;
+    background: rgba(30, 41, 59, 0.7);
+    border: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+.summary-row strong,
+.leetcode-foot strong {
+    justify-self: end;
+    font-size: 20px;
+}
+
+.difficulty-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 22px;
+}
+
+.difficulty-card {
+    padding: 18px;
+    border-radius: 20px;
+    border: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+.difficulty-card.easy {
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.16), rgba(15, 23, 42, 0.9));
+}
+
+.difficulty-card.medium {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.18), rgba(15, 23, 42, 0.9));
+}
+
+.difficulty-card.hard {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.18), rgba(15, 23, 42, 0.9));
+}
+
+.leetcode-foot {
+    margin-top: 20px;
+}
+
+.leetcode-foot>div {
+    padding: 16px 18px;
+    border-radius: 18px;
+    background: rgba(15, 23, 42, 0.76);
+    border: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+@media (max-width: 980px) {
+    .activity-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .activity-section {
+        padding: 90px 16px 30px;
+    }
+
+    .stat-grid,
+    .difficulty-grid,
+    .summary-row,
+    .leetcode-foot {
+        grid-template-columns: 1fr;
+    }
+
+    .summary-row strong,
+    .leetcode-foot strong {
+        justify-self: start;
+    }
+
+    .leetcode-top {
+        grid-template-columns: 1fr;
+        justify-items: center;
+    }
+
+    .leetcode-summary {
+        width: 100%;
+    }
+
+    .heatmap-head {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .activity-card {
+        padding: 22px;
+        border-radius: 22px;
+    }
+
+    .activity-card-head h3 {
+        font-size: 22px;
+    }
+
+    .progress-ring {
+        width: 150px;
+        height: 150px;
+    }
+
+    .progress-ring-inner strong {
+        font-size: 32px;
+    }
+}
