@@ -1,7 +1,10 @@
 .journey {
     padding: 120px 10%;
     width: 100%;
-    background: #020617;
+    background: linear-gradient(135deg,
+            #020617 0%,
+            #0f172a 40%,
+            #1e293b 100%);
     color: white;
     position: relative;
 }

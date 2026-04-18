@@ -1,13 +1,15 @@
 .navbar {
-  width: 96vw;
   position: fixed;
+  top: 2vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90vw;
   height: 9vh;
   background-color: rgba(6, 17, 42, 0.5);
-  margin: 2vh;
   z-index: 1000;
   display: flex;
   align-items: center;
-  justify-content: Space-between;
+  justify-content: space-between;
   border-radius: 15px;
   backdrop-filter: blur(5px);
 

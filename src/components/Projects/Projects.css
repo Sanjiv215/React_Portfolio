@@ -10,9 +10,10 @@ body {
 .projects-section {
     padding: 100px 8%;
     background: #020617;
-    width: 100%;
+    /* width: 100%; */
     color: white;
     font-family: "Outfit", sans-serif;
+    box-sizing: border-box;
 }
 
 /* TITLE */

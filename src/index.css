@@ -3,3 +3,9 @@ body {
   color: white;
   font-family: 'Poppins', sans-serifs;
 }
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
