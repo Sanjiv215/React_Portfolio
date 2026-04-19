@@ -1,594 +1,367 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, {
+  useEffect,
+  useMemo,
+  useState,
+  useCallback,
+} from "react";
 import "./Activity.css";
-import { FaCodeBranch, FaFire, FaGithub, FaLaptopCode, FaCodePullRequest } from "react-icons/fa6";
-import { SiLeetcode } from "react-icons/si";
 
 const GITHUB_USERNAME = "Sanjiv215";
-const LEETCODE_USERNAME = "Sanjiv215";
 
-const githubContributionQuery = `
-  query githubActivity($login: String!, $from: DateTime!, $to: DateTime!) {
-    user(login: $login) {
-      followers {
-        totalCount
-      }
-      repositories(ownerAffiliations: OWNER, privacy: PUBLIC, isFork: false) {
-        totalCount
-      }
-      contributionsCollection(from: $from, to: $to) {
-        totalCommitContributions
-        totalPullRequestContributions
-        contributionCalendar {
-          totalContributions
-          weeks {
-            contributionDays {
-              contributionCount
-              date
-              contributionLevel
-            }
-          }
-        }
-      }
-    }
-  }
-`;
+// ─── Utilities ────────────────────────────────────────────────────────────────
 
-const leetCodeQuery = `
-  query userProfile($username: String!) {
-    matchedUser(username: $username) {
-      submitStatsGlobal {
-        acSubmissionNum {
-          difficulty
-          count
-          submissions
-        }
-      }
-      profile {
-        ranking
-        userAvatar
-        realName
-        reputation
-      }
-      badges {
-        id
-        displayName
-        icon
-      }
-    }
-    userContestRanking(username: $username) {
-      rating
-      globalRanking
-      attendedContestsCount
-      topPercentage
-    }
-    allQuestionsCount {
-      difficulty
-      count
-    }
-  }
-`;
-
-function formatCompact(value) {
-  if (value === null || value === undefined || Number.isNaN(value)) {
-    return "--";
-  }
-
-  return new Intl.NumberFormat("en", {
-    notation: "compact",
-    maximumFractionDigits: 1,
-  }).format(value);
+function fmt(value) {
+  if (value === null || value === undefined) return "--";
+  return new Intl.NumberFormat("en-IN").format(Math.round(value));
 }
 
-function buildGithubHeatmap(events) {
+function timeAgo(dateStr) {
+  const diff = (Date.now() - new Date(dateStr)) / 1000;
+  if (diff < 60)    return `${Math.floor(diff)}s ago`;
+  if (diff < 3600)  return `${Math.floor(diff / 60)}m ago`;
+  if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
+  return `${Math.floor(diff / 86400)}d ago`;
+}
+
+function getEventMeta(event) {
+  const repo = event.repo?.name || "";
+  switch (event.type) {
+    case "PushEvent":
+      return { icon: "↑", label: `Pushed ${event.payload?.commits?.length || 1} commit(s)`, color: "var(--c-blue)", repo };
+    case "PullRequestEvent":
+      return { icon: "⇄", label: `PR ${event.payload?.action}`, color: "var(--c-violet)", repo };
+    case "IssuesEvent":
+      return { icon: "○", label: `Issue ${event.payload?.action}`, color: "var(--c-green)", repo };
+    case "WatchEvent":
+      return { icon: "✦", label: "Starred", color: "var(--c-amber)", repo };
+    case "ForkEvent":
+      return { icon: "⑂", label: "Forked", color: "var(--c-pink)", repo };
+    case "CreateEvent":
+      return { icon: "+", label: `Created ${event.payload?.ref_type || "ref"}`, color: "var(--c-teal)", repo };
+    case "IssueCommentEvent":
+      return { icon: "›", label: "Commented", color: "var(--c-muted)", repo };
+    default:
+      return { icon: "·", label: event.type.replace("Event", ""), color: "var(--c-muted)", repo };
+  }
+}
+
+// ─── Data builders ────────────────────────────────────────────────────────────
+
+function buildHeatmap(events) {
+  const map = new Map();
+  events.forEach((e) => {
+    const key = new Date(e.created_at).toISOString().slice(0, 10);
+    const w = e.type === "PushEvent" ? Math.max(e.payload?.commits?.length || 0, 1) : 1;
+    map.set(key, (map.get(key) || 0) + w);
+  });
   const today = new Date();
-  const days = 35;
-  const eventMap = new Map();
-
-  events.forEach((event) => {
-    const key = new Date(event.created_at).toISOString().slice(0, 10);
-    const weight = event.type === "PushEvent"
-      ? Math.max(event.payload?.commits?.length || 0, 1)
-      : 1;
-
-    eventMap.set(key, (eventMap.get(key) || 0) + weight);
-  });
-
-  return Array.from({ length: days }, (_, index) => {
-    const date = new Date(today);
-    date.setDate(today.getDate() - (days - index - 1));
-
-    const key = date.toISOString().slice(0, 10);
-    const count = eventMap.get(key) || 0;
-
+  return Array.from({ length: 364 }, (_, i) => {
+    const d = new Date(today);
+    d.setDate(today.getDate() - (363 - i));
+    const key = d.toISOString().slice(0, 10);
+    const count = map.get(key) || 0;
     let level = 0;
-
-    if (count >= 5) level = 4;
-    else if (count >= 3) level = 3;
-    else if (count >= 2) level = 2;
+    if (count >= 8) level = 4;
+    else if (count >= 5) level = 3;
+    else if (count >= 3) level = 2;
     else if (count >= 1) level = 1;
-
-    return {
-      key,
-      count,
-      level,
-    };
+    return { key, count, level };
   });
 }
 
-function buildGithubHeatmapFromCalendar(weeks) {
-  const flattenedDays = weeks
-    .flatMap((week) => week.contributionDays)
-    .slice(-35);
-
-  return flattenedDays.map((day) => {
-    const levelMap = {
-      NONE: 0,
-      FIRST_QUARTILE: 1,
-      SECOND_QUARTILE: 2,
-      THIRD_QUARTILE: 3,
-      FOURTH_QUARTILE: 4,
-    };
-
-    return {
-      key: day.date,
-      count: day.contributionCount,
-      level: levelMap[day.contributionLevel] ?? 0,
-    };
-  });
-}
-
-function buildPublicStreak(events) {
-  const activeDays = new Set(
-    events.map((event) => new Date(event.created_at).toISOString().slice(0, 10))
-  );
-
+function buildStreak(events) {
+  const days = new Set(events.map((e) => new Date(e.created_at).toISOString().slice(0, 10)));
   let streak = 0;
-  const cursor = new Date();
-
-  for (let i = 0; i < 60; i += 1) {
-    const key = cursor.toISOString().slice(0, 10);
-
-    if (!activeDays.has(key)) {
-      break;
-    }
-
-    streak += 1;
-    cursor.setDate(cursor.getDate() - 1);
+  const cur = new Date();
+  for (let i = 0; i < 90; i++) {
+    if (!days.has(cur.toISOString().slice(0, 10))) break;
+    streak++;
+    cur.setDate(cur.getDate() - 1);
   }
-
   return streak;
 }
 
-function buildContributionStreak(weeks) {
-  const contributionDays = weeks
-    .flatMap((week) => week.contributionDays)
-    .filter((day) => day.contributionCount > 0)
-    .map((day) => day.date);
-
-  const activeDays = new Set(contributionDays);
-  let streak = 0;
-  const cursor = new Date();
-
-  for (let i = 0; i < 370; i += 1) {
-    const key = cursor.toISOString().slice(0, 10);
-
-    if (!activeDays.has(key)) {
-      break;
-    }
-
-    streak += 1;
-    cursor.setDate(cursor.getDate() - 1);
-  }
-
-  return streak;
+function buildLanguages(repos) {
+  const map = {};
+  repos.forEach((r) => { if (r.language) map[r.language] = (map[r.language] || 0) + 1; });
+  const total = Object.values(map).reduce((a, b) => a + b, 0);
+  return Object.entries(map)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 6)
+    .map(([lang, count]) => ({ lang, pct: Math.round((count / total) * 100) }));
 }
 
-function buildLeetCodeStats(payload) {
-  const stats = payload?.matchedUser?.submitStatsGlobal?.acSubmissionNum || [];
-  const totals = payload?.allQuestionsCount || [];
-  const contest = payload?.userContestRanking || null;
+const LANG_COLORS = {
+  JavaScript: "#f7df1e", TypeScript: "#3178c6", Python: "#4584b6",
+  HTML: "#e34c26", CSS: "#264de4", C: "#6e6e6e", "C++": "#f34b7d",
+  Java: "#b07219", Rust: "#ce422b", Go: "#00ADD8", default: "#38bdf8",
+};
 
-  const byDifficulty = stats.reduce((accumulator, item) => {
-    accumulator[item.difficulty] = item.count;
-    return accumulator;
-  }, {});
+// ─── Count-up hook ────────────────────────────────────────────────────────────
 
-  const totalsByDifficulty = totals.reduce((accumulator, item) => {
-    accumulator[item.difficulty] = item.count;
-    return accumulator;
-  }, {});
-
-  const solvedTotal = byDifficulty.All || 0;
-  const totalQuestions = totalsByDifficulty.All || 0;
-  const solveRate = totalQuestions > 0
-    ? Math.round((solvedTotal / totalQuestions) * 100)
-    : 0;
-
-  return {
-    solvedTotal,
-    easy: byDifficulty.Easy || 0,
-    medium: byDifficulty.Medium || 0,
-    hard: byDifficulty.Hard || 0,
-    totalQuestions,
-    solveRate,
-    contestRating: contest?.rating ? Math.round(contest.rating) : null,
-    contestRank: contest?.globalRanking || null,
-    contestCount: contest?.attendedContestsCount || 0,
-    badges: payload?.matchedUser?.badges?.length || 0,
-  };
-}
-
-function Activity() {
-  const [githubData, setGithubData] = useState({
-    loading: true,
-    error: "",
-    profile: null,
-    pullRequests: 0,
-    recentCommits: 0,
-    streak: 0,
-    heatmap: [],
-    commitLabel: "Recent public commits",
-    streakLabel: "Public streak days",
-    periodLabel: "Last 35 days",
-  });
-
-  const [leetcodeData, setLeetcodeData] = useState({
-    loading: true,
-    error: "",
-    stats: null,
-  });
-
+function useCountUp(target, delay = 0) {
+  const [val, setVal] = useState(0);
   useEffect(() => {
-    let isMounted = true;
+    if (!target) return;
+    let raf, start = null;
+    const t = setTimeout(() => {
+      raf = requestAnimationFrame(function step(ts) {
+        if (!start) start = ts;
+        const p = Math.min((ts - start) / 1100, 1);
+        setVal(Math.round((1 - Math.pow(1 - p, 3)) * target));
+        if (p < 1) raf = requestAnimationFrame(step);
+      });
+    }, delay);
+    return () => { clearTimeout(t); cancelAnimationFrame(raf); };
+  }, [target, delay]);
+  return val;
+}
 
-    async function loadGithub() {
-      try {
-        const githubToken = import.meta.env.VITE_GITHUB_TOKEN;
+// ─── StatCard ─────────────────────────────────────────────────────────────────
 
-        if (githubToken) {
-          const now = new Date();
-          const yearAgo = new Date(now);
-          yearAgo.setFullYear(now.getFullYear() - 1);
+function StatCard({ label, value, delay, accent }) {
+  const display = useCountUp(typeof value === "number" ? value : 0, delay);
+  return (
+    <div className="sc" style={{ "--accent": accent }}>
+      <span className="sc-val">{typeof value === "number" ? fmt(display) : value}</span>
+      <span className="sc-label">{label}</span>
+      <div className="sc-bar" />
+    </div>
+  );
+}
 
-          const graphResponse = await fetch("https://api.github.com/graphql", {
-            method: "POST",
-            headers: {
-              Authorization: `Bearer ${githubToken}`,
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              query: githubContributionQuery,
-              variables: {
-                login: GITHUB_USERNAME,
-                from: yearAgo.toISOString(),
-                to: now.toISOString(),
-              },
-            }),
-          });
+// ─── Heatmap ──────────────────────────────────────────────────────────────────
 
-          if (!graphResponse.ok) {
-            throw new Error("GitHub GraphQL stats could not be loaded.");
-          }
+function Heatmap({ cells }) {
+  const [hovered, setHovered] = useState(null);
 
-          const graphPayload = await graphResponse.json();
-          const githubUser = graphPayload?.data?.user;
-          const calendarWeeks = githubUser?.contributionsCollection?.contributionCalendar?.weeks || [];
-
-          if (graphPayload.errors || !githubUser) {
-            throw new Error("GitHub GraphQL stats could not be loaded.");
-          }
-
-          if (!isMounted) {
-            return;
-          }
-
-          setGithubData({
-            loading: false,
-            error: "",
-            profile: {
-              public_repos: githubUser.repositories.totalCount,
-              followers: githubUser.followers.totalCount,
-            },
-            pullRequests: githubUser.contributionsCollection.totalPullRequestContributions || 0,
-            recentCommits: githubUser.contributionsCollection.totalCommitContributions || 0,
-            streak: buildContributionStreak(calendarWeeks),
-            heatmap: buildGithubHeatmapFromCalendar(calendarWeeks),
-            commitLabel: "Last 12 months commits",
-            streakLabel: "Contribution streak",
-            periodLabel: "Last 35 contribution days",
-          });
-
-          return;
-        }
-
-        const headers = {
-          Accept: "application/vnd.github+json",
-          "X-GitHub-Api-Version": "2022-11-28",
-        };
-
-        const [profileResponse, prResponse, eventsResponse] = await Promise.all([
-          fetch(`https://api.github.com/users/${GITHUB_USERNAME}`, { headers }),
-          fetch(
-            `https://api.github.com/search/issues?q=author:${GITHUB_USERNAME}+type:pr`,
-            { headers }
-          ),
-          fetch(`https://api.github.com/users/${GITHUB_USERNAME}/events/public?per_page=100`, {
-            headers,
-          }),
-        ]);
-
-        if (!profileResponse.ok || !prResponse.ok || !eventsResponse.ok) {
-          throw new Error("GitHub stats could not be loaded.");
-        }
-
-        const [profile, pullRequests, events] = await Promise.all([
-          profileResponse.json(),
-          prResponse.json(),
-          eventsResponse.json(),
-        ]);
-
-        const recentCommits = events
-          .filter((event) => event.type === "PushEvent")
-          .reduce((total, event) => total + (event.payload?.commits?.length || 0), 0);
-
-        if (!isMounted) {
-          return;
-        }
-
-        setGithubData({
-          loading: false,
-          error: "",
-          profile,
-          pullRequests: pullRequests.total_count || 0,
-          recentCommits,
-          streak: buildPublicStreak(events),
-          heatmap: buildGithubHeatmap(events),
-          commitLabel: "Recent public commits",
-          streakLabel: "Public streak days",
-          periodLabel: "Last 35 public activity days",
-        });
-      } catch (error) {
-        if (!isMounted) {
-          return;
-        }
-
-        setGithubData({
-          loading: false,
-          error: "GitHub activity is temporarily unavailable.",
-          profile: null,
-          pullRequests: 0,
-          recentCommits: 0,
-          streak: 0,
-          heatmap: [],
-          commitLabel: "GitHub commits",
-          streakLabel: "Streak",
-          periodLabel: "Recent activity",
-        });
-      }
-    }
-
-    async function loadLeetCode() {
-      try {
-        const response = await fetch("https://leetcode.com/graphql", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            query: leetCodeQuery,
-            variables: { username: LEETCODE_USERNAME },
-          }),
-        });
-
-        if (!response.ok) {
-          throw new Error("LeetCode request failed.");
-        }
-
-        const payload = await response.json();
-
-        if (payload.errors || !payload.data?.matchedUser) {
-          throw new Error("LeetCode stats are not public.");
-        }
-
-        if (!isMounted) {
-          return;
-        }
-
-        setLeetcodeData({
-          loading: false,
-          error: "",
-          stats: buildLeetCodeStats(payload.data),
-        });
-      } catch (error) {
-        if (!isMounted) {
-          return;
-        }
-
-        setLeetcodeData({
-          loading: false,
-          error: "LeetCode stats are temporarily unavailable.",
-          stats: null,
-        });
-      }
-    }
-
-    loadGithub();
-    loadLeetCode();
-
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-
-  const progressDegrees = useMemo(() => {
-    const solveRate = leetcodeData.stats?.solveRate || 0;
-    return `${Math.min(Math.max(solveRate, 0), 100) * 3.6}deg`;
-  }, [leetcodeData.stats]);
+  const weeks = useMemo(() => {
+    const w = [];
+    for (let i = 0; i < cells.length; i += 7) w.push(cells.slice(i, i + 7));
+    return w;
+  }, [cells]);
 
   return (
-    <section className="activity-section" id="activity">
-      <div className="activity-shell">
-        <p className="activity-kicker">Live developer snapshot</p>
-        <h2 className="activity-title">My Activity</h2>
-        <p className="activity-subtitle">
-          Public GitHub momentum and LeetCode problem-solving stats, refreshed from
-          live profile data.
-        </p>
-
-        <div className="activity-grid">
-          <article className="activity-card github-card">
-            <div className="activity-card-head">
-              <div className="activity-icon github-icon">
-                <FaGithub />
-              </div>
-              <div>
-                <p className="activity-label">GitHub</p>
-                <h3>@{GITHUB_USERNAME}</h3>
-              </div>
+    <div className="hm">
+      <div className="hm-scroll">
+        <div className="hm-grid">
+          {weeks.map((week, wi) => (
+            <div key={wi} className="hm-week">
+              {week.map((day) => (
+                <div
+                  key={day.key}
+                  className={`hm-cell lv-${day.level}`}
+                  onMouseEnter={() => setHovered(day)}
+                  onMouseLeave={() => setHovered(null)}
+                />
+              ))}
             </div>
+          ))}
+        </div>
+      </div>
 
-            {githubData.loading ? (
-              <p className="activity-status">Loading GitHub activity...</p>
-            ) : githubData.error ? (
-              <p className="activity-status error-text">{githubData.error}</p>
-            ) : (
+      <div className="hm-footer">
+        <div className="hm-legend">
+          <span>Less</span>
+          {[0, 1, 2, 3, 4].map((l) => (
+            <div key={l} className={`hm-cell lv-${l} no-hover`} />
+          ))}
+          <span>More</span>
+        </div>
+        <div className={`hm-tip ${hovered ? "hm-tip--active" : ""}`}>
+          {hovered
+            ? <><strong>{hovered.count}</strong> contribution{hovered.count !== 1 ? "s" : ""} · {hovered.key}</>
+            : "Hover to inspect"}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Language bar ─────────────────────────────────────────────────────────────
+
+function LangBar({ languages }) {
+  return (
+    <div className="lb">
+      <div className="lb-track">
+        {languages.map(({ lang, pct }) => (
+          <div
+            key={lang}
+            className="lb-seg"
+            style={{ width: `${pct}%`, background: LANG_COLORS[lang] || LANG_COLORS.default }}
+            title={`${lang} · ${pct}%`}
+          />
+        ))}
+      </div>
+      <div className="lb-pills">
+        {languages.map(({ lang, pct }) => (
+          <div key={lang} className="lb-pill">
+            <span className="lb-dot" style={{ background: LANG_COLORS[lang] || LANG_COLORS.default }} />
+            <span className="lb-name">{lang}</span>
+            <span className="lb-pct">{pct}%</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ─── Feed item ────────────────────────────────────────────────────────────────
+
+function FeedItem({ event, index }) {
+  const { icon, label, color, repo } = getEventMeta(event);
+  const short = repo.split("/")[1] || repo;
+  return (
+    <div className="fi" style={{ "--fc": color, animationDelay: `${index * 50}ms` }}>
+      <span className="fi-icon" style={{ color }}>{icon}</span>
+      <div className="fi-body">
+        <span className="fi-label">{label}</span>
+        <a
+          className="fi-repo"
+          href={`https://github.com/${repo}`}
+          target="_blank"
+          rel="noreferrer"
+        >
+          {short}
+        </a>
+      </div>
+      <span className="fi-time">{timeAgo(event.created_at)}</span>
+    </div>
+  );
+}
+
+// ─── Main component ───────────────────────────────────────────────────────────
+
+export default function Activity() {
+  const [loading, setLoading] = useState(true);
+  const [error, setError]     = useState(null);
+  const [profile, setProfile] = useState(null);
+  const [events, setEvents]   = useState([]);
+  const [repos, setRepos]     = useState([]);
+  const [prs, setPrs]         = useState(0);
+
+  const fetchAll = useCallback(async () => {
+    const [evRes, profRes, prRes, repoRes] = await Promise.all([
+      fetch(`https://api.github.com/users/${GITHUB_USERNAME}/events/public?per_page=100`),
+      fetch(`https://api.github.com/users/${GITHUB_USERNAME}`),
+      fetch(`https://api.github.com/search/issues?q=author:${GITHUB_USERNAME}+type:pr`),
+      fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?per_page=100&sort=updated`),
+    ]);
+    if (!profRes.ok) throw new Error(`GitHub API ${profRes.status}`);
+    const [evData, profData, prData, repoData] = await Promise.all([
+      evRes.json(), profRes.json(), prRes.json(), repoRes.json(),
+    ]);
+    setEvents(Array.isArray(evData) ? evData : []);
+    setProfile(profData);
+    setPrs(prData.total_count || 0);
+    setRepos(Array.isArray(repoData) ? repoData : []);
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      try { await fetchAll(); }
+      catch (e) { setError(e.message); }
+      finally   { setLoading(false); }
+    })();
+  }, [fetchAll]);
+
+  const heatmap   = useMemo(() => buildHeatmap(events), [events]);
+  const streak    = useMemo(() => buildStreak(events), [events]);
+  const languages = useMemo(() => buildLanguages(repos), [repos]);
+
+  const commits = useMemo(
+    () => events.filter((e) => e.type === "PushEvent")
+                .reduce((t, e) => t + (e.payload?.commits?.length || 0), 0),
+    [events]
+  );
+  const totalStars = useMemo(
+    () => repos.reduce((t, r) => t + (r.stargazers_count || 0), 0),
+    [repos]
+  );
+
+  if (loading) {
+    return (
+      <div className="act-loading">
+        <div className="act-spinner" />
+      </div>
+    );
+  }
+
+  return (
+    <section className="act">
+      <div className="act-shell">
+
+        {/* ── Header ── */}
+        <header className="act-header">
+          <div className="act-eyebrow">GitHub Activity</div>
+          <h2 className="act-title">Code. Commit. Repeat.</h2>
+          {profile && (
+            <a
+              href={profile.html_url}
+              target="_blank"
+              rel="noreferrer"
+              className="act-profile-link"
+            >
+              <img src={profile.avatar_url} alt={profile.login} className="act-avatar" />
+              <div className="act-profile-text">
+                <span className="act-profile-name">{profile.name || profile.login}</span>
+                <span className="act-profile-handle">@{profile.login}</span>
+              </div>
+              <span className="act-profile-arrow">↗</span>
+            </a>
+          )}
+        </header>
+
+        {error && <p className="act-error">⚠ {error}</p>}
+
+        {/* ── Stats row — 6 equal columns ── */}
+        <div className="sc-row">
+          <StatCard label="Commits"       value={commits}                  delay={0}   accent="var(--c-blue)"   />
+          <StatCard label="Repositories"  value={profile?.public_repos||0} delay={80}  accent="var(--c-violet)" />
+          <StatCard label="Pull Requests" value={prs}                      delay={160} accent="var(--c-green)"  />
+          <StatCard label="Stars Earned"  value={totalStars}               delay={240} accent="var(--c-amber)"  />
+          <StatCard label="Followers"     value={profile?.followers||0}    delay={320} accent="var(--c-pink)"   />
+          <StatCard label="Day Streak"    value={streak}                   delay={400} accent="var(--c-teal)"   />
+        </div>
+
+        {/* ── Body — two perfectly equal columns ── */}
+        <div className="act-body">
+
+          {/* Left — contribution heatmap */}
+          <div className="panel act-col">
+            <div className="panel-head">
+              <span className="panel-title">Contributions</span>
+              <span className="panel-sub">Last 52 weeks</span>
+            </div>
+            <Heatmap cells={heatmap} />
+
+            {languages.length > 0 && (
               <>
-                <div className="stat-grid">
-                  <div className="stat-chip">
-                    <span className="chip-icon"><FaCodeBranch /></span>
-                    <div>
-                      <strong>{formatCompact(githubData.recentCommits)}</strong>
-                      <p>{githubData.commitLabel}</p>
-                    </div>
-                  </div>
-
-                  <div className="stat-chip">
-                    <span className="chip-icon"><FaCodePullRequest /></span>
-                    <div>
-                      <strong>{formatCompact(githubData.pullRequests)}</strong>
-                      <p>Pull requests</p>
-                    </div>
-                  </div>
-
-                  <div className="stat-chip">
-                    <span className="chip-icon"><FaFire /></span>
-                    <div>
-                      <strong>{formatCompact(githubData.streak)}</strong>
-                      <p>{githubData.streakLabel}</p>
-                    </div>
-                  </div>
-
-                  <div className="stat-chip">
-                    <span className="chip-icon"><FaLaptopCode /></span>
-                    <div>
-                      <strong>{formatCompact(githubData.profile?.public_repos || 0)}</strong>
-                      <p>Public repositories</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="activity-heatmap">
-                  <div className="heatmap-head">
-                    <span>{githubData.periodLabel}</span>
-                    <span>{formatCompact(githubData.profile?.followers || 0)} followers</span>
-                  </div>
-
-                  <div className="heatmap-grid">
-                    {githubData.heatmap.map((day) => (
-                      <span
-                        key={day.key}
-                        className={`heatmap-cell level-${day.level}`}
-                        title={`${day.key}: ${day.count} activity events`}
-                      />
-                    ))}
-                  </div>
-                </div>
+                <div className="divider" />
+                <p className="panel-title" style={{ marginBottom: 14 }}>Top Languages</p>
+                <LangBar languages={languages} />
               </>
             )}
-          </article>
+          </div>
 
-          <article className="activity-card leetcode-card">
-            <div className="activity-card-head">
-              <div className="activity-icon leetcode-icon">
-                <SiLeetcode />
-              </div>
-              <div>
-                <p className="activity-label">LeetCode</p>
-                <h3>@{LEETCODE_USERNAME}</h3>
-              </div>
+          {/* Right — activity feed, same height as left */}
+          <div className="panel act-col feed-panel">
+            <div className="panel-head">
+              <span className="panel-title">Activity Feed</span>
+              <span className="panel-dot" />
             </div>
+            <div className="feed">
+              {events.slice(0, 12).length > 0
+                ? events.slice(0, 12).map((ev, i) => (
+                    <FeedItem key={ev.id} event={ev} index={i} />
+                  ))
+                : <p className="feed-empty">No recent public events.</p>
+              }
+            </div>
+          </div>
 
-            {leetcodeData.loading ? (
-              <p className="activity-status">Loading LeetCode stats...</p>
-            ) : leetcodeData.error ? (
-              <p className="activity-status error-text">{leetcodeData.error}</p>
-            ) : (
-              <>
-                <div className="leetcode-top">
-                  <div
-                    className="progress-ring"
-                    style={{
-                      background: `conic-gradient(#38bdf8 0deg ${progressDegrees}, rgba(148, 163, 184, 0.16) ${progressDegrees} 360deg)`,
-                    }}
-                  >
-                    <div className="progress-ring-inner">
-                      <strong>{leetcodeData.stats?.solvedTotal || 0}</strong>
-                      <span>Solved</span>
-                    </div>
-                  </div>
-
-                  <div className="leetcode-summary">
-                    <div className="summary-row">
-                      <span>Total solved</span>
-                      <strong>{formatCompact(leetcodeData.stats?.solvedTotal || 0)}</strong>
-                    </div>
-                    <div className="summary-row">
-                      <span>Solve rate</span>
-                      <strong>{leetcodeData.stats?.solveRate || 0}%</strong>
-                    </div>
-                    <div className="summary-row">
-                      <span>Contest rating</span>
-                      <strong>{formatCompact(leetcodeData.stats?.contestRating)}</strong>
-                    </div>
-                    <div className="summary-row">
-                      <span>Badges</span>
-                      <strong>{formatCompact(leetcodeData.stats?.badges || 0)}</strong>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="difficulty-grid">
-                  <div className="difficulty-card easy">
-                    <p>Easy</p>
-                    <strong>{formatCompact(leetcodeData.stats?.easy || 0)}</strong>
-                  </div>
-                  <div className="difficulty-card medium">
-                    <p>Medium</p>
-                    <strong>{formatCompact(leetcodeData.stats?.medium || 0)}</strong>
-                  </div>
-                  <div className="difficulty-card hard">
-                    <p>Hard</p>
-                    <strong>{formatCompact(leetcodeData.stats?.hard || 0)}</strong>
-                  </div>
-                </div>
-
-                <div className="leetcode-foot">
-                  <div>
-                    <span>Contest rank</span>
-                    <strong>{formatCompact(leetcodeData.stats?.contestRank)}</strong>
-                  </div>
-                  <div>
-                    <span>Contests</span>
-                    <strong>{formatCompact(leetcodeData.stats?.contestCount || 0)}</strong>
-                  </div>
-                </div>
-              </>
-            )}
-          </article>
         </div>
       </div>
     </section>
   );
 }
-
-export default Activity;
