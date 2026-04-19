@@ -6,6 +6,33 @@ import { SiLeetcode } from "react-icons/si";
 const GITHUB_USERNAME = "Sanjiv215";
 const LEETCODE_USERNAME = "Sanjiv215";
 
+const githubContributionQuery = `
+  query githubActivity($login: String!, $from: DateTime!, $to: DateTime!) {
+    user(login: $login) {
+      followers {
+        totalCount
+      }
+      repositories(ownerAffiliations: OWNER, privacy: PUBLIC, isFork: false) {
+        totalCount
+      }
+      contributionsCollection(from: $from, to: $to) {
+        totalCommitContributions
+        totalPullRequestContributions
+        contributionCalendar {
+          totalContributions
+          weeks {
+            contributionDays {
+              contributionCount
+              date
+              contributionLevel
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 const leetCodeQuery = `
   query userProfile($username: String!) {
     matchedUser(username: $username) {
@@ -88,6 +115,28 @@ function buildGithubHeatmap(events) {
   });
 }
 
+function buildGithubHeatmapFromCalendar(weeks) {
+  const flattenedDays = weeks
+    .flatMap((week) => week.contributionDays)
+    .slice(-35);
+
+  return flattenedDays.map((day) => {
+    const levelMap = {
+      NONE: 0,
+      FIRST_QUARTILE: 1,
+      SECOND_QUARTILE: 2,
+      THIRD_QUARTILE: 3,
+      FOURTH_QUARTILE: 4,
+    };
+
+    return {
+      key: day.date,
+      count: day.contributionCount,
+      level: levelMap[day.contributionLevel] ?? 0,
+    };
+  });
+}
+
 function buildPublicStreak(events) {
   const activeDays = new Set(
     events.map((event) => new Date(event.created_at).toISOString().slice(0, 10))
@@ -97,6 +146,30 @@ function buildPublicStreak(events) {
   const cursor = new Date();
 
   for (let i = 0; i < 60; i += 1) {
+    const key = cursor.toISOString().slice(0, 10);
+
+    if (!activeDays.has(key)) {
+      break;
+    }
+
+    streak += 1;
+    cursor.setDate(cursor.getDate() - 1);
+  }
+
+  return streak;
+}
+
+function buildContributionStreak(weeks) {
+  const contributionDays = weeks
+    .flatMap((week) => week.contributionDays)
+    .filter((day) => day.contributionCount > 0)
+    .map((day) => day.date);
+
+  const activeDays = new Set(contributionDays);
+  let streak = 0;
+  const cursor = new Date();
+
+  for (let i = 0; i < 370; i += 1) {
     const key = cursor.toISOString().slice(0, 10);
 
     if (!activeDays.has(key)) {
@@ -154,6 +227,9 @@ function Activity() {
     recentCommits: 0,
     streak: 0,
     heatmap: [],
+    commitLabel: "Recent public commits",
+    streakLabel: "Public streak days",
+    periodLabel: "Last 35 days",
   });
 
   const [leetcodeData, setLeetcodeData] = useState({
@@ -167,6 +243,64 @@ function Activity() {
 
     async function loadGithub() {
       try {
+        const githubToken = import.meta.env.VITE_GITHUB_TOKEN;
+
+        if (githubToken) {
+          const now = new Date();
+          const yearAgo = new Date(now);
+          yearAgo.setFullYear(now.getFullYear() - 1);
+
+          const graphResponse = await fetch("https://api.github.com/graphql", {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${githubToken}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              query: githubContributionQuery,
+              variables: {
+                login: GITHUB_USERNAME,
+                from: yearAgo.toISOString(),
+                to: now.toISOString(),
+              },
+            }),
+          });
+
+          if (!graphResponse.ok) {
+            throw new Error("GitHub GraphQL stats could not be loaded.");
+          }
+
+          const graphPayload = await graphResponse.json();
+          const githubUser = graphPayload?.data?.user;
+          const calendarWeeks = githubUser?.contributionsCollection?.contributionCalendar?.weeks || [];
+
+          if (graphPayload.errors || !githubUser) {
+            throw new Error("GitHub GraphQL stats could not be loaded.");
+          }
+
+          if (!isMounted) {
+            return;
+          }
+
+          setGithubData({
+            loading: false,
+            error: "",
+            profile: {
+              public_repos: githubUser.repositories.totalCount,
+              followers: githubUser.followers.totalCount,
+            },
+            pullRequests: githubUser.contributionsCollection.totalPullRequestContributions || 0,
+            recentCommits: githubUser.contributionsCollection.totalCommitContributions || 0,
+            streak: buildContributionStreak(calendarWeeks),
+            heatmap: buildGithubHeatmapFromCalendar(calendarWeeks),
+            commitLabel: "Last 12 months commits",
+            streakLabel: "Contribution streak",
+            periodLabel: "Last 35 contribution days",
+          });
+
+          return;
+        }
+
         const headers = {
           Accept: "application/vnd.github+json",
           "X-GitHub-Api-Version": "2022-11-28",
@@ -209,6 +343,9 @@ function Activity() {
           recentCommits,
           streak: buildPublicStreak(events),
           heatmap: buildGithubHeatmap(events),
+          commitLabel: "Recent public commits",
+          streakLabel: "Public streak days",
+          periodLabel: "Last 35 public activity days",
         });
       } catch (error) {
         if (!isMounted) {
@@ -223,6 +360,9 @@ function Activity() {
           recentCommits: 0,
           streak: 0,
           heatmap: [],
+          commitLabel: "GitHub commits",
+          streakLabel: "Streak",
+          periodLabel: "Recent activity",
         });
       }
     }
@@ -318,7 +458,7 @@ function Activity() {
                     <span className="chip-icon"><FaCodeBranch /></span>
                     <div>
                       <strong>{formatCompact(githubData.recentCommits)}</strong>
-                      <p>Recent public commits</p>
+                      <p>{githubData.commitLabel}</p>
                     </div>
                   </div>
 
@@ -334,7 +474,7 @@ function Activity() {
                     <span className="chip-icon"><FaFire /></span>
                     <div>
                       <strong>{formatCompact(githubData.streak)}</strong>
-                      <p>Public streak days</p>
+                      <p>{githubData.streakLabel}</p>
                     </div>
                   </div>
 
@@ -349,7 +489,7 @@ function Activity() {
 
                 <div className="activity-heatmap">
                   <div className="heatmap-head">
-                    <span>Last 35 days</span>
+                    <span>{githubData.periodLabel}</span>
                     <span>{formatCompact(githubData.profile?.followers || 0)} followers</span>
                   </div>
 
