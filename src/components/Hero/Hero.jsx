@@ -1,9 +1,11 @@
 import React from 'react'
 import "./Hero.css";
 
+const RESUME_URL = "/Sanjiv-Resume.pdf";
+
 function Hero() {
     return (
-        <section className="hero">
+        <section className="hero" id="home">
             <div className="hero-inner">
 
                 <h2 className="hero-title">
@@ -19,13 +21,13 @@ function Hero() {
                 </p>
 
                 <div className="hero-actions">
-                    <button className="btn-primary">
+                    <a className="btn-primary" href="#projects">
                         View Projects →
-                    </button>
+                    </a>
 
-                    <button className="btn-outline">
+                    <a className="btn-outline" href={RESUME_URL} download="Sanjiv-Resume.pdf">
                         Download Resume
-                    </button>
+                    </a>
                 </div>
 
             </div>

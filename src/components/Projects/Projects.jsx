@@ -16,7 +16,7 @@ const projects = [
         title: "Codek",
         description:
             "High-performance portfolio featuring custom design systems and optimized asset loading.",
-        tech: ["HTML", "CSS", "Javasccript", "Firebase", "SQL"],
+        tech: ["HTML", "CSS", "JavaScript", "Firebase", "SQL"],
         image: "/images/codek.png",
         live: "https://codekdeployed.vercel.app",
         code: "https://github.com/Sanjiv215/Codek",
@@ -26,7 +26,7 @@ const projects = [
 
 function Projects() {
     return (
-        <section className="projects-section">
+        <section className="projects-section" id="projects">
             <h2 className="projects-title">Featured Projects</h2>
             <p className="projects-subtitle">
                 Selected works that showcase technical expertise and design sensibility
@@ -51,11 +51,11 @@ function Projects() {
                             </div>
 
                             <div className="project-links">
-                                <a href={project.live} target="_blank">
+                                <a href={project.live} target="_blank" rel="noreferrer">
                                     <FaExternalLinkAlt /> Live
                                 </a>
 
-                                <a href={project.code} target="_blank">
+                                <a href={project.code} target="_blank" rel="noreferrer">
                                     <FaGithub /> Code
                                 </a>
                             </div>

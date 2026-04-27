@@ -1,6 +1,6 @@
 .journey {
+    overflow: hidden;
     padding: 120px 10%;
-    width: 100%;
     background: linear-gradient(135deg,
             #020617 0%,
             #0f172a 40%,
@@ -9,12 +9,26 @@
     position: relative;
 }
 
+.journey::before {
+    content: "";
+    position: absolute;
+    top: 80px;
+    left: 8%;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.14), transparent 70%);
+    filter: blur(18px);
+    animation: float-glow 8.5s ease-in-out infinite;
+}
+
 .journey-title {
     font-size: 42px;
     text-align: center;
     font-weight: 700;
 
     margin-bottom: 10px;
+    animation: fade-up 0.8s ease both;
 }
 
 .journey-sub {
@@ -27,6 +41,7 @@
     position: relative;
     max-width: 1100px;
     margin: auto;
+    z-index: 1;
 }
 
 .timeline::before {
@@ -38,6 +53,7 @@
     height: 100%;
     background: linear-gradient(#38bdf8, #6366f1);
     box-shadow: 0 0 15px #38bdf8;
+    animation: pulse-line 3.2s ease-in-out infinite;
 }
 
 .timeline-row {
@@ -49,6 +65,7 @@
 
 .timeline-left {
     width: 180px;
+    flex-shrink: 0;
     text-align: right;
     margin-right: 40px;
     color: #cbd5f5;
@@ -84,14 +101,24 @@
     padding: 30px;
     border-radius: 14px;
     flex: 1;
+    min-width: 0;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     transition: 0.3s;
+    animation: fade-up 0.8s ease both;
 }
 
 .timeline-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 15px 40px rgba(56, 189, 248, 0.25);
+}
+
+.timeline-row:nth-child(2) .timeline-card {
+    animation-delay: 0.12s;
+}
+
+.timeline-row:nth-child(3) .timeline-card {
+    animation-delay: 0.24s;
 }
 
 .timeline-card h3 {
@@ -125,6 +152,9 @@
 /* responsive */
 
 @media(max-width:900px) {
+    .journey {
+        padding: 90px 20px;
+    }
 
     .timeline::before {
         left: 30px;
@@ -137,7 +167,9 @@
     }
 
     .timeline-left {
+        width: auto;
         text-align: left;
+        margin-right: 0;
         margin-bottom: 10px;
     }
 
@@ -145,4 +177,26 @@
         margin: 20px 0;
     }
 
+    .timeline-card {
+        width: 100%;
+    }
+}
+
+@media (max-width: 520px) {
+    .journey-title {
+        font-size: 34px;
+    }
+
+    .journey-sub {
+        margin-bottom: 56px;
+    }
+
+    .timeline-row {
+        padding-left: 48px;
+        margin-bottom: 56px;
+    }
+
+    .timeline-card {
+        padding: 24px;
+    }
 }

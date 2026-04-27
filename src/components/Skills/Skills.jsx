@@ -19,7 +19,7 @@ import {
 
 function Skills() {
     return (
-        <section className="arsenal">
+        <section className="arsenal" id="skills">
 
             <h2 className="arsenal-title">Technical Arsenal</h2>
 

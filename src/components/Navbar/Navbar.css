@@ -1,65 +1,120 @@
 .navbar {
   position: fixed;
-  top: 2vh;
+  top: 18px;
   left: 50%;
   transform: translateX(-50%);
-  width: 90vw;
-  height: 9vh;
+  width: min(1120px, calc(100vw - 32px));
+  min-height: 72px;
+  padding: 14px 22px;
   background-color: rgba(6, 17, 42, 0.5);
   z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-radius: 15px;
-  backdrop-filter: blur(5px);
-
+  gap: 24px;
+  border-radius: 18px;
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 20px 50px rgba(2, 6, 23, 0.32);
 }
 
-h1 {
-  text-align: center;
-  font-size: larger;
-  margin: auto;
-
+.navbar-brand {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
 }
 
-ul {
-  display: flex;
-  justify-content: space-evenly;
-  width: 25%;
-  font-size: medium;
-}
-
-li {
-  list-style: none;
-
-}
-
-a {
+.navbar-brand a,
+.navbar-links a {
   text-decoration: none;
   color: white;
 }
 
-/* Resume Button */
-button {
-  padding: 10px 22px;
-  margin: auto;
+.navbar-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  margin: 0;
+  padding: 0;
+  font-size: 0.95rem;
+}
+
+.navbar-links li {
+  list-style: none;
+}
+
+.navbar-links a {
+  color: #cbd5e1;
+  transition: color 0.2s ease;
+}
+
+.navbar-links a:hover {
+  color: #7dd3fc;
+}
+
+.navbar-links a:focus-visible,
+.navbar-brand a:focus-visible,
+.navbar-button:focus-visible {
+  outline: 2px solid #7dd3fc;
+  outline-offset: 3px;
+}
+
+.navbar-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 18px;
+  margin: 0;
   border-radius: 8px;
   border: none;
   background: linear-gradient(135deg, #8dc6e4, #1f6083);
   color: black;
-  font-size: 15px;
+  font-size: 0.95rem;
   font-weight: 600;
   cursor: pointer;
+  text-decoration: none;
   transition: all 0.3s ease;
 }
 
-/* Hover effect */
-button:hover {
+.navbar-button:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(79, 70, 229, 0.4);
 }
 
-/* Click effect */
-/* button:active {
-  transform: scale(0.96);
-} */
+@media (max-width: 900px) {
+  .navbar {
+    width: min(680px, calc(100vw - 24px));
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .navbar-brand,
+  .navbar-button {
+    width: 100%;
+    text-align: center;
+  }
+
+  .navbar-links {
+    flex-wrap: wrap;
+    gap: 14px 18px;
+  }
+}
+
+@media (max-width: 520px) {
+  .navbar {
+    top: 12px;
+    padding: 12px 16px;
+    border-radius: 16px;
+  }
+
+  .navbar-links {
+    font-size: 0.88rem;
+    gap: 12px;
+  }
+
+  .navbar-button {
+    width: 100%;
+  }
+}
