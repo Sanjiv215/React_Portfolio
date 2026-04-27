@@ -1,8 +1,8 @@
 import "./Skills.css";
-import { SiExpress, SiDocker, SiCplusplus, SiMongodb, SiPostgresql } from "react-icons/si";
+import { SiDocker, SiMongodb, SiOpenai } from "react-icons/si";
 
 import {
-    FaHtml5, FaCss3Alt, FaJs, FaReact, FaGitAlt, FaGithub, FaDatabase, FaNodeJs, FaGoogle
+    FaHtml5, FaCss3Alt, FaJs, FaReact, FaGitAlt, FaGithub
 } from "react-icons/fa";
 
 import {
@@ -68,11 +68,11 @@ function Skills() {
                     </div>
 
 
-
+                    {/* 
                     <div className="skill">
                         <SiCplusplus className="icon cpp" />
                         <span>C++</span>
-                    </div>
+                    </div> */}
 
 
 
@@ -89,7 +89,7 @@ function Skills() {
                 {/* Tools */}
                 <div className="arsenal-card">
 
-                    <h3>Tools & API</h3>
+                    <h3>Tools</h3>
 
                     <div className="skill">
                         <FaGitAlt className="icon git" />
@@ -116,6 +116,12 @@ function Skills() {
                         <span>Docker</span>
                     </div>
 
+                    <div className="skill">
+                        <SiOpenai className="icon codex" />
+                        <span>Codex</span>
+                    </div>
+
+
 
                 </div>
                 {/* Backend */}
@@ -123,7 +129,7 @@ function Skills() {
 
                     <h3>Backend</h3>
 
-                    <div className="skill">
+                    {/* <div className="skill">
                         <FaNodeJs className="icon node" />
                         <span>Node.js</span>
                     </div>
@@ -131,7 +137,7 @@ function Skills() {
                     <div className="skill">
                         <SiExpress className="icon express" />
                         <span>Express.js</span>
-                    </div>
+                    </div> */}
 
                     <div className="skill">
                         <span className="text-icon">API</span>
@@ -145,7 +151,7 @@ function Skills() {
 
                     <h3>Database</h3>
 
-                    <div className="skill">
+                    {/* <div className="skill">
                         <FaDatabase className="icon sql" />
                         <span>SQL</span>
                     </div>
@@ -153,7 +159,7 @@ function Skills() {
                     <div className="skill">
                         <SiPostgresql className="icon postgresql" />
                         <span>PostgreSQL</span>
-                    </div>
+                    </div> */}
 
                     <div className="skill">
                         <SiMongodb className="icon mongodb" />

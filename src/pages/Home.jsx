@@ -5,6 +5,7 @@ import Skills from "../components/Skills/Skills.jsx"
 import Projects from "../components/Projects/Projects.jsx"
 import Journey from "../components/Journey/Journey.jsx"
 import Contact from "../components/Contact/Contact.jsx"
+import Footer from "../components/Footer/Footer.jsx"
 
 
 
@@ -17,6 +18,7 @@ const Home = () => {
             <Projects />
             <Journey />
             <Contact />
+            <Footer />
 
         </div>
     )

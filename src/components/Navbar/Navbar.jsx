@@ -11,6 +11,7 @@ function Navbar() {
                 <li><a href="#home">About</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#projects">Projects</a></li>
+                <li><a href="#journey">Journey</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
             <a className="navbar-button" href={RESUME_URL} target="_blank" rel="noreferrer">

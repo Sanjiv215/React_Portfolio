@@ -123,7 +123,7 @@ function Contact() {
               <span className="contact-icon"><FaLocationDot /></span>
               <div>
                 <h3>Location</h3>
-                <p>Maharashtra, India</p>
+                <p>Bangalore, Karnataka, India</p>
               </div>
             </div>
           </div>

@@ -4,7 +4,7 @@ import { FaGraduationCap, FaLaptopCode, FaBriefcase } from "react-icons/fa";
 
 function Journey() {
     return (
-        <section className="journey">
+        <section className="journey" id="journey">
 
             <h2 className="journey-title">The Professional Journey</h2>
             <p className="journey-sub">
