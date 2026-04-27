@@ -104,7 +104,7 @@ function Contact() {
                 {CONTACT_EMAIL ? (
                   <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
                 ) : (
-                  <p>Email configuration pending</p>
+                  <p>Sanjivprasad215@gmail.com</p>
                 )}
               </div>
             </div>
