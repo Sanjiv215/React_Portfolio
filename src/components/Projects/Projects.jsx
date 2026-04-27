@@ -2,13 +2,15 @@ import React from 'react'
 import "./Projects.css";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 
+const assetUrl = (path) => `${import.meta.env.BASE_URL}${path}`;
+
 const projects = [
     {
         title: "SmartBuyAI",
         description:
             "SmartBuyAI is a comprehensive browsing platform built with React and Firebase. It features a modern user interface, to compare prices on multiple e-commerce websites.",
         tech: ["React", "Firebase", "FastAPI"],
-        image: "/images/smartbuyai.png",
+        image: assetUrl("images/smartbuyai.png"),
         live: "https://smart-buy-bmqt.vercel.app/",
         code: "https://github.com/Sanjiv215/SmartBuy-AI",
     },
@@ -17,7 +19,7 @@ const projects = [
         description:
             "High-performance portfolio featuring custom design systems and optimized asset loading.",
         tech: ["HTML", "CSS", "JavaScript", "Firebase", "SQL"],
-        image: "/images/codek.png",
+        image: assetUrl("images/codek.png"),
         live: "https://codekdeployed.vercel.app",
         code: "https://github.com/Sanjiv215/Codek",
     }

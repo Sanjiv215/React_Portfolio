@@ -1,7 +1,7 @@
 import React from 'react'
 import "./Hero.css";
 
-const RESUME_URL = "/Sanjiv-Resume.pdf";
+const RESUME_URL = `${import.meta.env.BASE_URL}Sanjiv-Resume.pdf`;
 
 function Hero() {
     return (

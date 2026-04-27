@@ -10,6 +10,7 @@ const CONTACT_EMAIL = import.meta.env.VITE_CONTACT_EMAIL;
 const hasEmailConfig = Boolean(
   EMAILJS_SERVICE_ID && EMAILJS_TEMPLATE_ID && EMAILJS_PUBLIC_KEY && CONTACT_EMAIL
 );
+const SUBMIT_COOLDOWN_MS = 30_000;
 
 function Contact() {
   const [status, setStatus] = useState("");
@@ -25,9 +26,15 @@ function Contact() {
     const email = String(formData.get("email") || "").trim();
     const subject = String(formData.get("subject") || "").trim();
     const message = String(formData.get("message") || "").trim();
+    const website = String(formData.get("website") || "").trim();
 
     if (!name || !email || !subject || !message) {
       setStatus("Please fill in all fields before sending your message.");
+      return;
+    }
+
+    if (website) {
+      setStatus("Submission blocked.");
       return;
     }
 
@@ -35,7 +42,15 @@ function Contact() {
     const lastName = rest.join(" ");
 
     if (!hasEmailConfig) {
-      setStatus("Contact form is not configured yet. Add your EmailJS keys in the .env file.");
+      setStatus("This form is temporarily unavailable. Please email me directly instead.");
+      return;
+    }
+
+    const lastSubmitAt = Number(window.localStorage.getItem("contact-last-submit-at") || 0);
+    const now = Date.now();
+
+    if (now - lastSubmitAt < SUBMIT_COOLDOWN_MS) {
+      setStatus("Please wait a few seconds before sending another message.");
       return;
     }
 
@@ -58,6 +73,7 @@ function Contact() {
         EMAILJS_PUBLIC_KEY
       );
 
+      window.localStorage.setItem("contact-last-submit-at", String(now));
       setStatus("Message sent successfully. I’ll get back to you soon.");
       form.reset();
     } catch (error) {
@@ -140,11 +156,30 @@ function Contact() {
             />
           </div>
 
+          <div className="field-group honeypot-field" aria-hidden="true">
+            <label htmlFor="website">Website</label>
+            <input
+              id="website"
+              type="text"
+              name="website"
+              tabIndex="-1"
+              autoComplete="off"
+            />
+          </div>
+
           <button type="submit" className="contact-submit" disabled={isSending || !hasEmailConfig}>
             {isSending ? "Sending..." : "Send Message"}
           </button>
 
-          {status ? <p className="contact-status">{status}</p> : null}
+          {status ? (
+            <p className={`contact-status${!hasEmailConfig ? " contact-status-warning" : ""}`}>
+              {status}
+            </p>
+          ) : !hasEmailConfig ? (
+            <p className="contact-status contact-status-warning">
+              Direct email is available at {CONTACT_EMAIL || "the address above"}.
+            </p>
+          ) : null}
         </form>
       </div>
     </section>
