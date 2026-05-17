@@ -1,5 +1,5 @@
 import "./Skills.css";
-import { SiDocker, SiMongodb, SiOpenai } from "react-icons/si";
+import { SiDocker, SiMongodb, SiOpenai, SiExpress } from "react-icons/si";
 
 import {
     FaHtml5, FaCss3Alt, FaJs, FaReact, FaGitAlt, FaGithub
@@ -132,12 +132,12 @@ function Skills() {
                     {/* <div className="skill">
                         <FaNodeJs className="icon node" />
                         <span>Node.js</span>
-                    </div>
+                    </div>*/}
 
                     <div className="skill">
                         <SiExpress className="icon express" />
                         <span>Express.js</span>
-                    </div> */}
+                    </div>
 
                     <div className="skill">
                         <span className="text-icon">API</span>
