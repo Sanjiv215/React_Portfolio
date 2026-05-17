@@ -26,6 +26,10 @@ This project is a personal portfolio website designed to showcase skills, projec
 
 The final outcome is a fast, modern, and user-friendly portfolio website. It presents project work clearly, improves personal branding, and provides an easy way for visitors to connect with the developer.
 
+## Deployed Link
+
+https://react-portfolio-wine-tau.vercel.app/
+
 ## Run Locally
 
 ```bash
