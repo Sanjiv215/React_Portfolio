@@ -48,7 +48,7 @@
 .timeline::before {
     content: "";
     position: absolute;
-    left: 200px;
+    left: 254px;
     top: 0;
     width: 3px;
     height: 100%;
@@ -176,6 +176,7 @@
 
     .timeline-dot {
         margin: 20px 0;
+        transform: translateX(-65px);
     }
 
     .timeline-card {

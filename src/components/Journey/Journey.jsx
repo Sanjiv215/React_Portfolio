@@ -73,6 +73,7 @@ function Journey() {
 
                     <div className="timeline-left">
                         <span>2025</span>
+                        <p>Internship</p>
                     </div>
 
                     <div className="timeline-dot">

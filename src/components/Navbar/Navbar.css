@@ -83,38 +83,37 @@
   box-shadow: 0 8px 20px rgba(79, 70, 229, 0.4);
 }
 
-@media (max-width: 900px) {
-  .navbar {
-    width: min(680px, calc(100vw - 24px));
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .navbar-brand,
-  .navbar-button {
-    width: 100%;
-    text-align: center;
-  }
-
-  .navbar-links {
-    flex-wrap: wrap;
-    gap: 14px 18px;
-  }
+.navbar-links a.active-link {
+  color: #38bdf8;
+  font-weight: 600;
 }
 
-@media (max-width: 520px) {
-  .navbar {
-    top: 12px;
-    padding: 12px 16px;
-    border-radius: 16px;
+.mobile-toggle {
+  display: none;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .mobile-toggle {
+    display: block;
   }
 
   .navbar-links {
-    font-size: 0.88rem;
-    gap: 12px;
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    padding-top: 10px;
+  }
+
+  .navbar-links.active {
+    display: flex;
   }
 
   .navbar-button {
-    width: 100%;
+    display: none;
   }
 }

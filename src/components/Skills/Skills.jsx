@@ -1,21 +1,8 @@
 import "./Skills.css";
-import { SiDocker, SiMongodb, SiOpenai, SiExpress } from "react-icons/si";
-
-import {
-    FaHtml5, FaCss3Alt, FaJs, FaReact, FaGitAlt, FaGithub
-} from "react-icons/fa";
-
-import {
-    SiTailwindcss, SiPostman
-} from "react-icons/si";
-
-import {
-    VscVscode
-} from "react-icons/vsc";
-
-import {
-    FaPython
-} from "react-icons/fa";
+import { SiDocker, SiMongodb, SiOpenai, SiExpress, SiFastapi, SiCplusplus, SiPostgresql } from "react-icons/si";
+import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaGitAlt, FaGithub, FaPython, FaNodeJs, FaDatabase } from "react-icons/fa";
+import { SiTailwindcss, SiPostman } from "react-icons/si";
+import { VscVscode } from "react-icons/vsc";
 
 function Skills() {
     return (
@@ -59,7 +46,6 @@ function Skills() {
 
                 {/* Programming */}
                 <div className="arsenal-card">
-
                     <h3>Programming</h3>
 
                     <div className="skill">
@@ -67,28 +53,19 @@ function Skills() {
                         <span>Python</span>
                     </div>
 
-
-                    {/* 
                     <div className="skill">
                         <SiCplusplus className="icon cpp" />
                         <span>C++</span>
-                    </div> */}
-
-
+                    </div>
 
                     <div className="skill">
                         <span className="text-icon">DSA</span>
-                        <span>DSA</span>
+                        <span>Data Structures</span>
                     </div>
-
-
-
                 </div>
-
 
                 {/* Tools */}
                 <div className="arsenal-card">
-
                     <h3>Tools</h3>
 
                     <div className="skill">
@@ -106,33 +83,30 @@ function Skills() {
                         <span>VS Code</span>
                     </div>
 
-
-
-
-
-
                     <div className="skill">
                         <SiDocker className="icon docker" />
                         <span>Docker</span>
                     </div>
 
                     <div className="skill">
-                        <SiOpenai className="icon codex" />
-                        <span>Codex</span>
+                        <SiPostman className="icon postman" />
+                        <span>Postman</span>
                     </div>
 
-
-
+                    <div className="skill">
+                        <SiOpenai className="icon codex" />
+                        <span>AI Tools</span>
+                    </div>
                 </div>
+
                 {/* Backend */}
                 <div className="arsenal-card">
-
                     <h3>Backend</h3>
 
-                    {/* <div className="skill">
+                    <div className="skill">
                         <FaNodeJs className="icon node" />
                         <span>Node.js</span>
-                    </div>*/}
+                    </div>
 
                     <div className="skill">
                         <SiExpress className="icon express" />
@@ -140,18 +114,21 @@ function Skills() {
                     </div>
 
                     <div className="skill">
-                        <span className="text-icon">API</span>
+                        <SiFastapi className="icon fastapi" />
                         <span>FastAPI</span>
                     </div>
-
                 </div>
 
                 {/* Database */}
                 <div className="arsenal-card">
-
                     <h3>Database</h3>
 
-                    {/* <div className="skill">
+                    <div className="skill">
+                        <SiMongodb className="icon mongodb" />
+                        <span>MongoDB</span>
+                    </div>
+
+                    <div className="skill">
                         <FaDatabase className="icon sql" />
                         <span>SQL</span>
                     </div>
@@ -159,19 +136,9 @@ function Skills() {
                     <div className="skill">
                         <SiPostgresql className="icon postgresql" />
                         <span>PostgreSQL</span>
-                    </div> */}
-
-                    <div className="skill">
-                        <SiMongodb className="icon mongodb" />
-                        <span>MongoDB</span>
                     </div>
-
-
-
                 </div>
-
             </div>
-
         </section>
     );
 }

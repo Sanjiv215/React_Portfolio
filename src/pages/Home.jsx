@@ -1,27 +1,33 @@
-import React from 'react'
-import Navbar from '../components/Navbar/Navbar.jsx'
-import Hero from '../components/Hero/Hero.jsx'
-import Skills from "../components/Skills/Skills.jsx"
-import Projects from "../components/Projects/Projects.jsx"
-import Journey from "../components/Journey/Journey.jsx"
-import Contact from "../components/Contact/Contact.jsx"
-import Footer from "../components/Footer/Footer.jsx"
+import React from 'react';
+import { ThemeProvider } from '../context/ThemeContext';
+import BackgroundCanvas from '../components/BackgroundCanvas';
+import Navbar from '../components/Navbar';
+import HeroSection from '../components/HeroSection';
+import AboutSection from '../components/AboutSection';
+import SkillsSection from '../components/SkillsSection';
+import ProjectsSection from '../components/ProjectsSection';
+import InteractiveTerminal from '../components/InteractiveTerminal';
+import ExperienceSection from '../components/ExperienceSection';
+import ContactSection from '../components/ContactSection';
+import Footer from '../components/Footer';
 
-
-
-const Home = () => {
-    return (
-        <div>
-            <Navbar />
-            <Hero />
-            <Skills />
-            <Projects />
-            <Journey />
-            <Contact />
-            <Footer />
-
-        </div>
-    )
+export default function Home() {
+  return (
+    <ThemeProvider>
+      <div className="relative min-h-screen bg-slate-950 text-gray-100 selection:bg-cyan-500 selection:text-slate-950">
+        <BackgroundCanvas />
+        <Navbar />
+        <main>
+          <HeroSection />
+          <AboutSection />
+          <SkillsSection />
+          <ProjectsSection />
+          <InteractiveTerminal />
+          <ExperienceSection />
+          <ContactSection />
+        </main>
+        <Footer />
+      </div>
+    </ThemeProvider>
+  );
 }
-
-export default Home;
