@@ -10,7 +10,7 @@ export const portfolioData = {
       "Creator of Vigilo (PyPI)",
       "AI Systems & Security Researcher"
     ],
-    bio: "Python • AI • Full Stack • DevTools. Building Vigilo. Transitioned from fitness training into software development—bringing discipline, consistency, and a problem-solving mindset to every line of code.",
+    bio: "Python • AI • Full Stack • DevTools. Building Vigilo. Transitioned from fitness training into software engineering—bringing discipline, consistency, and a problem-solving mindset to scalable web architectures and developer tools.",
     story: "Before transitioning into software development, I worked as a fitness trainer, where I developed discipline, consistency, problem-solving skills, and a results-driven mindset. I now bring the same approach to technology: learn, build, improve, repeat.",
     location: "Bangalore, Karnataka, India",
     availability: "Available for Software Engineering Roles",
@@ -18,22 +18,22 @@ export const portfolioData = {
     github: "https://github.com/Sanjiv215",
     linkedin: "https://www.linkedin.com/in/prasadsanjiv",
     resumeUrl: "/Sanjiv-Resume.pdf",
-    heroCodeSnippet: `// Developer Profile @Sanjiv215
+    heroCodeSnippet: `// macOS System Configuration @Sanjiv215
 const engineer = {
   name: "Sanjiv Prasad",
   bio: "Python • AI • Full Stack • DevTools",
-  building: "Vigilo (pip install vigilo)",
+  flagshipTool: "vigilo (pip install vigilo)",
   education: "B.Tech CSE (AI & ML) @ UIT",
   internships: ["IIT Patna", "Code Alpha"],
   motto: "Build. Break. Fix. Repeat.",
-  status: "🟢 Open for Opportunities"
+  status: "🟢 Available for Engineering Roles"
 };`
   },
   stats: [
     { label: "PyPI Package Stars", value: 4, suffix: "★" },
     { label: "Public Repositories", value: 16, suffix: "+" },
     { label: "Industry Internships", value: 2, suffix: " Roles" },
-    { label: "Commitment", value: 100, suffix: "%" }
+    { label: "Open Source Mindset", value: 100, suffix: "%" }
   ],
   values: [
     {
@@ -54,25 +54,35 @@ const engineer = {
   ],
   skillCategories: [
     "All",
-    "DevTools & Security",
-    "Python & AI/ML",
-    "Frontend",
-    "Backend & Database",
-    "Cloud & DevOps"
+    "Languages",
+    "Frameworks & Web",
+    "Security & Tooling",
+    "AI & ML",
+    "Databases & Cloud"
   ],
   skills: [
-    { name: "Python 3 & FastAPI", category: "Python & AI/ML", level: 95, icon: "Cpu", langColor: "#3572A5" },
-    { name: "Static Analysis & AST", category: "DevTools & Security", level: 92, icon: "Terminal", langColor: "#3572A5" },
-    { name: "CWE Vulnerability Detection", category: "DevTools & Security", level: 88, icon: "Shield", langColor: "#e34c26" },
-    { name: "React 19 & Vite", category: "Frontend", level: 94, icon: "Code2", langColor: "#61dafb" },
-    { name: "Modern JavaScript (ES6+)", category: "Frontend", level: 95, icon: "FileCode", langColor: "#f1e05a" },
-    { name: "Tailwind CSS v4", category: "Frontend", level: 96, icon: "Palette", langColor: "#38bdf8" },
-    { name: "Node.js & Express", category: "Backend & Database", level: 90, icon: "Server", langColor: "#339933" },
-    { name: "MongoDB & PostgreSQL", category: "Backend & Database", level: 88, icon: "Database", langColor: "#336791" },
-    { name: "AI Agents & LLMs", category: "Python & AI/ML", level: 86, icon: "Cpu", langColor: "#3572A5" },
-    { name: "Docker & Containers", category: "Cloud & DevOps", level: 84, icon: "Box", langColor: "#2496ed" },
-    { name: "Git & GitHub CI Automation", category: "Cloud & DevOps", level: 95, icon: "GitBranch", langColor: "#f05032" },
-    { name: "RESTful Architecture", category: "Backend & Database", level: 94, icon: "Network", langColor: "#6366f1" }
+    { name: "Python 3.12", category: "Languages", level: 95, icon: "Cpu", langColor: "#3572A5", desc: "FastAPI, PyPI, AST parsing, Automation scripts" },
+    { name: "TypeScript & JavaScript", category: "Languages", level: 94, icon: "FileCode", langColor: "#3178c6", desc: "ES6+, Async, Type systems, DOM APIs" },
+    { name: "C / C++", category: "Languages", level: 82, icon: "Terminal", langColor: "#f34b7d", desc: "Data structures, Memory management, Algorithms" },
+    { name: "HTML5 & Modern CSS", category: "Languages", level: 96, icon: "Palette", langColor: "#e34c26", desc: "Tailwind CSS v4, Glassmorphism, Responsive UI" },
+    
+    { name: "React 19 & Vite", category: "Frameworks & Web", level: 95, icon: "Code2", langColor: "#61dafb", desc: "Hooks, Virtual DOM, State management, 60fps UX" },
+    { name: "FastAPI", category: "Frameworks & Web", level: 92, icon: "Cpu", langColor: "#05998b", desc: "Asynchronous REST endpoints, Pydantic, Swagger" },
+    { name: "Node.js & Express", category: "Frameworks & Web", level: 90, icon: "Server", langColor: "#339933", desc: "RESTful APIs, Middleware, JWT / OTP auth, RBAC" },
+    { name: "Next.js", category: "Frameworks & Web", level: 85, icon: "Layout", langColor: "#ffffff", desc: "Server components, Routing, SSR / SSG" },
+
+    { name: "AST Static Analysis", category: "Security & Tooling", level: 92, icon: "Terminal", langColor: "#3572A5", desc: "Abstract syntax tree traversal, Code diagnostics" },
+    { name: "CWE Vulnerability Detection", category: "Security & Tooling", level: 88, icon: "Shield", langColor: "#e34c26", desc: "Eval injection, SQLi, Hardcoded secrets, Cmd injection" },
+    { name: "PyPI Package Release", category: "Security & Tooling", level: 90, icon: "Box", langColor: "#3775a9", desc: "Wheel building, setup.py / pyproject.toml, CI publishing" },
+    { name: "CLI Tooling Architecture", category: "Security & Tooling", level: 94, icon: "Terminal", langColor: "#a855f7", desc: "Argparse, Rich terminal outputs, Caching engines" },
+
+    { name: "AI Agents & LLM Pipelines", category: "AI & ML", level: 88, icon: "Cpu", langColor: "#10b981", desc: "Context chaining, Multi-modal prompting, Generative AI" },
+    { name: "Computer Vision & ML", category: "AI & ML", level: 82, icon: "Shield", langColor: "#f59e0b", desc: "OpenCV, Object detection heuristics, Image feeds" },
+
+    { name: "PostgreSQL & SQL", category: "Databases & Cloud", level: 88, icon: "Database", langColor: "#336791", desc: "Relational schemas, Prepared queries, Indexing" },
+    { name: "MongoDB", category: "Databases & Cloud", level: 90, icon: "Database", langColor: "#47a248", desc: "Document modeling, Aggregation pipelines, Mongoose" },
+    { name: "Docker & Containers", category: "Databases & Cloud", level: 84, icon: "Box", langColor: "#2496ed", desc: "Dockerfile, Compose, Container isolation" },
+    { name: "Git & GitHub Actions", category: "Databases & Cloud", level: 95, icon: "GitBranch", langColor: "#f05032", desc: "CI/CD pipelines, Version control, Automation" }
   ],
   projectCategories: [
     "All",
@@ -90,7 +100,7 @@ const engineer = {
       shortDescription: "A Python static security scanner focused on detecting CWE security vulnerabilities and code correctness issues.",
       fullDescription: "Vigilo is a high-speed Python static analysis and security scanning tool published on PyPI. It performs AST-based security analysis to detect CWE vulnerabilities (such as eval injection, SQL injection, insecure commands, and hardcoded credentials), repository scanning, caching, CI/release automation, and standalone executables.",
       image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1000&q=80",
-      tech: ["Python", "AST Parsing", "CWE Security Engine", "CLI Tooling", "PyPI", "CI/CD"],
+      tech: ["Python 3.12", "AST Engine", "CWE Scanner", "PyPI", "CLI Tooling", "CI/CD"],
       features: [
         "Published on PyPI: pip install vigilo",
         "CWE-based vulnerability detection rules",
@@ -135,7 +145,7 @@ const engineer = {
       shortDescription: "Enterprise Resource Planning (ERP) Portal and collaborative task management system engineered during IIT Patna internship.",
       fullDescription: "Engineered an ERP Portal for enterprise client workflows during Full-Stack internship at IIT Patna. Features role-based access control (RBAC), multi-user task management, automated notifications, and scalable REST API endpoints.",
       image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1000&q=80",
-      tech: ["React", "JavaScript", "Node.js", "Express", "MongoDB", "REST APIs"],
+      tech: ["React 19", "JavaScript", "Node.js", "Express", "MongoDB", "REST APIs"],
       features: [
         "Role-based access control (RBAC) authentication",
         "Enterprise task assignment & progress tracking boards",

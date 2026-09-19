@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Shield, Terminal, Copy, Check, Play, AlertTriangle, CheckCircle, Bug, Sparkles, ExternalLink, RefreshCw } from 'lucide-react';
 import { FaGithub, FaPython } from 'react-icons/fa';
+import WindowFrame from './MacOS/WindowFrame';
 
 const SAMPLE_SNIPPETS = [
   {
@@ -140,65 +141,25 @@ export default function VigiloShowcase() {
   };
 
   return (
-    <section id="vigilo-showcase" className="py-24 px-4 relative z-10 border-t border-white/5">
-      <div className="max-w-5xl mx-auto">
-        
+    <section id="vigilo-showcase" className="py-16 px-4 relative z-10 max-w-5xl mx-auto">
+      <WindowFrame title="Vigilo.app — Python Static Security Scanner (PyPI)" icon={Shield}>
         {/* Section Header */}
-        <div className="mb-12">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-zinc-500 font-mono text-xs uppercase tracking-widest block mb-2"
-          >
-            02 / Open Source Security Tool
-          </motion.div>
-          
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-3xl sm:text-4xl font-bold tracking-tight text-white"
-          >
-            Vigilo <span className="text-zinc-400">Security Scanner</span>
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-zinc-400 max-w-2xl mt-3 text-sm sm:text-base leading-relaxed"
-          >
-            A high-speed Python static analysis tool published on PyPI. Detects CWE vulnerabilities and code correctness issues at compile-time using AST traversal.
-          </motion.p>
-        </div>
-
-        {/* PyPI Quick Install Bar */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mb-10 glass-card p-4 rounded-2xl border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4"
-        >
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-zinc-300">
-              <FaPython className="w-4 h-4" />
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="font-bold text-white text-sm font-mono">vigilo</span>
-                <span className="text-[10px] font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded-full">
-                  PyPI Package • 4★
-                </span>
-              </div>
-              <p className="text-xs text-zinc-400">Python Static Security Scanner &amp; Diagnostic Tool</p>
-            </div>
+        <div className="mb-8 pb-6 border-b border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <span className="text-[11px] font-mono text-zinc-500 uppercase tracking-widest block mb-1">
+              PyPI Security Tool
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
+              Vigilo Security Scanner
+            </h2>
+            <p className="text-zinc-400 mt-1 text-xs sm:text-sm leading-relaxed">
+              Compile-time AST security analysis detecting CWE vulnerabilities in Python codebases.
+            </p>
           </div>
 
-          <div className="flex items-center gap-2.5 w-full sm:w-auto">
-            <div className="flex-1 sm:flex-none flex items-center justify-between gap-3 px-3.5 py-1.5 rounded-full bg-zinc-950 border border-white/10 font-mono text-xs text-zinc-300">
+          {/* Quick Action Install Bar */}
+          <div className="flex items-center gap-2">
+            <div className="flex items-center justify-between gap-3 px-3 py-1.5 rounded-xl bg-zinc-900 border border-white/10 font-mono text-xs text-zinc-300">
               <span>pip install vigilo</span>
               <button
                 onClick={copyPipCommand}
@@ -213,7 +174,7 @@ export default function VigiloShowcase() {
               href="https://pypi.org/project/vigilo/"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 rounded-full glass-card text-zinc-400 hover:text-white hover:border-white/20 transition-all text-xs shrink-0"
+              className="p-2 rounded-xl bg-zinc-900 border border-white/10 text-zinc-400 hover:text-white hover:border-white/20 transition-all text-xs"
               title="View on PyPI"
             >
               <ExternalLink className="w-3.5 h-3.5" />
@@ -223,37 +184,27 @@ export default function VigiloShowcase() {
               href="https://github.com/Sanjiv215/VIGILO-Python-Package"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 rounded-full glass-card text-zinc-400 hover:text-white hover:border-white/20 transition-all text-xs shrink-0"
+              className="p-2 rounded-xl bg-zinc-900 border border-white/10 text-zinc-400 hover:text-white hover:border-white/20 transition-all text-xs"
               title="View GitHub Repository"
             >
               <FaGithub className="w-3.5 h-3.5" />
             </a>
           </div>
-        </motion.div>
+        </div>
 
         {/* Interactive Scanner Simulator */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
           
           {/* Left: Code Editor & Samples */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="lg:col-span-7 glass-panel rounded-2xl border border-white/10 overflow-hidden bg-zinc-950/80"
-          >
+          <div className="lg:col-span-7 rounded-xl border border-white/10 overflow-hidden bg-zinc-950/90">
             {/* Window header */}
-            <div className="bg-zinc-900/60 px-4 py-2.5 border-b border-white/10 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-zinc-700" />
-                <span className="w-2.5 h-2.5 rounded-full bg-zinc-700" />
-                <span className="w-2.5 h-2.5 rounded-full bg-zinc-700" />
-                <span className="text-xs font-mono text-zinc-400 ml-2">target_snippet.py</span>
-              </div>
+            <div className="bg-zinc-900/80 px-3.5 py-2 border-b border-white/10 flex items-center justify-between">
+              <span className="text-xs font-mono text-zinc-400">target_snippet.py</span>
 
               <button
                 onClick={handleRunScan}
                 disabled={scanning}
-                className="px-3 py-1 rounded-full bg-white text-zinc-950 font-semibold text-xs flex items-center gap-1.5 shadow-sm hover:bg-zinc-200 transition-all font-mono disabled:opacity-50"
+                className="px-3 py-1 rounded-md bg-white text-zinc-950 font-semibold text-xs flex items-center gap-1.5 shadow-sm hover:bg-zinc-200 transition-all font-mono disabled:opacity-50"
               >
                 {scanning ? (
                   <>
@@ -270,15 +221,15 @@ export default function VigiloShowcase() {
             </div>
 
             {/* Sample Selector Pills */}
-            <div className="p-3 bg-zinc-950/40 border-b border-white/10 flex flex-wrap gap-1.5">
-              <span className="text-[11px] font-mono text-zinc-500 self-center mr-1">Presets:</span>
+            <div className="p-2.5 bg-zinc-900/40 border-b border-white/10 flex flex-wrap gap-1.5">
+              <span className="text-[10px] font-mono text-zinc-500 self-center mr-1">Presets:</span>
               {SAMPLE_SNIPPETS.map((sample) => (
                 <button
                   key={sample.id}
                   onClick={() => handleSelectSample(sample)}
-                  className={`px-2.5 py-1 rounded-full text-[11px] font-mono transition-all ${
+                  className={`px-2 py-0.5 rounded-md text-[11px] font-mono transition-all ${
                     selectedSample.id === sample.id
-                      ? 'bg-white/15 text-white border border-white/20'
+                      ? 'bg-white/15 text-white border border-white/20 font-medium'
                       : 'bg-zinc-900/60 text-zinc-400 hover:text-zinc-200 border border-white/5'
                   }`}
                 >
@@ -288,125 +239,104 @@ export default function VigiloShowcase() {
             </div>
 
             {/* Code Input Area */}
-            <div className="p-4 bg-zinc-950/95">
+            <div className="p-4 bg-zinc-950">
               <textarea
                 value={customCode}
                 onChange={(e) => setCustomCode(e.target.value)}
-                rows={9}
+                rows={8}
                 className="w-full bg-transparent font-mono text-xs sm:text-sm text-zinc-200 focus:outline-none leading-relaxed resize-none selection:bg-white/20"
                 placeholder="# Type or paste Python code to scan for CWE vulnerabilities..."
               />
             </div>
 
-            <div className="px-4 py-2 bg-zinc-950 border-t border-white/10 flex items-center justify-between text-[10px] font-mono text-zinc-500">
-              <span>AST Parsing Engine • Python 3.10+ AST</span>
+            <div className="px-3.5 py-1.5 bg-zinc-950 border-t border-white/10 flex items-center justify-between text-[10px] font-mono text-zinc-500">
+              <span>AST Parsing Engine • Python 3.12 AST</span>
               <span>Edit snippet or choose a preset</span>
             </div>
-          </motion.div>
+          </div>
 
           {/* Right: Diagnostics Output */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="lg:col-span-5"
-          >
-            <div className="glass-panel p-6 rounded-2xl border border-white/10 space-y-4 bg-zinc-950/80">
-              <div className="flex items-center justify-between pb-3 border-b border-white/10">
-                <div className="flex items-center gap-2">
-                  <Terminal className="w-4 h-4 text-zinc-400" />
-                  <h3 className="font-mono text-xs font-semibold text-white">Diagnostics Report</h3>
-                </div>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                  AST Engine Active
-                </span>
+          <div className="lg:col-span-5 p-5 rounded-xl bg-zinc-900/60 border border-white/10 space-y-3">
+            <div className="flex items-center justify-between pb-2.5 border-b border-white/10">
+              <div className="flex items-center gap-2">
+                <Terminal className="w-3.5 h-3.5 text-zinc-400" />
+                <h3 className="font-mono text-xs font-semibold text-white">Diagnostics Report</h3>
               </div>
-
-              {/* Status Indicator */}
-              <AnimatePresence mode="wait">
-                {scanning ? (
-                  <motion.div
-                    key="scanning"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    className="py-10 flex flex-col items-center justify-center text-center space-y-2"
-                  >
-                    <RefreshCw className="w-6 h-6 text-zinc-400 animate-spin" />
-                    <p className="font-mono text-xs text-zinc-300">Parsing Syntax Tree...</p>
-                  </motion.div>
-                ) : scanResult && scanResult.length > 0 ? (
-                  <motion.div
-                    key="results"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="space-y-3 max-h-[320px] overflow-y-auto pr-1"
-                  >
-                    <div className="flex items-center gap-2 p-2.5 rounded-xl bg-red-950/30 border border-red-500/20 text-red-300 text-xs font-mono">
-                      <AlertTriangle className="w-3.5 h-3.5 shrink-0 text-red-400" />
-                      <span>Found {scanResult.length} security vulnerability</span>
-                    </div>
-
-                    {scanResult.map((finding, idx) => (
-                      <div
-                        key={idx}
-                        className="p-3.5 rounded-xl bg-zinc-900/80 border border-white/10 space-y-1.5 text-xs"
-                      >
-                        <div className="flex items-center justify-between gap-2">
-                          <span className="px-2 py-0.5 rounded-full bg-red-500/15 text-red-400 font-mono font-bold text-[10px] border border-red-500/25">
-                            {finding.cwe}
-                          </span>
-                          <span className="text-[10px] font-mono text-zinc-400">Line {finding.line}</span>
-                          <span className="px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-300 font-mono text-[9px] uppercase">
-                            {finding.severity}
-                          </span>
-                        </div>
-
-                        <h4 className="font-semibold text-white leading-snug text-xs">{finding.name}</h4>
-                        
-                        <div className="pt-1.5 border-t border-white/5 text-zinc-400 text-[11px] leading-relaxed">
-                          <span className="text-zinc-200 font-mono font-medium">Fix: </span>
-                          {finding.advice}
-                        </div>
-                      </div>
-                    ))}
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="clean"
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="py-8 flex flex-col items-center justify-center text-center space-y-2"
-                  >
-                    <div className="w-10 h-10 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
-                      <CheckCircle className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <h4 className="font-medium text-emerald-300 text-xs">No Vulnerabilities Detected</h4>
-                      <p className="text-[11px] text-zinc-500 mt-0.5">Code passed all AST checks.</p>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-
-              {/* Highlights Feature Badges */}
-              <div className="pt-3 border-t border-white/10 grid grid-cols-2 gap-2 text-[10px] font-mono text-zinc-400">
-                <div className="p-2 rounded-xl bg-zinc-900/60 border border-white/5 flex items-center gap-1.5">
-                  <Sparkles className="w-3 h-3 text-zinc-300" />
-                  <span>CWE Mappings</span>
-                </div>
-                <div className="p-2 rounded-xl bg-zinc-900/60 border border-white/5 flex items-center gap-1.5">
-                  <Bug className="w-3 h-3 text-zinc-300" />
-                  <span>AST Linter</span>
-                </div>
-              </div>
-
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                Live AST Matcher
+              </span>
             </div>
-          </motion.div>
+
+            {/* Status Indicator */}
+            <AnimatePresence mode="wait">
+              {scanning ? (
+                <motion.div
+                  key="scanning"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="py-8 flex flex-col items-center justify-center text-center space-y-2"
+                >
+                  <RefreshCw className="w-5 h-5 text-zinc-400 animate-spin" />
+                  <p className="font-mono text-xs text-zinc-300">Parsing AST nodes...</p>
+                </motion.div>
+              ) : scanResult && scanResult.length > 0 ? (
+                <motion.div
+                  key="results"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="space-y-2.5 max-h-[290px] overflow-y-auto pr-1"
+                >
+                  <div className="flex items-center gap-2 p-2 rounded-lg bg-red-950/30 border border-red-500/20 text-red-300 text-xs font-mono">
+                    <AlertTriangle className="w-3.5 h-3.5 shrink-0 text-red-400" />
+                    <span>{scanResult.length} Security Finding(s)</span>
+                  </div>
+
+                  {scanResult.map((finding, idx) => (
+                    <div
+                      key={idx}
+                      className="p-3 rounded-lg bg-zinc-950 border border-white/10 space-y-1 text-xs"
+                    >
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="px-1.5 py-0.5 rounded bg-red-500/15 text-red-400 font-mono font-bold text-[10px]">
+                          {finding.cwe}
+                        </span>
+                        <span className="text-[10px] font-mono text-zinc-400">Line {finding.line}</span>
+                        <span className="px-1.5 py-0.2 rounded bg-zinc-800 text-zinc-300 font-mono text-[9px] uppercase">
+                          {finding.severity}
+                        </span>
+                      </div>
+
+                      <h4 className="font-medium text-white text-xs leading-snug">{finding.name}</h4>
+                      
+                      <div className="pt-1 border-t border-white/5 text-zinc-400 text-[11px] leading-relaxed">
+                        <span className="text-zinc-200 font-mono">Remediation: </span>
+                        {finding.advice}
+                      </div>
+                    </div>
+                  ))}
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="clean"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="py-6 flex flex-col items-center justify-center text-center space-y-2"
+                >
+                  <div className="w-8 h-8 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+                    <CheckCircle className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-emerald-300 text-xs">No Vulnerabilities Detected</h4>
+                    <p className="text-[11px] text-zinc-500">AST matches clean code policy.</p>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
 
         </div>
-
-      </div>
+      </WindowFrame>
     </section>
   );
 }

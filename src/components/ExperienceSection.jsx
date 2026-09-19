@@ -1,45 +1,30 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Briefcase, GraduationCap, Award } from 'lucide-react';
+import { Briefcase, GraduationCap, Award, Calendar } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
+import WindowFrame from './MacOS/WindowFrame';
 
 export default function ExperienceSection() {
   return (
-    <section id="experience" className="py-24 px-4 relative z-10 border-t border-white/5">
-      <div className="max-w-4xl mx-auto">
-        
+    <section id="experience" className="py-16 px-4 relative z-10 max-w-4xl mx-auto">
+      <WindowFrame title="Calendar &amp; History — Career Milestones &amp; Academic Timeline" icon={Calendar}>
         {/* Section Header */}
-        <div className="mb-14">
-          <motion.span
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-zinc-500 font-mono text-xs uppercase tracking-widest block mb-2"
-          >
-            06 / History &amp; Education
-          </motion.span>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-3xl sm:text-4xl font-bold tracking-tight text-white"
-          >
-            Experience &amp; Milestones
-          </motion.h2>
+        <div className="mb-8 pb-6 border-b border-white/10">
+          <span className="text-[11px] font-mono text-zinc-500 uppercase tracking-widest block mb-1">
+            Career Timeline
+          </span>
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
+            Experience &amp; Education
+          </h2>
         </div>
 
         {/* Timeline Container */}
-        <div className="relative border-l border-white/10 ml-4 sm:ml-6 space-y-10">
+        <div className="relative border-l border-white/10 ml-4 sm:ml-6 space-y-8">
           {portfolioData.experiences.map((exp, idx) => {
             const isEducation = exp.type === 'Education';
             return (
-              <motion.div
+              <div
                 key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
                 className="relative pl-7 sm:pl-8 group"
               >
                 {/* Node Bullet Icon */}
@@ -48,8 +33,8 @@ export default function ExperienceSection() {
                 </div>
 
                 {/* Timeline Card */}
-                <div className="glass-card p-6 sm:p-7 rounded-2xl border border-white/10 hover:border-white/20 transition-all">
-                  <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
+                <div className="p-5 sm:p-6 rounded-xl bg-zinc-900/40 border border-white/10 hover:border-white/20 transition-all">
+                  <div className="flex flex-wrap items-center justify-between gap-2 mb-1.5">
                     <span className="px-2.5 py-0.5 rounded-full bg-white/5 border border-white/10 text-zinc-300 text-xs font-mono">
                       {exp.period}
                     </span>
@@ -59,7 +44,7 @@ export default function ExperienceSection() {
                     </span>
                   </div>
 
-                  <h3 className="text-lg font-semibold text-white mb-0.5 group-hover:text-zinc-200 transition-colors">
+                  <h3 className="text-base font-semibold text-white mb-0.5">
                     {exp.role}
                   </h3>
                   <h4 className="text-xs font-mono text-zinc-400 mb-3">
@@ -75,19 +60,18 @@ export default function ExperienceSection() {
                     {exp.skills.map((s) => (
                       <span
                         key={s}
-                        className="px-2.5 py-0.5 rounded-full bg-zinc-900 border border-white/5 text-zinc-400 text-[11px] font-mono"
+                        className="px-2 py-0.5 rounded-md bg-zinc-950 border border-white/5 text-zinc-400 text-[11px] font-mono"
                       >
                         {s}
                       </span>
                     ))}
                   </div>
                 </div>
-              </motion.div>
+              </div>
             );
           })}
         </div>
-
-      </div>
+      </WindowFrame>
     </section>
   );
 }

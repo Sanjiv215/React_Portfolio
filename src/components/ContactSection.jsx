@@ -4,6 +4,7 @@ import { Mail, MapPin, Send, CheckCircle2, AlertCircle, Copy, Check } from 'luci
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import emailjs from '@emailjs/browser';
 import { portfolioData } from '../data/portfolioData';
+import WindowFrame from './MacOS/WindowFrame';
 
 const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
@@ -63,57 +64,39 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-24 px-4 relative z-10 border-t border-white/5">
-      <div className="max-w-5xl mx-auto">
-        
+    <section id="contact" className="py-16 px-4 relative z-10 max-w-4xl mx-auto">
+      <WindowFrame title="Mail.app — New Message to Sanjiv Prasad" icon={Mail}>
         {/* Section Header */}
-        <div className="mb-14">
-          <motion.span
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-zinc-500 font-mono text-xs uppercase tracking-widest block mb-2"
-          >
-            07 / Initiate Connection
-          </motion.span>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-3xl sm:text-4xl font-bold tracking-tight text-white"
-          >
-            Get in Touch
-          </motion.h2>
+        <div className="mb-6 pb-4 border-b border-white/10">
+          <span className="text-[11px] font-mono text-zinc-500 uppercase tracking-widest block mb-1">
+            Communication
+          </span>
+          <h2 className="text-2xl font-bold tracking-tight text-white">
+            Send Message
+          </h2>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
           
           {/* Left Info Column */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="lg:col-span-5 space-y-4"
-          >
-            <div className="glass-card p-6 sm:p-8 rounded-3xl border border-white/10 space-y-6">
-              <h3 className="text-lg font-semibold text-white">Contact Information</h3>
-              <p className="text-zinc-400 text-xs sm:text-sm leading-relaxed">
-                Whether you have an engineering opportunity, open-source collaboration, or project inquiry, feel free to reach out.
+          <div className="lg:col-span-5 space-y-4">
+            <div className="p-5 rounded-xl bg-zinc-900/40 border border-white/10 space-y-4">
+              <h3 className="text-sm font-semibold text-white">Contact Card</h3>
+              <p className="text-zinc-400 text-xs leading-relaxed">
+                Open for software engineering opportunities, developer tooling collaborations, and technical discussions.
               </p>
 
               {/* Direct Points */}
               <div className="space-y-3 pt-3 border-t border-white/10">
-                
                 {/* Email */}
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-zinc-300 shrink-0">
-                    <Mail className="w-4 h-4" />
+                <div className="flex items-center gap-2.5">
+                  <div className="w-7 h-7 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-zinc-300 shrink-0">
+                    <Mail className="w-3.5 h-3.5" />
                   </div>
                   <div className="overflow-hidden">
-                    <span className="text-[10px] font-mono text-zinc-500 uppercase">Email</span>
-                    <div className="flex items-center gap-2">
-                      <a href={`mailto:${portfolioData.personal.email}`} className="text-xs sm:text-sm font-mono text-white hover:text-zinc-300 transition-colors truncate">
+                    <span className="text-[10px] font-mono text-zinc-500 uppercase block">Direct Email</span>
+                    <div className="flex items-center gap-1.5">
+                      <a href={`mailto:${portfolioData.personal.email}`} className="text-xs font-mono text-white hover:text-zinc-300 transition-colors truncate">
                         {portfolioData.personal.email}
                       </a>
                       <button
@@ -128,25 +111,24 @@ export default function ContactSection() {
                 </div>
 
                 {/* Location */}
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-zinc-300 shrink-0">
-                    <MapPin className="w-4 h-4" />
+                <div className="flex items-center gap-2.5">
+                  <div className="w-7 h-7 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-zinc-300 shrink-0">
+                    <MapPin className="w-3.5 h-3.5" />
                   </div>
                   <div>
-                    <span className="text-[10px] font-mono text-zinc-500 uppercase">Location</span>
-                    <p className="text-xs sm:text-sm font-medium text-white">{portfolioData.personal.location}</p>
+                    <span className="text-[10px] font-mono text-zinc-500 uppercase block">Location</span>
+                    <p className="text-xs font-medium text-white">{portfolioData.personal.location}</p>
                   </div>
                 </div>
-
               </div>
 
               {/* Socials */}
-              <div className="pt-3 border-t border-white/10 flex items-center gap-3">
+              <div className="pt-3 border-t border-white/10 flex items-center gap-2">
                 <a
                   href={portfolioData.personal.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 py-2.5 rounded-full glass-card text-zinc-300 hover:text-white hover:border-white/20 text-xs font-mono flex items-center justify-center gap-1.5 transition-all"
+                  className="flex-1 py-2 rounded-lg bg-zinc-900 border border-white/10 text-zinc-300 hover:text-white text-xs font-mono flex items-center justify-center gap-1.5 transition-all"
                 >
                   <FaGithub className="w-3.5 h-3.5" />
                   <span>GitHub</span>
@@ -155,75 +137,67 @@ export default function ContactSection() {
                   href={portfolioData.personal.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 py-2.5 rounded-full glass-card text-zinc-300 hover:text-white hover:border-white/20 text-xs font-mono flex items-center justify-center gap-1.5 transition-all"
+                  className="flex-1 py-2 rounded-lg bg-blue-600/80 hover:bg-blue-600 text-white text-xs font-mono flex items-center justify-center gap-1.5 transition-all"
                 >
                   <FaLinkedin className="w-3.5 h-3.5" />
                   <span>LinkedIn</span>
                 </a>
               </div>
-
             </div>
-          </motion.div>
+          </div>
 
-          {/* Right Glass Form */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="lg:col-span-7"
-          >
-            <form onSubmit={handleSubmit} className="glass-panel p-6 sm:p-8 rounded-3xl border border-white/10 space-y-5 bg-zinc-950/80 shadow-xl">
-              <h3 className="text-lg font-semibold text-white">Send Message</h3>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="space-y-1.5">
-                  <label className="text-[11px] font-mono text-zinc-400 uppercase">Name</label>
+          {/* Right Form */}
+          <div className="lg:col-span-7">
+            <form onSubmit={handleSubmit} className="p-5 rounded-xl bg-zinc-900/60 border border-white/10 space-y-3.5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="space-y-1">
+                  <label className="text-[11px] font-mono text-zinc-400">From (Name)</label>
                   <input
                     type="text"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     placeholder="Sanjiv Prasad"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900/90 border border-white/10 text-white text-xs sm:text-sm focus:border-white/30 focus:outline-none transition-colors"
+                    className="w-full px-3 py-2 rounded-lg bg-zinc-950 border border-white/10 text-white text-xs focus:border-white/30 focus:outline-none transition-colors"
                   />
                 </div>
 
-                <div className="space-y-1.5">
-                  <label className="text-[11px] font-mono text-zinc-400 uppercase">Email</label>
+                <div className="space-y-1">
+                  <label className="text-[11px] font-mono text-zinc-400">Email Address</label>
                   <input
                     type="email"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     placeholder="you@company.com"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900/90 border border-white/10 text-white text-xs sm:text-sm focus:border-white/30 focus:outline-none transition-colors"
+                    className="w-full px-3 py-2 rounded-lg bg-zinc-950 border border-white/10 text-white text-xs focus:border-white/30 focus:outline-none transition-colors"
                   />
                 </div>
               </div>
 
-              <div className="space-y-1.5">
-                <label className="text-[11px] font-mono text-zinc-400 uppercase">Subject</label>
+              <div className="space-y-1">
+                <label className="text-[11px] font-mono text-zinc-400">Subject</label>
                 <input
                   type="text"
                   value={formData.subject}
                   onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                  placeholder="Engineering Role / Project"
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900/90 border border-white/10 text-white text-xs sm:text-sm focus:border-white/30 focus:outline-none transition-colors"
+                  placeholder="Engineering Role / Project Opportunity"
+                  className="w-full px-3 py-2 rounded-lg bg-zinc-950 border border-white/10 text-white text-xs focus:border-white/30 focus:outline-none transition-colors"
                 />
               </div>
 
-              <div className="space-y-1.5">
-                <label className="text-[11px] font-mono text-zinc-400 uppercase">Message</label>
+              <div className="space-y-1">
+                <label className="text-[11px] font-mono text-zinc-400">Message</label>
                 <textarea
                   rows={4}
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  placeholder="Tell me about your project goals or timeline..."
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900/90 border border-white/10 text-white text-xs sm:text-sm focus:border-white/30 focus:outline-none transition-colors resize-none"
+                  placeholder="Write your message here..."
+                  className="w-full px-3 py-2 rounded-lg bg-zinc-950 border border-white/10 text-white text-xs focus:border-white/30 focus:outline-none transition-colors resize-none"
                 />
               </div>
 
               {status.message && (
                 <div
-                  className={`p-3 rounded-xl text-xs font-mono flex items-center gap-2 ${
+                  className={`p-2.5 rounded-lg text-xs font-mono flex items-center gap-2 ${
                     status.type === 'success'
                       ? 'bg-emerald-950/40 border border-emerald-500/30 text-emerald-300'
                       : 'bg-zinc-900 border border-white/10 text-zinc-300'
@@ -237,17 +211,16 @@ export default function ContactSection() {
               <button
                 type="submit"
                 disabled={sending}
-                className="w-full py-3 rounded-full bg-white text-zinc-950 hover:bg-zinc-200 font-semibold text-xs font-mono flex items-center justify-center gap-2 transition-all disabled:opacity-50 shadow-md"
+                className="w-full py-2.5 rounded-lg bg-white text-zinc-950 hover:bg-zinc-200 font-semibold text-xs font-mono flex items-center justify-center gap-1.5 transition-all disabled:opacity-50"
               >
-                <span>{sending ? 'Sending...' : 'Send Message'}</span>
+                <span>{sending ? 'Sending Message...' : 'Send Message'}</span>
                 <Send className="w-3.5 h-3.5" />
               </button>
             </form>
-          </motion.div>
+          </div>
 
         </div>
-
-      </div>
+      </WindowFrame>
     </section>
   );
 }
