@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sun, Moon, Menu, X, FileText, Code } from 'lucide-react';
+import { Sun, Moon, Menu, X, FileText, Code, Shield } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import { portfolioData } from '../data/portfolioData';
 
 const navLinks = [
   { name: 'About', href: '#about' },
+  { name: 'Vigilo', href: '#vigilo-showcase' },
   { name: 'Skills', href: '#skills' },
   { name: 'Projects', href: '#projects' },
   { name: 'Terminal', href: '#terminal' },
@@ -50,7 +51,7 @@ export default function Navbar() {
     >
       <nav
         className={`w-full max-w-6xl rounded-2xl transition-all duration-300 glass-panel px-5 py-3 flex items-center justify-between ${
-          scrolled ? 'shadow-2xl border-cyan-500/30' : 'border-white/10'
+          scrolled ? 'shadow-2xl border-cyan-500/30 bg-slate-950/90' : 'border-white/10'
         }`}
       >
         {/* Brand */}
@@ -65,18 +66,20 @@ export default function Navbar() {
         </a>
 
         {/* Desktop Links */}
-        <ul className="hidden md:flex items-center gap-6 text-sm font-medium">
+        <ul className="hidden md:flex items-center gap-5 text-sm font-medium">
           {navLinks.map((link) => {
             const isActive = activeSection === link.href.replace('#', '');
+            const isVigilo = link.name === 'Vigilo';
             return (
               <li key={link.name}>
                 <a
                   href={link.href}
-                  className={`relative py-1 transition-colors duration-200 ${
+                  className={`relative py-1 flex items-center gap-1.5 transition-colors duration-200 ${
                     isActive ? 'text-cyan-400 font-semibold' : 'text-gray-300 hover:text-white'
                   }`}
                 >
-                  {link.name}
+                  {isVigilo && <Shield className="w-3.5 h-3.5 text-cyan-400" />}
+                  <span>{link.name}</span>
                   {isActive && (
                     <motion.div
                       layoutId="activeIndicator"
@@ -105,6 +108,7 @@ export default function Navbar() {
           <a
             href={portfolioData.personal.resumeUrl}
             download="Sanjiv-Resume.pdf"
+            rel="noopener noreferrer"
             className="hidden sm:inline-flex items-center gap-2 text-xs font-semibold px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 hover:scale-105 active:scale-95 transition-all"
           >
             <FileText className="w-3.5 h-3.5" />
@@ -130,7 +134,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -20, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="absolute top-20 left-4 right-4 glass-panel rounded-2xl p-6 border border-cyan-500/30 md:hidden shadow-2xl"
+            className="absolute top-20 left-4 right-4 glass-panel rounded-2xl p-6 border border-cyan-500/30 md:hidden shadow-2xl bg-slate-950/95"
           >
             <ul className="flex flex-col gap-4 font-medium">
               {navLinks.map((link) => (
@@ -138,9 +142,10 @@ export default function Navbar() {
                   <a
                     href={link.href}
                     onClick={() => setIsMobileOpen(false)}
-                    className="block py-2 text-gray-200 hover:text-cyan-400 transition-colors"
+                    className="flex items-center gap-2 py-2 text-gray-200 hover:text-cyan-400 transition-colors"
                   >
-                    {link.name}
+                    {link.name === 'Vigilo' && <Shield className="w-4 h-4 text-cyan-400" />}
+                    <span>{link.name}</span>
                   </a>
                 </li>
               ))}

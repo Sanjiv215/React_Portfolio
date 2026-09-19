@@ -145,7 +145,7 @@ export default function ContactSection() {
                 <a
                   href={portfolioData.personal.github}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   className="flex-1 py-3 rounded-xl glass-card text-gray-300 hover:text-cyan-400 hover:border-cyan-500/40 text-xs font-semibold flex items-center justify-center gap-2 transition-all"
                 >
                   <FaGithub className="w-4 h-4" />
@@ -154,7 +154,7 @@ export default function ContactSection() {
                 <a
                   href={portfolioData.personal.linkedin}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   className="flex-1 py-3 rounded-xl glass-card text-gray-300 hover:text-cyan-400 hover:border-cyan-500/40 text-xs font-semibold flex items-center justify-center gap-2 transition-all"
                 >
                   <FaLinkedin className="w-4 h-4" />

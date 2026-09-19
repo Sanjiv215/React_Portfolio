@@ -124,6 +124,7 @@ export default function BackgroundCanvas() {
   return (
     <canvas
       ref={canvasRef}
+      aria-hidden="true"
       className="fixed inset-0 pointer-events-none z-0 opacity-60 transition-opacity duration-500"
     />
   );

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Copy, Check, Terminal, Sparkles, ExternalLink } from 'lucide-react';
-import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { ArrowRight, Copy, Check, Terminal, Sparkles, Shield, Code2, ExternalLink } from 'lucide-react';
+import { FaGithub, FaLinkedin, FaPython } from 'react-icons/fa';
 import { portfolioData } from '../data/portfolioData';
 
 export default function HeroSection() {
@@ -24,8 +24,8 @@ export default function HeroSection() {
   return (
     <section id="home" className="relative min-h-screen pt-32 pb-20 flex items-center justify-center px-4 overflow-hidden">
       {/* Background glow effects */}
-      <div className="absolute top-1/4 left-10 w-72 h-72 bg-cyan-500/15 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 right-10 w-96 h-96 bg-purple-500/15 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/4 left-10 w-80 h-80 bg-cyan-500/15 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-10 right-10 w-96 h-96 bg-blue-600/15 rounded-full blur-3xl pointer-events-none" />
 
       <div className="w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
         
@@ -48,12 +48,12 @@ export default function HeroSection() {
           {/* Subheader */}
           <p className="text-cyan-400 font-mono text-sm tracking-widest uppercase mb-2 flex items-center gap-2">
             <Sparkles className="w-4 h-4 text-cyan-400 animate-pulse" />
-            Architecting Digital Precision
+            Software Engineer • DevTools &amp; Security • AI
           </p>
 
           {/* Name Header */}
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight mb-4">
-            Hello, I&apos;m{' '}
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight mb-4 text-white">
+            Hi, I&apos;m{' '}
             <span className="text-gradient-cyan neon-glow-cyan block sm:inline">
               {portfolioData.personal.name}
             </span>
@@ -61,7 +61,7 @@ export default function HeroSection() {
 
           {/* Animated Role Switcher */}
           <div className="h-12 flex items-center mb-6 text-xl sm:text-2xl font-bold text-gray-300">
-            <span className="text-gray-400 mr-2">Specializing in</span>
+            <span className="text-gray-400 mr-2">I build</span>
             <div className="relative inline-block overflow-hidden h-9">
               <AnimatePresence mode="wait">
                 <motion.span
@@ -89,8 +89,16 @@ export default function HeroSection() {
               href="#projects"
               className="px-6 py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-semibold flex items-center justify-center gap-2 shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-105 active:scale-95 transition-all text-sm"
             >
-              <span>Explore Featured Projects</span>
+              <span>Explore Projects</span>
               <ArrowRight className="w-4 h-4" />
+            </a>
+
+            <a
+              href="#vigilo-showcase"
+              className="px-5 py-3.5 rounded-xl glass-card border border-cyan-500/30 hover:border-cyan-400 text-cyan-300 hover:text-white font-medium flex items-center justify-center gap-2 transition-all active:scale-95 text-sm"
+            >
+              <Shield className="w-4 h-4 text-cyan-400" />
+              <span>Test Vigilo Scanner</span>
             </a>
 
             <button
@@ -98,17 +106,17 @@ export default function HeroSection() {
               className="px-5 py-3.5 rounded-xl glass-card border border-white/10 hover:border-cyan-500/40 text-gray-200 hover:text-white font-medium flex items-center justify-center gap-2 transition-all active:scale-95 text-sm"
             >
               {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4 text-cyan-400" />}
-              <span>{copied ? 'Email Copied!' : 'Copy Email Address'}</span>
+              <span>{copied ? 'Email Copied!' : 'Copy Email'}</span>
             </button>
           </div>
 
-          {/* Social Icons */}
+          {/* Social Icons & Badges */}
           <div className="flex items-center gap-4 mt-10">
             <span className="text-xs font-mono text-gray-500 uppercase tracking-widest">Connect:</span>
             <a
               href={portfolioData.personal.github}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="p-2.5 rounded-xl glass-card text-gray-400 hover:text-cyan-400 hover:border-cyan-500/40 transition-all"
               aria-label="GitHub Profile"
             >
@@ -117,11 +125,21 @@ export default function HeroSection() {
             <a
               href={portfolioData.personal.linkedin}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="p-2.5 rounded-xl glass-card text-gray-400 hover:text-cyan-400 hover:border-cyan-500/40 transition-all"
               aria-label="LinkedIn Profile"
             >
               <FaLinkedin className="w-5 h-5" />
+            </a>
+            <a
+              href="https://pypi.org/project/vigilo/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2.5 rounded-xl glass-card text-gray-400 hover:text-cyan-400 hover:border-cyan-500/40 transition-all"
+              title="PyPI Profile"
+              aria-label="PyPI Package"
+            >
+              <FaPython className="w-5 h-5" />
             </a>
           </div>
         </motion.div>
@@ -146,8 +164,8 @@ export default function HeroSection() {
                 <Terminal className="w-3.5 h-3.5 text-cyan-400" />
                 <span>sanjiv.config.ts</span>
               </div>
-              <span className="text-[10px] font-mono text-cyan-400/70 bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/20">
-                v2.4.0
+              <span className="text-[10px] font-mono text-cyan-400/80 bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/20">
+                vigilo 1.2
               </span>
             </div>
 
@@ -155,16 +173,13 @@ export default function HeroSection() {
             <div className="p-5 font-mono text-xs sm:text-sm leading-relaxed overflow-x-auto bg-slate-950/90 text-gray-300">
               <pre className="text-cyan-300">
                 <code>
-                  <span className="text-purple-400">const</span> <span className="text-yellow-300">developer</span> = &#123;{'\n'}
+                  <span className="text-purple-400">const</span> <span className="text-yellow-300">engineer</span> = &#123;{'\n'}
                   {'  '}<span className="text-cyan-400">name</span>: <span className="text-emerald-300">&quot;Sanjiv Prasad&quot;</span>,{'\n'}
-                  {'  '}<span className="text-cyan-400">title</span>: <span className="text-emerald-300">&quot;Senior Full-Stack Engineer&quot;</span>,{'\n'}
-                  {'  '}<span className="text-cyan-400">location</span>: <span className="text-emerald-300">&quot;Bangalore, India&quot;</span>,{'\n'}
-                  {'  '}<span className="text-cyan-400">coreStack</span>: [{'\n'}
-                  {'    '}<span className="text-emerald-300">&quot;React 19&quot;</span>, <span className="text-emerald-300">&quot;FastAPI&quot;</span>,{'\n'}
-                  {'    '}<span className="text-emerald-300">&quot;Tailwind v4&quot;</span>, <span className="text-emerald-300">&quot;Node.js&quot;</span>{'\n'}
-                  {'  '}],{'\n'}
-                  {'  '}<span className="text-cyan-400">status</span>: <span className="text-emerald-300">&quot;🟢 Available for Lead Roles&quot;</span>,{'\n'}
-                  {'  '}<span className="text-cyan-400">buildSystem</span>: () =&gt; <span className="text-emerald-300">&quot;60fps Glassmorphic UI&quot;</span>{'\n'}
+                  {'  '}<span className="text-cyan-400">focus</span>: [<span className="text-emerald-300">&quot;Full-Stack&quot;</span>, <span className="text-emerald-300">&quot;DevTools&quot;</span>, <span className="text-emerald-300">&quot;AI&quot;</span>],{'\n'}
+                  {'  '}<span className="text-cyan-400">flagshipPackage</span>: <span className="text-emerald-300">&quot;vigilo (PyPI)&quot;</span>,{'\n'}
+                  {'  '}<span className="text-cyan-400">internships</span>: [<span className="text-emerald-300">&quot;IIT Patna&quot;</span>, <span className="text-emerald-300">&quot;Code Alpha&quot;</span>],{'\n'}
+                  {'  '}<span className="text-cyan-400">mindset</span>: <span className="text-emerald-300">&quot;Build. Break. Fix. Repeat.&quot;</span>,{'\n'}
+                  {'  '}<span className="text-cyan-400">status</span>: <span className="text-emerald-300">&quot;🟢 Open for Opportunities&quot;</span>{'\n'}
                   &#125;;
                 </code>
               </pre>

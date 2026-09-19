@@ -32,7 +32,7 @@ export default function ProjectModal({ project, onClose }) {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
           transition={{ duration: 0.25 }}
-          className="relative w-full max-w-3xl glass-panel border border-cyan-500/30 rounded-3xl p-6 sm:p-8 shadow-2xl overflow-hidden z-10 my-auto"
+          className="relative w-full max-w-3xl glass-panel border border-cyan-500/30 rounded-3xl p-6 sm:p-8 shadow-2xl overflow-hidden z-10 my-auto bg-slate-950/95"
         >
           {/* Close button */}
           <button
@@ -45,9 +45,16 @@ export default function ProjectModal({ project, onClose }) {
 
           {/* Header */}
           <div className="mb-6">
-            <span className="inline-block px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-mono font-semibold uppercase tracking-wider mb-2">
-              {project.category}
-            </span>
+            <div className="flex flex-wrap items-center gap-2 mb-2">
+              <span className="inline-block px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-mono font-semibold uppercase tracking-wider">
+                {project.category}
+              </span>
+              {project.badge && (
+                <span className="inline-block px-2.5 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-xs font-mono font-semibold">
+                  {project.badge}
+                </span>
+              )}
+            </div>
             <h3 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
               {project.title}
             </h3>
@@ -74,7 +81,7 @@ export default function ProjectModal({ project, onClose }) {
           {/* Key Features */}
           <div className="mb-6">
             <h4 className="text-xs font-mono uppercase tracking-widest text-cyan-400 mb-3 flex items-center gap-2">
-              <Layers className="w-4 h-4" /> Key Architecture Features
+              <Layers className="w-4 h-4" /> Key Architecture Highlights
             </h4>
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-gray-300">
               {project.features.map((feat, idx) => (
@@ -106,21 +113,21 @@ export default function ProjectModal({ project, onClose }) {
             <a
               href={project.liveUrl}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="flex-1 min-w-[140px] px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-semibold flex items-center justify-center gap-2 shadow-lg shadow-cyan-500/25 transition-all text-sm"
             >
-              <span>Live Application</span>
+              <span>{project.id === 'vigilo' ? 'View on PyPI' : 'Live Demo / Docs'}</span>
               <ExternalLink className="w-4 h-4" />
             </a>
 
             <a
               href={project.githubUrl}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="flex-1 min-w-[140px] px-6 py-3 rounded-xl glass-card border border-white/10 hover:border-cyan-500/40 text-gray-200 hover:text-white font-semibold flex items-center justify-center gap-2 transition-all text-sm"
             >
               <FaGithub className="w-4 h-4" />
-              <span>Source Code</span>
+              <span>Source Repository</span>
             </a>
           </div>
         </motion.div>

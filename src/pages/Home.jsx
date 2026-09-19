@@ -4,6 +4,7 @@ import BackgroundCanvas from '../components/BackgroundCanvas';
 import Navbar from '../components/Navbar';
 import HeroSection from '../components/HeroSection';
 import AboutSection from '../components/AboutSection';
+import VigiloShowcase from '../components/VigiloShowcase';
 import SkillsSection from '../components/SkillsSection';
 import ProjectsSection from '../components/ProjectsSection';
 import InteractiveTerminal from '../components/InteractiveTerminal';
@@ -20,6 +21,7 @@ export default function Home() {
         <main>
           <HeroSection />
           <AboutSection />
+          <VigiloShowcase />
           <SkillsSection />
           <ProjectsSection />
           <InteractiveTerminal />

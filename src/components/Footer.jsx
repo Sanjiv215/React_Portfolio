@@ -26,13 +26,13 @@ export default function Footer() {
             {portfolioData.personal.name}
           </span>
           <span className="text-xs font-mono text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/20">
-            Senior Full-Stack &amp; UI/UX
+            {portfolioData.personal.roleTitle}
           </span>
         </div>
 
         {/* Center Credits & Celebration */}
         <div className="flex items-center gap-2 text-xs text-gray-400">
-          <span>Crafted with</span>
+          <span>Engineered with</span>
           <Heart className="w-3.5 h-3.5 text-red-500 fill-red-500 animate-pulse" />
           <span>using React 19 &amp; Tailwind v4</span>
           <button

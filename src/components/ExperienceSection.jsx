@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Briefcase, GraduationCap, Calendar, MapPin, Award } from 'lucide-react';
+import { Briefcase, GraduationCap, Calendar, MapPin, Award, CheckCircle2 } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
 
 export default function ExperienceSection() {
@@ -16,16 +16,16 @@ export default function ExperienceSection() {
             viewport={{ once: true }}
             className="text-cyan-400 font-mono text-xs uppercase tracking-widest px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20"
           >
-            Milestones &amp; History
+            Track Record &amp; Milestones
           </motion.span>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-3xl sm:text-5xl font-extrabold mt-3 tracking-tight"
+            className="text-3xl sm:text-5xl font-extrabold mt-3 tracking-tight text-white"
           >
-            Career &amp; <span className="text-gradient-cyan">Education</span>
+            Experience &amp; <span className="text-gradient-cyan">Education</span>
           </motion.h2>
         </div>
 
@@ -53,7 +53,7 @@ export default function ExperienceSection() {
                     <span className="px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-mono font-semibold">
                       {exp.period}
                     </span>
-                    <span className="text-xs text-gray-500 font-mono flex items-center gap-1">
+                    <span className="text-xs text-gray-400 font-mono flex items-center gap-1.5 bg-slate-900/60 px-2.5 py-1 rounded-lg border border-white/5">
                       <Award className="w-3.5 h-3.5 text-cyan-400" />
                       {exp.type}
                     </span>
@@ -62,11 +62,11 @@ export default function ExperienceSection() {
                   <h3 className="text-xl sm:text-2xl font-bold text-white mb-1 group-hover:text-cyan-400 transition-colors">
                     {exp.role}
                   </h3>
-                  <h4 className="text-sm font-semibold text-gray-300 mb-4">
-                    {exp.company}
+                  <h4 className="text-sm font-semibold text-cyan-300 mb-4 flex items-center gap-2">
+                    <span>{exp.company}</span>
                   </h4>
 
-                  <p className="text-gray-400 text-sm leading-relaxed mb-6">
+                  <p className="text-gray-300 text-sm leading-relaxed mb-6">
                     {exp.description}
                   </p>
 

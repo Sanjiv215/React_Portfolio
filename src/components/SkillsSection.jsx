@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Code2, FileCode, Palette, Layout, Server, Cpu, Network, Box, GitBranch, Terminal, Database, HardDrive, Cpu as DefaultIcon } from 'lucide-react';
+import { Code2, FileCode, Palette, Layout, Server, Cpu, Network, Box, GitBranch, Terminal, Database, HardDrive, Shield, Cpu as DefaultIcon } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
 
 const skillIcons = {
@@ -15,7 +15,8 @@ const skillIcons = {
   GitBranch,
   Terminal,
   Database,
-  HardDrive
+  HardDrive,
+  Shield
 };
 
 export default function SkillsSection() {
@@ -37,26 +38,26 @@ export default function SkillsSection() {
             viewport={{ once: true }}
             className="text-cyan-400 font-mono text-xs uppercase tracking-widest px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20"
           >
-            Technical Stack
+            Technical Stack &amp; Toolchain
           </motion.span>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-3xl sm:text-5xl font-extrabold mt-3 tracking-tight"
+            className="text-3xl sm:text-5xl font-extrabold mt-3 tracking-tight text-white"
           >
-            Capabilities &amp; <span className="text-gradient-cyan">Arsenal</span>
+            Engineering <span className="text-gradient-cyan">Arsenal</span>
           </motion.h2>
         </div>
 
         {/* Category Tabs */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
+        <div className="flex flex-wrap justify-center gap-2.5 mb-12">
           {portfolioData.skillCategories.map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className={`px-5 py-2.5 rounded-full text-xs font-semibold tracking-wider transition-all duration-300 ${
+              className={`px-4 py-2 rounded-full text-xs font-semibold tracking-wider transition-all duration-300 ${
                 activeCategory === cat
                   ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-500/25 border border-cyan-400/40'
                   : 'glass-card text-gray-400 hover:text-white border-white/10 hover:border-cyan-500/30'
