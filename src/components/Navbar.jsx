@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sun, Moon, Menu, X, FileText, Code, Shield } from 'lucide-react';
+import { Sun, Moon, Menu, X, FileText, Terminal, Shield } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import { portfolioData } from '../data/portfolioData';
 
@@ -22,10 +22,10 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
+      setScrolled(window.scrollY > 30);
 
       const sections = document.querySelectorAll('section[id]');
-      const scrollPosition = window.scrollY + 140;
+      const scrollPosition = window.scrollY + 120;
 
       sections.forEach(section => {
         const top = section.offsetTop;
@@ -44,29 +44,29 @@ export default function Navbar() {
 
   return (
     <motion.header
-      initial={{ y: -100, opacity: 0 }}
+      initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
+      transition={{ duration: 0.5, ease: 'easeOut' }}
       className="fixed top-4 inset-x-0 z-50 flex justify-center px-4"
     >
       <nav
-        className={`w-full max-w-6xl rounded-2xl transition-all duration-300 glass-panel px-5 py-3 flex items-center justify-between ${
-          scrolled ? 'shadow-2xl border-cyan-500/30 bg-slate-950/90' : 'border-white/10'
+        className={`w-full max-w-5xl rounded-full transition-all duration-300 glass-panel px-5 py-2.5 flex items-center justify-between ${
+          scrolled ? 'shadow-2xl border-white/15 bg-zinc-950/85 backdrop-blur-xl' : 'border-white/10 bg-zinc-950/50'
         }`}
       >
         {/* Brand */}
         <a
           href="#home"
-          className="flex items-center gap-2 text-lg font-bold tracking-wider text-cyan-400 hover:text-cyan-300 transition-colors"
+          className="flex items-center gap-2.5 text-sm font-semibold tracking-tight text-white hover:text-zinc-300 transition-colors"
         >
-          <div className="w-8 h-8 rounded-lg bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center text-cyan-400">
-            <Code className="w-5 h-5" />
+          <div className="w-7 h-7 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white text-xs font-mono font-bold">
+            S
           </div>
-          <span>SANJIV.<span className="text-white">DEV</span></span>
+          <span className="font-mono">sanjiv<span className="text-zinc-500">.dev</span></span>
         </a>
 
         {/* Desktop Links */}
-        <ul className="hidden md:flex items-center gap-5 text-sm font-medium">
+        <ul className="hidden md:flex items-center gap-1 text-xs font-medium text-zinc-400">
           {navLinks.map((link) => {
             const isActive = activeSection === link.href.replace('#', '');
             const isVigilo = link.name === 'Vigilo';
@@ -74,19 +74,12 @@ export default function Navbar() {
               <li key={link.name}>
                 <a
                   href={link.href}
-                  className={`relative py-1 flex items-center gap-1.5 transition-colors duration-200 ${
-                    isActive ? 'text-cyan-400 font-semibold' : 'text-gray-300 hover:text-white'
+                  className={`relative px-3.5 py-1.5 rounded-full transition-all duration-200 flex items-center gap-1.5 ${
+                    isActive ? 'text-white bg-white/10 font-semibold' : 'hover:text-zinc-200 hover:bg-white/5'
                   }`}
                 >
-                  {isVigilo && <Shield className="w-3.5 h-3.5 text-cyan-400" />}
+                  {isVigilo && <Shield className="w-3 h-3 text-emerald-400" />}
                   <span>{link.name}</span>
-                  {isActive && (
-                    <motion.div
-                      layoutId="activeIndicator"
-                      className="absolute bottom-0 left-0 right-0 h-[2px] bg-cyan-400 rounded-full shadow-[0_0_8px_#06b6d4]"
-                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                    />
-                  )}
                 </a>
               </li>
             );
@@ -94,14 +87,14 @@ export default function Navbar() {
         </ul>
 
         {/* Actions */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
           {/* Theme Toggle */}
           <button
             onClick={toggleTheme}
             aria-label="Toggle theme"
-            className="p-2 rounded-xl bg-white/5 border border-white/10 text-gray-300 hover:text-cyan-400 hover:border-cyan-500/40 transition-all"
+            className="p-2 rounded-full bg-white/5 border border-white/10 text-zinc-400 hover:text-white hover:border-white/20 transition-all text-xs"
           >
-            {theme === 'dark' ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-cyan-500" />}
+            {theme === 'dark' ? <Sun className="w-3.5 h-3.5 text-zinc-300" /> : <Moon className="w-3.5 h-3.5 text-zinc-700" />}
           </button>
 
           {/* Resume Link */}
@@ -109,19 +102,19 @@ export default function Navbar() {
             href={portfolioData.personal.resumeUrl}
             download="Sanjiv-Resume.pdf"
             rel="noopener noreferrer"
-            className="hidden sm:inline-flex items-center gap-2 text-xs font-semibold px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 hover:scale-105 active:scale-95 transition-all"
+            className="hidden sm:inline-flex items-center gap-1.5 text-xs font-medium px-3.5 py-1.5 rounded-full bg-white text-zinc-950 hover:bg-zinc-200 transition-all font-mono"
           >
-            <FileText className="w-3.5 h-3.5" />
+            <FileText className="w-3 h-3" />
             <span>Resume</span>
           </a>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileOpen(!isMobileOpen)}
-            className="md:hidden p-2 rounded-xl bg-white/5 border border-white/10 text-gray-300"
+            className="md:hidden p-2 rounded-full bg-white/5 border border-white/10 text-zinc-300"
             aria-label="Toggle Navigation Menu"
           >
-            {isMobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {isMobileOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
           </button>
         </div>
       </nav>
@@ -134,29 +127,29 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -20, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="absolute top-20 left-4 right-4 glass-panel rounded-2xl p-6 border border-cyan-500/30 md:hidden shadow-2xl bg-slate-950/95"
+            className="absolute top-16 left-4 right-4 glass-panel rounded-3xl p-6 border border-white/10 md:hidden shadow-2xl bg-zinc-950/95"
           >
-            <ul className="flex flex-col gap-4 font-medium">
+            <ul className="flex flex-col gap-3 font-medium text-sm text-zinc-300">
               {navLinks.map((link) => (
                 <li key={link.name}>
                   <a
                     href={link.href}
                     onClick={() => setIsMobileOpen(false)}
-                    className="flex items-center gap-2 py-2 text-gray-200 hover:text-cyan-400 transition-colors"
+                    className="flex items-center gap-2 py-2 px-3 rounded-xl hover:bg-white/5 hover:text-white transition-colors"
                   >
-                    {link.name === 'Vigilo' && <Shield className="w-4 h-4 text-cyan-400" />}
+                    {link.name === 'Vigilo' && <Shield className="w-4 h-4 text-emerald-400" />}
                     <span>{link.name}</span>
                   </a>
                 </li>
               ))}
-              <li className="pt-2 border-t border-white/10">
+              <li className="pt-3 border-t border-white/10">
                 <a
                   href={portfolioData.personal.resumeUrl}
                   download="Sanjiv-Resume.pdf"
                   onClick={() => setIsMobileOpen(false)}
-                  className="flex items-center justify-center gap-2 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold text-sm"
+                  className="flex items-center justify-center gap-2 py-2.5 rounded-full bg-white text-zinc-950 font-semibold text-xs font-mono"
                 >
-                  <FileText className="w-4 h-4" />
+                  <FileText className="w-3.5 h-3.5" />
                   <span>Download Resume</span>
                 </a>
               </li>

@@ -27,40 +27,40 @@ export default function SkillsSection() {
     : portfolioData.skills.filter(s => s.category === activeCategory);
 
   return (
-    <section id="skills" className="py-24 px-4 relative z-10">
-      <div className="max-w-6xl mx-auto">
+    <section id="skills" className="py-24 px-4 relative z-10 border-t border-white/5">
+      <div className="max-w-5xl mx-auto">
         
         {/* Section Header */}
-        <div className="text-center mb-12">
+        <div className="mb-12">
           <motion.span
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-cyan-400 font-mono text-xs uppercase tracking-widest px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20"
+            className="text-zinc-500 font-mono text-xs uppercase tracking-widest block mb-2"
           >
-            Technical Stack &amp; Toolchain
+            03 / Capabilities &amp; Arsenal
           </motion.span>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-3xl sm:text-5xl font-extrabold mt-3 tracking-tight text-white"
+            className="text-3xl sm:text-4xl font-bold tracking-tight text-white"
           >
-            Engineering <span className="text-gradient-cyan">Arsenal</span>
+            Technical Stack
           </motion.h2>
         </div>
 
         {/* Category Tabs */}
-        <div className="flex flex-wrap justify-center gap-2.5 mb-12">
+        <div className="flex flex-wrap gap-2 mb-10">
           {portfolioData.skillCategories.map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className={`px-4 py-2 rounded-full text-xs font-semibold tracking-wider transition-all duration-300 ${
+              className={`px-3.5 py-1.5 rounded-full text-xs font-mono transition-all duration-200 ${
                 activeCategory === cat
-                  ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-500/25 border border-cyan-400/40'
-                  : 'glass-card text-gray-400 hover:text-white border-white/10 hover:border-cyan-500/30'
+                  ? 'bg-white text-zinc-950 font-semibold'
+                  : 'glass-card text-zinc-400 hover:text-white border-white/10 hover:border-white/20'
               }`}
             >
               {cat}
@@ -71,7 +71,7 @@ export default function SkillsSection() {
         {/* Skill Grid */}
         <motion.div
           layout
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
         >
           <AnimatePresence>
             {filteredSkills.map((skill) => {
@@ -80,37 +80,37 @@ export default function SkillsSection() {
                 <motion.div
                   key={skill.name}
                   layout
-                  initial={{ opacity: 0, scale: 0.9 }}
+                  initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.3 }}
-                  className="glass-card p-6 rounded-2xl border border-white/10 hover:border-cyan-500/40 transition-all group"
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.2 }}
+                  className="glass-card p-5 rounded-2xl border border-white/10 hover:border-white/20 transition-all group"
                 >
-                  <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform">
-                        <IconComp className="w-5 h-5" />
+                      <div className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-zinc-300 group-hover:text-white transition-colors">
+                        <IconComp className="w-4 h-4" />
                       </div>
                       <div>
-                        <h4 className="font-bold text-white text-base group-hover:text-cyan-400 transition-colors">
+                        <h4 className="font-medium text-white text-sm">
                           {skill.name}
                         </h4>
-                        <span className="text-xs text-gray-500 font-mono">{skill.category}</span>
+                        <span className="text-[11px] text-zinc-500 font-mono">{skill.category}</span>
                       </div>
                     </div>
-                    <span className="text-xs font-mono font-bold text-cyan-400 bg-cyan-500/10 px-2 py-1 rounded border border-cyan-500/20">
+                    <span className="text-xs font-mono text-zinc-400">
                       {skill.level}%
                     </span>
                   </div>
 
-                  {/* Animated Progress Bar */}
-                  <div className="w-full bg-slate-900/80 rounded-full h-2 overflow-hidden p-0.5 border border-white/5">
+                  {/* Progress Bar */}
+                  <div className="w-full bg-zinc-900 rounded-full h-1.5 overflow-hidden">
                     <motion.div
                       initial={{ width: 0 }}
                       whileInView={{ width: `${skill.level}%` }}
                       viewport={{ once: true }}
-                      transition={{ duration: 1, ease: 'easeOut' }}
-                      className="h-full bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 rounded-full shadow-[0_0_10px_#06b6d4]"
+                      transition={{ duration: 0.8, ease: 'easeOut' }}
+                      className="h-full bg-white rounded-full"
                     />
                   </div>
                 </motion.div>

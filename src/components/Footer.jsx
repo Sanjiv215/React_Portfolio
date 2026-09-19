@@ -17,41 +17,39 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative z-10 border-t border-white/10 py-12 px-4 bg-slate-950/80 backdrop-blur-md">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+    <footer className="relative z-10 border-t border-white/10 py-12 px-4 bg-zinc-950/80 backdrop-blur-md">
+      <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
         
         {/* Left Brand */}
-        <div className="flex items-center gap-2">
-          <span className="font-bold text-lg text-white">
+        <div className="flex items-center gap-2.5">
+          <span className="font-semibold text-sm text-white font-mono">
             {portfolioData.personal.name}
           </span>
-          <span className="text-xs font-mono text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/20">
+          <span className="text-[11px] font-mono text-zinc-400 bg-white/5 px-2 py-0.5 rounded-full border border-white/10">
             {portfolioData.personal.roleTitle}
           </span>
         </div>
 
-        {/* Center Credits & Celebration */}
-        <div className="flex items-center gap-2 text-xs text-gray-400">
-          <span>Engineered with</span>
-          <Heart className="w-3.5 h-3.5 text-red-500 fill-red-500 animate-pulse" />
-          <span>using React 19 &amp; Tailwind v4</span>
+        {/* Center Credits */}
+        <div className="flex items-center gap-1.5 text-xs text-zinc-400 font-mono">
+          <span>Engineered with React 19 &amp; Tailwind</span>
           <button
             onClick={triggerConfetti}
-            className="ml-2 p-1.5 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 transition-colors"
+            className="p-1 rounded-md text-zinc-400 hover:text-white transition-colors"
             title="Celebrate!"
           >
-            <Sparkles className="w-3.5 h-3.5" />
+            <Sparkles className="w-3 h-3 text-emerald-400" />
           </button>
         </div>
 
         {/* Right Back-To-Top Button */}
         <button
           onClick={scrollToTop}
-          className="p-3 rounded-xl glass-card text-gray-300 hover:text-cyan-400 hover:border-cyan-500/40 transition-all flex items-center gap-2 text-xs font-semibold"
+          className="px-3.5 py-1.5 rounded-full glass-card text-zinc-400 hover:text-white hover:border-white/20 transition-all flex items-center gap-1.5 text-xs font-mono"
           aria-label="Back to top"
         >
           <span>Back to Top</span>
-          <ArrowUp className="w-4 h-4 text-cyan-400" />
+          <ArrowUp className="w-3 h-3" />
         </button>
 
       </div>

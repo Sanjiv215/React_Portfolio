@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Copy, Check, Terminal, Sparkles, Shield, Code2, ExternalLink } from 'lucide-react';
+import { ArrowRight, Copy, Check, Terminal, Shield, Sparkles } from 'lucide-react';
 import { FaGithub, FaLinkedin, FaPython } from 'react-icons/fa';
 import { portfolioData } from '../data/portfolioData';
 
@@ -11,7 +11,7 @@ export default function HeroSection() {
   useEffect(() => {
     const interval = setInterval(() => {
       setRoleIndex((prev) => (prev + 1) % portfolioData.personal.roles.length);
-    }, 3200);
+    }, 3000);
     return () => clearInterval(interval);
   }, []);
 
@@ -22,55 +22,44 @@ export default function HeroSection() {
   };
 
   return (
-    <section id="home" className="relative min-h-screen pt-32 pb-20 flex items-center justify-center px-4 overflow-hidden">
-      {/* Background glow effects */}
-      <div className="absolute top-1/4 left-10 w-80 h-80 bg-cyan-500/15 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 right-10 w-96 h-96 bg-blue-600/15 rounded-full blur-3xl pointer-events-none" />
+    <section id="home" className="relative min-h-[92vh] pt-36 pb-20 flex items-center justify-center px-4 overflow-hidden">
+      {/* Delicate background ambient spotlight */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-white/[0.03] rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+      <div className="w-full max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
         
         {/* Left Column: Heading & CTAs */}
         <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
           className="lg:col-span-7 flex flex-col items-start"
         >
           {/* Status Badge */}
-          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full glass-card border border-emerald-500/30 text-emerald-400 text-xs font-semibold mb-6 shadow-[0_0_15px_rgba(16,185,129,0.2)]">
-            <span className="relative flex h-2.5 w-2.5">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-900/80 border border-white/10 text-zinc-300 text-xs font-mono mb-6">
+            <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
             </span>
             <span>{portfolioData.personal.availability}</span>
           </div>
 
-          {/* Subheader */}
-          <p className="text-cyan-400 font-mono text-sm tracking-widest uppercase mb-2 flex items-center gap-2">
-            <Sparkles className="w-4 h-4 text-cyan-400 animate-pulse" />
-            Software Engineer • DevTools &amp; Security • AI
-          </p>
-
           {/* Name Header */}
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight mb-4 text-white">
-            Hi, I&apos;m{' '}
-            <span className="text-gradient-cyan neon-glow-cyan block sm:inline">
-              {portfolioData.personal.name}
-            </span>
+          <h1 className="text-4xl sm:text-6xl font-bold tracking-tight mb-4 text-white">
+            {portfolioData.personal.name}
           </h1>
 
           {/* Animated Role Switcher */}
-          <div className="h-12 flex items-center mb-6 text-xl sm:text-2xl font-bold text-gray-300">
-            <span className="text-gray-400 mr-2">I build</span>
+          <div className="h-10 flex items-center mb-6 text-xl sm:text-2xl font-medium text-zinc-400">
             <div className="relative inline-block overflow-hidden h-9">
               <AnimatePresence mode="wait">
                 <motion.span
                   key={roleIndex}
-                  initial={{ y: 30, opacity: 0 }}
+                  initial={{ y: 24, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  exit={{ y: -30, opacity: 0 }}
-                  transition={{ duration: 0.4 }}
-                  className="text-cyan-400 font-mono block"
+                  exit={{ y: -24, opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="text-white font-mono block font-semibold"
                 >
                   {portfolioData.personal.roles[roleIndex]}
                 </motion.span>
@@ -79,107 +68,105 @@ export default function HeroSection() {
           </div>
 
           {/* Bio text */}
-          <p className="text-gray-400 text-base sm:text-lg max-w-2xl mb-8 leading-relaxed">
+          <p className="text-zinc-400 text-base sm:text-lg max-w-xl mb-8 leading-relaxed">
             {portfolioData.personal.bio}
           </p>
 
           {/* Action CTAs */}
-          <div className="flex flex-wrap gap-4 items-center w-full sm:w-auto">
+          <div className="flex flex-wrap gap-3 items-center w-full sm:w-auto">
             <a
               href="#projects"
-              className="px-6 py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-semibold flex items-center justify-center gap-2 shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-105 active:scale-95 transition-all text-sm"
+              className="px-5 py-2.5 rounded-full bg-white text-zinc-950 hover:bg-zinc-200 font-semibold flex items-center justify-center gap-2 shadow-lg transition-all text-xs font-mono"
             >
-              <span>Explore Projects</span>
-              <ArrowRight className="w-4 h-4" />
+              <span>View 4 Featured Projects</span>
+              <ArrowRight className="w-3.5 h-3.5" />
             </a>
 
             <a
               href="#vigilo-showcase"
-              className="px-5 py-3.5 rounded-xl glass-card border border-cyan-500/30 hover:border-cyan-400 text-cyan-300 hover:text-white font-medium flex items-center justify-center gap-2 transition-all active:scale-95 text-sm"
+              className="px-4 py-2.5 rounded-full glass-card border border-white/10 hover:border-white/20 text-zinc-300 hover:text-white font-medium flex items-center justify-center gap-2 transition-all text-xs font-mono"
             >
-              <Shield className="w-4 h-4 text-cyan-400" />
-              <span>Test Vigilo Scanner</span>
+              <Shield className="w-3.5 h-3.5 text-emerald-400" />
+              <span>Vigilo Scanner Demo</span>
             </a>
 
             <button
               onClick={handleCopyEmail}
-              className="px-5 py-3.5 rounded-xl glass-card border border-white/10 hover:border-cyan-500/40 text-gray-200 hover:text-white font-medium flex items-center justify-center gap-2 transition-all active:scale-95 text-sm"
+              className="px-4 py-2.5 rounded-full glass-card border border-white/10 hover:border-white/20 text-zinc-400 hover:text-white font-medium flex items-center justify-center gap-2 transition-all text-xs font-mono"
             >
-              {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4 text-cyan-400" />}
-              <span>{copied ? 'Email Copied!' : 'Copy Email'}</span>
+              {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+              <span>{copied ? 'Copied' : 'Copy Email'}</span>
             </button>
           </div>
 
           {/* Social Icons & Badges */}
-          <div className="flex items-center gap-4 mt-10">
-            <span className="text-xs font-mono text-gray-500 uppercase tracking-widest">Connect:</span>
+          <div className="flex items-center gap-3 mt-8">
             <a
               href={portfolioData.personal.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2.5 rounded-xl glass-card text-gray-400 hover:text-cyan-400 hover:border-cyan-500/40 transition-all"
+              className="p-2 rounded-full glass-card text-zinc-400 hover:text-white hover:border-white/25 transition-all text-xs"
               aria-label="GitHub Profile"
             >
-              <FaGithub className="w-5 h-5" />
+              <FaGithub className="w-4 h-4" />
             </a>
             <a
               href={portfolioData.personal.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2.5 rounded-xl glass-card text-gray-400 hover:text-cyan-400 hover:border-cyan-500/40 transition-all"
+              className="p-2 rounded-full glass-card text-zinc-400 hover:text-white hover:border-white/25 transition-all text-xs"
               aria-label="LinkedIn Profile"
             >
-              <FaLinkedin className="w-5 h-5" />
+              <FaLinkedin className="w-4 h-4" />
             </a>
             <a
               href="https://pypi.org/project/vigilo/"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2.5 rounded-xl glass-card text-gray-400 hover:text-cyan-400 hover:border-cyan-500/40 transition-all"
-              title="PyPI Profile"
+              className="p-2 rounded-full glass-card text-zinc-400 hover:text-white hover:border-white/25 transition-all text-xs"
+              title="PyPI Package"
               aria-label="PyPI Package"
             >
-              <FaPython className="w-5 h-5" />
+              <FaPython className="w-4 h-4" />
             </a>
           </div>
         </motion.div>
 
-        {/* Right Column: 3D Code Preview Window */}
+        {/* Right Column: Code Window */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.9, x: 50 }}
-          animate={{ opacity: 1, scale: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
           className="lg:col-span-5"
         >
-          <div className="glass-panel rounded-2xl border border-cyan-500/30 overflow-hidden shadow-2xl shadow-cyan-950/40 transform hover:rotate-1 hover:scale-[1.02] transition-transform duration-500">
-            
+          <div className="glass-panel rounded-2xl border border-white/10 overflow-hidden shadow-2xl bg-zinc-950/80">
             {/* Terminal Window Header */}
-            <div className="bg-slate-950/80 px-4 py-3 border-b border-white/10 flex items-center justify-between">
+            <div className="bg-zinc-900/60 px-4 py-2.5 border-b border-white/10 flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <span className="w-3 h-3 rounded-full bg-red-500/80 inline-block" />
-                <span className="w-3 h-3 rounded-full bg-yellow-500/80 inline-block" />
-                <span className="w-3 h-3 rounded-full bg-emerald-500/80 inline-block" />
+                <span className="w-2.5 h-2.5 rounded-full bg-zinc-700 inline-block" />
+                <span className="w-2.5 h-2.5 rounded-full bg-zinc-700 inline-block" />
+                <span className="w-2.5 h-2.5 rounded-full bg-zinc-700 inline-block" />
               </div>
-              <div className="flex items-center gap-1.5 text-xs font-mono text-gray-400">
-                <Terminal className="w-3.5 h-3.5 text-cyan-400" />
-                <span>sanjiv.config.ts</span>
+              <div className="flex items-center gap-1.5 text-xs font-mono text-zinc-400">
+                <Terminal className="w-3.5 h-3.5 text-zinc-400" />
+                <span>developer.config.ts</span>
               </div>
-              <span className="text-[10px] font-mono text-cyan-400/80 bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/20">
-                vigilo 1.2
+              <span className="text-[10px] font-mono text-zinc-400 bg-white/5 px-2 py-0.5 rounded border border-white/10">
+                v3.0
               </span>
             </div>
 
             {/* Code Content */}
-            <div className="p-5 font-mono text-xs sm:text-sm leading-relaxed overflow-x-auto bg-slate-950/90 text-gray-300">
-              <pre className="text-cyan-300">
+            <div className="p-5 font-mono text-xs leading-relaxed overflow-x-auto bg-zinc-950/90 text-zinc-300">
+              <pre>
                 <code>
-                  <span className="text-purple-400">const</span> <span className="text-yellow-300">engineer</span> = &#123;{'\n'}
-                  {'  '}<span className="text-cyan-400">name</span>: <span className="text-emerald-300">&quot;Sanjiv Prasad&quot;</span>,{'\n'}
-                  {'  '}<span className="text-cyan-400">focus</span>: [<span className="text-emerald-300">&quot;Full-Stack&quot;</span>, <span className="text-emerald-300">&quot;DevTools&quot;</span>, <span className="text-emerald-300">&quot;AI&quot;</span>],{'\n'}
-                  {'  '}<span className="text-cyan-400">flagshipPackage</span>: <span className="text-emerald-300">&quot;vigilo (PyPI)&quot;</span>,{'\n'}
-                  {'  '}<span className="text-cyan-400">internships</span>: [<span className="text-emerald-300">&quot;IIT Patna&quot;</span>, <span className="text-emerald-300">&quot;Code Alpha&quot;</span>],{'\n'}
-                  {'  '}<span className="text-cyan-400">mindset</span>: <span className="text-emerald-300">&quot;Build. Break. Fix. Repeat.&quot;</span>,{'\n'}
-                  {'  '}<span className="text-cyan-400">status</span>: <span className="text-emerald-300">&quot;🟢 Open for Opportunities&quot;</span>{'\n'}
+                  <span className="text-zinc-500">// Personal Architecture Stack</span>{'\n'}
+                  <span className="text-purple-400">const</span> <span className="text-zinc-100">engineer</span> = &#123;{'\n'}
+                  {'  '}<span className="text-zinc-400">name</span>: <span className="text-emerald-400">&quot;Sanjiv Prasad&quot;</span>,{'\n'}
+                  {'  '}<span className="text-zinc-400">focus</span>: [<span className="text-emerald-400">&quot;DevTools&quot;</span>, <span className="text-emerald-400">&quot;Full-Stack&quot;</span>],{'\n'}
+                  {'  '}<span className="text-zinc-400">flagshipPackage</span>: <span className="text-emerald-400">&quot;vigilo (PyPI)&quot;</span>,{'\n'}
+                  {'  '}<span className="text-zinc-400">internships</span>: [<span className="text-emerald-400">&quot;IIT Patna&quot;</span>, <span className="text-emerald-400">&quot;Code Alpha&quot;</span>],{'\n'}
+                  {'  '}<span className="text-zinc-400">motto</span>: <span className="text-emerald-400">&quot;Build. Break. Fix. Repeat.&quot;</span>{'\n'}
                   &#125;;
                 </code>
               </pre>

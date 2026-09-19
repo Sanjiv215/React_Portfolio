@@ -21,13 +21,13 @@ export default function BackgroundCanvas() {
 
     window.addEventListener('resize', handleResize);
 
-    const particleCount = Math.min(Math.floor(width / 18), 70);
+    const particleCount = Math.min(Math.floor(width / 24), 50);
     const particles = [];
 
     const mouse = {
       x: null,
       y: null,
-      radius: 140
+      radius: 120
     };
 
     const handleMouseMove = (e) => {
@@ -47,10 +47,10 @@ export default function BackgroundCanvas() {
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.8,
-        vy: (Math.random() - 0.5) * 0.8,
-        radius: Math.random() * 2 + 1,
-        alpha: Math.random() * 0.5 + 0.2
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        radius: Math.random() * 1.5 + 0.5,
+        alpha: Math.random() * 0.3 + 0.1
       });
     }
 
@@ -58,8 +58,8 @@ export default function BackgroundCanvas() {
       ctx.clearRect(0, 0, width, height);
 
       const isLight = theme === 'light';
-      const particleColor = isLight ? 'rgba(2, 132, 199, ' : 'rgba(6, 182, 212, ';
-      const lineColor = isLight ? 'rgba(2, 132, 199, ' : 'rgba(56, 189, 248, ';
+      const particleColor = isLight ? 'rgba(100, 116, 139, ' : 'rgba(255, 255, 255, ';
+      const lineColor = isLight ? 'rgba(148, 163, 184, ' : 'rgba(255, 255, 255, ';
 
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
@@ -80,8 +80,8 @@ export default function BackgroundCanvas() {
           if (dist < mouse.radius) {
             const angle = Math.atan2(dy, dx);
             const force = (mouse.radius - dist) / mouse.radius;
-            p.x -= Math.cos(angle) * force * 2;
-            p.y -= Math.sin(angle) * force * 2;
+            p.x -= Math.cos(angle) * force * 1.2;
+            p.y -= Math.sin(angle) * force * 1.2;
           }
         }
 
@@ -96,13 +96,13 @@ export default function BackgroundCanvas() {
           const dy = p.y - p2.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
 
-          if (dist < 130) {
-            const alpha = (1 - dist / 130) * 0.25;
+          if (dist < 100) {
+            const alpha = (1 - dist / 100) * 0.08;
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
             ctx.strokeStyle = lineColor + alpha + ')';
-            ctx.lineWidth = 0.8;
+            ctx.lineWidth = 0.5;
             ctx.stroke();
           }
         }
@@ -125,7 +125,7 @@ export default function BackgroundCanvas() {
     <canvas
       ref={canvasRef}
       aria-hidden="true"
-      className="fixed inset-0 pointer-events-none z-0 opacity-60 transition-opacity duration-500"
+      className="fixed inset-0 pointer-events-none z-0 opacity-40 transition-opacity duration-500"
     />
   );
 }

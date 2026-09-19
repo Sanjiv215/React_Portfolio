@@ -7,9 +7,9 @@ import { portfolioData } from '../data/portfolioData';
 const INITIAL_HISTORY = [
   {
     type: 'system',
-    content: `Welcome to Sanjiv OS v3.0.0 (x86_64-apple-darwin26)
-Interactive Shell & Developer Command Center
-Type "help" to explore commands or "vigilo" to run a security scan.`
+    content: `Sanjiv OS [Version 3.2.0 (x86_64-apple-darwin26)]
+Developer CLI Shell & Diagnostic Console
+Type "help" to list commands or "vigilo" to run security analysis.`
   }
 ];
 
@@ -42,17 +42,19 @@ export default function InteractiveTerminal() {
         newHistory.push({
           type: 'response',
           content: `Available commands:
-  help         - Show this help menu
-  about        - View Sanjiv's background, journey & engineering philosophy
+  help         - Show this command manual
+  about        - View Sanjiv's background & engineering philosophy
+  projects     - List the 4 featured systems
   vigilo       - Execute simulated AST security vulnerability scan
-  iit-patna    - Details regarding Full-Stack ERP development at IIT Patna
+  pysentra     - Python code diagnostics engine info
+  iit-patna    - IIT Patna ERP Portal architecture details
+  thewoodwise  - The WoodWise full-stack e-commerce architecture
   skills       - List technical capabilities & security tools
-  projects     - Output featured applications and PyPI package
   experience   - Display career milestones & internship history
-  github       - View GitHub profile stats & repositories
-  contact      - Output direct contact details & social channels
+  github       - View GitHub metrics and top repositories
+  contact      - Output communication channels
   clear        - Clear terminal screen
-  sudo hire-me - Launch celebratory recruitment protocol 🎉`
+  sudo hire-me - Launch recruitment protocol 🎉`
         });
         break;
 
@@ -78,7 +80,7 @@ Scanning targets in ./src / repositories ...
 
 [✓] AST parsed: 2,410 nodes evaluated
 [✓] Rule Matchers: CWE-95 (eval), CWE-89 (SQLi), CWE-798 (Secrets), CWE-78 (Cmd Injection)
-[✓] Caching Engine: Active (0.042s scan latency)
+[✓] Caching Engine: Active (0.042s latency)
 [✓] Result: 0 Vulnerabilities Detected in current build!
 
 PyPI Installation: pip install vigilo
@@ -86,10 +88,20 @@ GitHub: https://github.com/Sanjiv215/VIGILO-Python-Package`
         });
         break;
 
+      case 'pysentra':
+        newHistory.push({
+          type: 'response',
+          content: `[PYSENTRA DIAGNOSTIC ENGINE]
+License: Apache 2.0
+Description: Lightweight Python static code analyzer and AST diagnostic tool.
+Repository: https://github.com/Sanjiv215/PySentra`
+        });
+        break;
+
       case 'iit-patna':
         newHistory.push({
           type: 'response',
-          content: `[IIT PATNA INTERNSHIP DETAILS]
+          content: `[IIT PATNA ERP & TASK MANAGER]
 Role: Full-Stack Development Intern
 Project: Enterprise Resource Planning (ERP) Portal & Task Manager
 Tech Stack: React, JavaScript, Node.js, Express, MongoDB, REST APIs
@@ -100,19 +112,32 @@ Key Contributions:
         });
         break;
 
-      case 'skills':
+      case 'thewoodwise':
         newHistory.push({
           type: 'response',
-          content: `TECHNICAL ARSENAL:
-${portfolioData.skills.map(s => `  • ${s.name.padEnd(30, ' ')} [${s.category}] - ${s.level}%`).join('\n')}`
+          content: `[THE WOODWISE FULL-STACK E-COMMERCE]
+Tech Stack: React, Vite, Node.js, Express, MongoDB, Nodemailer, Axios
+Features:
+  • Email OTP user registration & password recovery.
+  • Persistent cart and wishlist state management.
+  • Dynamic product search, filtering, and pagination.
+  • Session-token authenticated REST endpoints.`
         });
         break;
 
       case 'projects':
         newHistory.push({
           type: 'response',
-          content: `FEATURED REPOSITORIES & SYSTEMS:
+          content: `FEATURED 4 SYSTEMS:
 ${portfolioData.projects.map(p => `  • ${p.title}\n    Category: ${p.category} | Tech: ${p.tech.join(', ')}\n    URL: ${p.liveUrl}`).join('\n\n')}`
+        });
+        break;
+
+      case 'skills':
+        newHistory.push({
+          type: 'response',
+          content: `TECHNICAL ARSENAL:
+${portfolioData.skills.map(s => `  • ${s.name.padEnd(30, ' ')} [${s.category}] - ${s.level}%`).join('\n')}`
         });
         break;
 
@@ -129,8 +154,8 @@ ${portfolioData.experiences.map(e => `  [${e.period}] ${e.role} @ ${e.company} (
           type: 'response',
           content: `GITHUB METRICS (@Sanjiv215):
   • Profile: ${portfolioData.personal.github}
-  • Flagship Repos: Vigilo-Python-Package, Advait, SmartBuy-AI, ERP_PORTAL, PySentra, PotHole-Detector
-  • Focus Areas: DevTools, Security AST, AI Agents, Full-Stack React/FastAPI`
+  • Featured 4: Vigilo-Python-Package, PySentra, ERP_PORTAL, TheWoodWise
+  • Focus: DevTools, Security AST, Full-Stack Architecture`
         });
         break;
 
@@ -172,68 +197,65 @@ Ready to engineer exceptional software together!`
   };
 
   return (
-    <section id="terminal" className="py-20 px-4 relative z-10">
+    <section id="terminal" className="py-24 px-4 relative z-10 border-t border-white/5">
       <div className="max-w-4xl mx-auto">
         
         {/* Section Header */}
-        <div className="text-center mb-10">
+        <div className="mb-10">
           <motion.span
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-cyan-400 font-mono text-xs uppercase tracking-widest px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20"
+            className="text-zinc-500 font-mono text-xs uppercase tracking-widest block mb-2"
           >
-            Interactive CLI Shell
+            05 / Interactive CLI
           </motion.span>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-3xl sm:text-4xl font-extrabold mt-3 tracking-tight"
+            className="text-3xl sm:text-4xl font-bold tracking-tight text-white"
           >
-            Developer Command <span className="text-gradient-cyan">Terminal</span>
+            Developer Console
           </motion.h2>
         </div>
 
         {/* Terminal Window */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="glass-panel border border-cyan-500/30 rounded-2xl overflow-hidden shadow-2xl shadow-cyan-950/50"
+          className="glass-panel border border-white/10 rounded-2xl overflow-hidden shadow-2xl bg-zinc-950/90"
         >
           {/* Bar */}
-          <div className="bg-slate-950 px-4 py-3 border-b border-white/10 flex items-center justify-between">
+          <div className="bg-zinc-900/60 px-4 py-2.5 border-b border-white/10 flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <span className="w-3 h-3 rounded-full bg-red-500/80" />
-              <span className="w-3 h-3 rounded-full bg-yellow-500/80" />
-              <span className="w-3 h-3 rounded-full bg-emerald-500/80" />
+              <span className="w-2.5 h-2.5 rounded-full bg-zinc-700" />
+              <span className="w-2.5 h-2.5 rounded-full bg-zinc-700" />
+              <span className="w-2.5 h-2.5 rounded-full bg-zinc-700" />
+              <span className="text-xs font-mono text-zinc-400 ml-2">sanjiv@darwin:~ (zsh)</span>
             </div>
-            <div className="flex items-center gap-2 text-xs font-mono text-gray-400">
-              <Terminal className="w-4 h-4 text-cyan-400" />
-              <span>sanjiv@darwin:~ (zsh)</span>
-            </div>
-            <span className="text-[10px] font-mono text-cyan-400/80 bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/20">
+            <span className="text-[10px] font-mono text-zinc-400 bg-white/5 px-2 py-0.5 rounded border border-white/10">
               vigilo v1.2
             </span>
           </div>
 
           {/* Body */}
-          <div className="p-5 font-mono text-xs sm:text-sm bg-slate-950/95 min-h-[320px] max-h-[440px] overflow-y-auto space-y-3">
+          <div className="p-5 font-mono text-xs sm:text-sm bg-zinc-950/95 min-h-[300px] max-h-[400px] overflow-y-auto space-y-3">
             {history.map((item, idx) => (
               <div key={idx} className="leading-relaxed">
                 {item.type === 'user' && (
-                  <div className="text-cyan-400 font-bold">{item.content}</div>
+                  <div className="text-white font-medium">{item.content}</div>
                 )}
                 {item.type === 'system' && (
-                  <div className="text-gray-400 border-l-2 border-cyan-500 pl-3 my-1 whitespace-pre-wrap">{item.content}</div>
+                  <div className="text-zinc-500 border-l border-zinc-700 pl-3 my-1 whitespace-pre-wrap">{item.content}</div>
                 )}
                 {item.type === 'response' && (
-                  <pre className="text-gray-300 whitespace-pre-wrap font-mono">{item.content}</pre>
+                  <pre className="text-zinc-300 whitespace-pre-wrap font-mono">{item.content}</pre>
                 )}
                 {item.type === 'success' && (
-                  <div className="text-emerald-400 font-bold p-3 rounded-xl bg-emerald-950/40 border border-emerald-500/30">{item.content}</div>
+                  <div className="text-emerald-400 font-medium p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/20">{item.content}</div>
                 )}
                 {item.type === 'error' && (
                   <div className="text-red-400 font-mono">{item.content}</div>
@@ -244,18 +266,18 @@ Ready to engineer exceptional software together!`
           </div>
 
           {/* Form Input */}
-          <form onSubmit={handleCommand} className="bg-slate-900/90 px-4 py-3 border-t border-white/10 flex items-center gap-3">
+          <form onSubmit={handleCommand} className="bg-zinc-900/40 px-4 py-3 border-t border-white/10 flex items-center gap-3">
             <span className="text-emerald-400 font-mono font-bold">$</span>
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder='Try typing "vigilo", "iit-patna", "skills", or "help"...'
-              className="flex-1 bg-transparent text-gray-200 font-mono text-xs sm:text-sm focus:outline-none placeholder:text-gray-600"
+              placeholder='Try typing "vigilo", "thewoodwise", "projects", or "help"...'
+              className="flex-1 bg-transparent text-zinc-200 font-mono text-xs sm:text-sm focus:outline-none placeholder:text-zinc-600"
             />
             <button
               type="submit"
-              className="p-2 rounded-lg bg-cyan-500/20 border border-cyan-500/30 text-cyan-400 hover:bg-cyan-500 hover:text-slate-950 transition-all"
+              className="p-1.5 rounded-lg bg-white/10 text-zinc-300 hover:text-white hover:bg-white/20 transition-all"
             >
               <Send className="w-3.5 h-3.5" />
             </button>
