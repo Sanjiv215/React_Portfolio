@@ -2,18 +2,19 @@ export const portfolioData = {
   personal: {
     name: "Sanjiv Prasad",
     handle: "Sanjiv215",
-    roleTitle: "Python • AI • Full Stack • DevTools",
-    tagline: "Python • AI • Full Stack • DevTools — Building Vigilo",
+    roleTitle: "Full Stack Intern",
+    tagline: "Full Stack Intern • Python • AI • DevTools — Building Vigilo",
+    avatar: "/images/profile.jpg",
     roles: [
+      "Full Stack Intern",
       "Python & DevTools Builder",
-      "Full-Stack Software Engineer",
       "Creator of Vigilo (PyPI)",
-      "AI Systems & Security Researcher"
+      "React & Node.js Developer"
     ],
-    bio: "Python • AI • Full Stack • DevTools. Building Vigilo. Transitioned from fitness training into software engineering—bringing discipline, consistency, and a problem-solving mindset to scalable web architectures and developer tools.",
+    bio: "Full Stack Intern specializing in Python, AI systems, modern React web architectures, and developer tooling. Transitioned from fitness training into software engineering—bringing discipline, consistency, and a problem-solving mindset to scalable systems and static analyzers.",
     story: "Before transitioning into software development, I worked as a fitness trainer, where I developed discipline, consistency, problem-solving skills, and a results-driven mindset. I now bring the same approach to technology: learn, build, improve, repeat.",
     location: "Bangalore, Karnataka, India",
-    availability: "Available for Software Engineering Roles",
+    availability: "Open to Internship & Freelance opportunities only",
     email: "prasad.sanjiv@outlook.com",
     github: "https://github.com/Sanjiv215",
     linkedin: "https://www.linkedin.com/in/prasadsanjiv",
@@ -21,18 +22,18 @@ export const portfolioData = {
     heroCodeSnippet: `// macOS System Configuration @Sanjiv215
 const engineer = {
   name: "Sanjiv Prasad",
-  bio: "Python • AI • Full Stack • DevTools",
+  role: "Full Stack Intern",
   flagshipTool: "vigilo (pip install vigilo)",
   education: "B.Tech CSE (AI & ML) @ UIT",
   internships: ["IIT Patna", "Code Alpha"],
   motto: "Build. Break. Fix. Repeat.",
-  status: "🟢 Available for Engineering Roles"
+  status: "🟢 Open to Internship & Freelance opportunities only"
 };`
   },
   stats: [
     { label: "PyPI Package Stars", value: 4, suffix: "★" },
     { label: "Public Repositories", value: 16, suffix: "+" },
-    { label: "Industry Internships", value: 2, suffix: " Roles" },
+    { label: "Client Freelance Portfolios", value: 2, suffix: " Delivered" },
     { label: "Open Source Mindset", value: 100, suffix: "%" }
   ],
   values: [
@@ -180,19 +181,69 @@ const engineer = {
       license: "MIT License"
     }
   ],
+  freelanceProjects: [
+    {
+      id: "jishnu-portfolio",
+      title: "Jishnu — Client Portfolio Website",
+      repoName: "Sanjiv215/jishnu_portfolio",
+      client: "Jishnu",
+      role: "Freelance Frontend Architect",
+      category: "Freelance Client Work",
+      primaryLanguage: "JavaScript",
+      languageColor: "#f1e05a",
+      shortDescription: "Custom bespoke portfolio website engineered for client Jishnu featuring rich motion graphics, responsive layouts, and interactive project showcases.",
+      fullDescription: "Engineered and delivered an end-to-end bespoke personal portfolio for client Jishnu. Built with modern React, Tailwind CSS, and Framer Motion, featuring smooth section transitions, responsive glassmorphic cards, optimized Lighthouse performance, and custom branding.",
+      image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1000&q=80",
+      tech: ["React", "Tailwind CSS", "Framer Motion", "Vite", "Responsive Design"],
+      features: [
+        "Bespoke UI/UX design tailored for client brand",
+        "Interactive motion animations with Framer Motion",
+        "Mobile-first responsive architecture",
+        "Optimized 100/100 Lighthouse performance metrics"
+      ],
+      liveUrl: "https://github.com/Sanjiv215/jishnu_portfolio",
+      githubUrl: "https://github.com/Sanjiv215/jishnu_portfolio",
+      badge: "Client Project",
+      license: "Client Proprietary"
+    },
+    {
+      id: "devendra-portfolio",
+      title: "Devendra — Client Portfolio Website",
+      repoName: "Sanjiv215/devendra_portfolio",
+      client: "Devendra",
+      role: "Freelance Frontend Architect",
+      category: "Freelance Client Work",
+      primaryLanguage: "JavaScript",
+      languageColor: "#f1e05a",
+      shortDescription: "Interactive modern portfolio designed and developed for client Devendra with clean visual hierarchy, dynamic showcase, and glassmorphism styling.",
+      fullDescription: "Designed and implemented a full portfolio web experience for client Devendra. Highlights include dynamic experience timelines, skill profilers, project showcase modaling, and sleek frosted glass aesthetics.",
+      image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1000&q=80",
+      tech: ["React", "Tailwind CSS", "Lucide Icons", "Vite", "Glassmorphism"],
+      features: [
+        "Sleek frosted glass UI/UX layout",
+        "Interactive skill rating and project gallery",
+        "Smooth scroll navigation and touch optimized controls",
+        "Direct contact routing and social integrations"
+      ],
+      liveUrl: "https://github.com/Sanjiv215/devendra_portfolio",
+      githubUrl: "https://github.com/Sanjiv215/devendra_portfolio",
+      badge: "Client Project",
+      license: "Client Proprietary"
+    }
+  ],
   experiences: [
     {
       role: "Full-Stack Development Intern",
       company: "IIT Patna",
-      period: "2025 – 2026",
+      period: "2026 – 2026",
       type: "Internship",
-      description: "Worked on an ERP Portal for a client, contributing to both frontend and backend development. Architected role-based access control (RBAC), collaborative task manager boards, and high-throughput REST API endpoints.",
+      description: "Worked on an ERP Portal for an enterprise client, contributing to both frontend and backend development. Architected role-based access control (RBAC), collaborative task manager boards, and high-throughput REST API endpoints.",
       skills: ["React", "JavaScript", "Node.js", "Express", "REST APIs", "ERP Systems"]
     },
     {
       role: "Frontend & Python Developer Intern",
       company: "Code Alpha",
-      period: "2025 – 2025",
+      period: "2026 – 2026",
       type: "Internship",
       description: "Engineered responsive React web interfaces, implemented automated Python scripting pipelines for data processing, and optimized state management for web tools.",
       skills: ["React", "Python", "Automation Scripts", "Tailwind CSS", "State Management"]

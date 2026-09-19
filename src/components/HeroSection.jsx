@@ -28,15 +28,15 @@ export default function HeroSection() {
 
       <div className="w-full max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
         
-        {/* Left Column: Heading & CTAs */}
+        {/* Left Column: Profile, Heading & CTAs */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           className="lg:col-span-7 flex flex-col items-start"
         >
-          {/* GitHub Style Status Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900/90 border border-white/10 text-zinc-300 text-xs font-mono mb-5">
+          {/* Status Badge */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-900/90 border border-white/15 text-zinc-300 text-xs font-mono mb-6 shadow-sm">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
@@ -44,17 +44,33 @@ export default function HeroSection() {
             <span>{portfolioData.personal.availability}</span>
           </div>
 
-          {/* Name & Handle Header */}
-          <div className="mb-3">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white">
-              {portfolioData.personal.name}
-            </h1>
-            <p className="text-xs font-mono text-zinc-500 mt-1">
-              github.com/{portfolioData.personal.handle}
-            </p>
+          {/* Profile Picture & Name Header */}
+          <div className="flex items-center gap-5 mb-4">
+            <div className="relative">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden border-2 border-white/20 shadow-xl bg-zinc-800">
+                <img
+                  src={portfolioData.personal.avatar}
+                  alt={portfolioData.personal.name}
+                  className="w-full h-full object-cover object-center"
+                  onError={(e) => {
+                    e.currentTarget.src = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80';
+                  }}
+                />
+              </div>
+              <span className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-emerald-500 border-2 border-zinc-950 shadow" />
+            </div>
+
+            <div>
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white">
+                {portfolioData.personal.name}
+              </h1>
+              <p className="text-xs font-mono text-zinc-400 mt-1">
+                Full Stack Intern • @{portfolioData.personal.handle}
+              </p>
+            </div>
           </div>
 
-          {/* Tagline / Role */}
+          {/* Animated Tagline / Role */}
           <div className="h-8 flex items-center mb-5 text-lg sm:text-xl font-medium text-zinc-300">
             <div className="relative inline-block overflow-hidden h-8">
               <AnimatePresence mode="wait">
@@ -81,15 +97,23 @@ export default function HeroSection() {
           <div className="flex flex-wrap gap-3 items-center w-full sm:w-auto">
             <a
               href="#projects"
-              className="px-5 py-2.5 rounded-full bg-white text-zinc-950 hover:bg-zinc-200 font-semibold flex items-center justify-center gap-2 transition-all text-xs font-mono"
+              className="px-5 py-2.5 rounded-full bg-white text-zinc-950 hover:bg-zinc-200 font-semibold flex items-center justify-center gap-2 transition-all text-xs font-mono shadow-md"
             >
               <span>Explore Projects</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </a>
 
             <a
+              href="#freelance"
+              className="px-4 py-2.5 rounded-full glass-card border border-white/15 hover:border-white/30 text-zinc-200 hover:text-white font-medium flex items-center justify-center gap-2 transition-all text-xs font-mono"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-violet-400" />
+              <span>Freelance Work</span>
+            </a>
+
+            <a
               href="#vigilo-showcase"
-              className="px-4 py-2.5 rounded-full glass-card border border-white/10 hover:border-white/20 text-zinc-300 hover:text-white font-medium flex items-center justify-center gap-2 transition-all text-xs font-mono"
+              className="px-4 py-2.5 rounded-full glass-card border border-white/15 hover:border-white/30 text-zinc-300 hover:text-white font-medium flex items-center justify-center gap-2 transition-all text-xs font-mono"
             >
               <Shield className="w-3.5 h-3.5 text-emerald-400" />
               <span>Vigilo Scanner</span>
@@ -97,7 +121,7 @@ export default function HeroSection() {
 
             <button
               onClick={handleCopyEmail}
-              className="px-4 py-2.5 rounded-full glass-card border border-white/10 hover:border-white/20 text-zinc-400 hover:text-white font-medium flex items-center justify-center gap-2 transition-all text-xs font-mono"
+              className="px-4 py-2.5 rounded-full glass-card border border-white/15 hover:border-white/30 text-zinc-400 hover:text-white font-medium flex items-center justify-center gap-2 transition-all text-xs font-mono"
             >
               {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
               <span>{copied ? 'Copied' : 'Copy Email'}</span>
@@ -110,7 +134,7 @@ export default function HeroSection() {
               href={portfolioData.personal.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 rounded-full glass-card text-zinc-400 hover:text-white hover:border-white/25 transition-all text-xs"
+              className="p-2.5 rounded-full glass-card text-zinc-400 hover:text-white hover:border-white/30 transition-all text-xs"
               aria-label="GitHub Profile"
               title="GitHub Profile"
             >
@@ -120,7 +144,7 @@ export default function HeroSection() {
               href={portfolioData.personal.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 rounded-full glass-card text-zinc-400 hover:text-white hover:border-white/25 transition-all text-xs"
+              className="p-2.5 rounded-full glass-card text-zinc-400 hover:text-white hover:border-white/30 transition-all text-xs"
               aria-label="LinkedIn Profile"
               title="LinkedIn Profile"
             >
@@ -130,7 +154,7 @@ export default function HeroSection() {
               href="https://pypi.org/project/vigilo/"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 rounded-full glass-card text-zinc-400 hover:text-white hover:border-white/25 transition-all text-xs"
+              className="p-2.5 rounded-full glass-card text-zinc-400 hover:text-white hover:border-white/30 transition-all text-xs"
               title="PyPI Package (vigilo)"
               aria-label="PyPI Package"
             >
@@ -139,40 +163,42 @@ export default function HeroSection() {
           </div>
         </motion.div>
 
-        {/* Right Column: GitHub Style Profile Window */}
+        {/* Right Column: macOS Terminal Window */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.15 }}
           className="lg:col-span-5"
         >
-          <div className="glass-panel rounded-2xl border border-white/10 overflow-hidden bg-zinc-950/90 shadow-2xl">
+          <div className="glass-panel rounded-2xl border border-white/15 overflow-hidden bg-zinc-950/95 shadow-2xl">
             {/* Terminal Window Header */}
-            <div className="bg-zinc-900/70 px-4 py-2.5 border-b border-white/10 flex items-center justify-between">
+            <div className="bg-zinc-900/80 px-4 py-2.5 border-b border-white/10 flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-zinc-700" />
-                <span className="w-2.5 h-2.5 rounded-full bg-zinc-700" />
-                <span className="w-2.5 h-2.5 rounded-full bg-zinc-700" />
+                <span className="w-3 h-3 rounded-full bg-[#FF5F56] inline-block shadow-sm" />
+                <span className="w-3 h-3 rounded-full bg-[#FFBD2E] inline-block shadow-sm" />
+                <span className="w-3 h-3 rounded-full bg-[#27C93F] inline-block shadow-sm" />
               </div>
               <div className="flex items-center gap-1.5 text-xs font-mono text-zinc-400">
                 <Terminal className="w-3.5 h-3.5 text-zinc-400" />
-                <span>README.md</span>
+                <span>README.md — macOS Tahoe</span>
               </div>
               <span className="text-[10px] font-mono text-zinc-400 bg-white/5 px-2 py-0.5 rounded border border-white/10">
-                markdown
+                v15.0
               </span>
             </div>
 
             {/* Code Content */}
             <div className="p-5 font-mono text-xs leading-relaxed overflow-x-auto bg-zinc-950/95 text-zinc-300 space-y-2">
               <div className="text-zinc-500">## Hi, I’m Sanjiv Prasad 👋</div>
-              <div className="text-emerald-400 font-semibold">Python • AI • Full Stack • DevTools</div>
-              <div className="text-zinc-400">Building <span className="text-white font-bold">Vigilo</span></div>
-              <div className="pt-2 border-t border-white/5 text-zinc-400">
-                <span className="text-zinc-500">- 🏢 Intern:</span> IIT Patna &amp; Code Alpha{'\n'}
-                <span className="text-zinc-500">- 📦 PyPI:</span> pip install vigilo{'\n'}
-                <span className="text-zinc-500">- 🎓 B.Tech:</span> CS (AI &amp; ML) @ UIT{'\n'}
-                <span className="text-zinc-500">- 💡 Motto:</span> Build. Break. Fix. Repeat.
+              <div className="text-emerald-400 font-semibold">Full Stack Intern • Python • DevTools</div>
+              <div className="text-zinc-400">Flagship: <span className="text-white font-bold">Vigilo (PyPI)</span></div>
+              <div className="pt-2 border-t border-white/10 text-zinc-400 space-y-1">
+                <div><span className="text-zinc-500">- 💼 Role:</span> Full Stack Intern (2026 – 2026)</div>
+                <div><span className="text-zinc-500">- 🏢 Internships:</span> IIT Patna &amp; Code Alpha</div>
+                <div><span className="text-zinc-500">- 📦 PyPI Package:</span> pip install vigilo</div>
+                <div><span className="text-zinc-500">- 🚀 Client Work:</span> Jishnu &amp; Devendra Portfolios</div>
+                <div><span className="text-zinc-500">- 🟢 Availability:</span> Internship &amp; Freelance only</div>
+                <div><span className="text-zinc-500">- 💡 Motto:</span> Build. Break. Fix. Repeat.</div>
               </div>
             </div>
           </div>

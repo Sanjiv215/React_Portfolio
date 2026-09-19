@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layers, Zap, Shield, Award, Sparkles, Folder } from 'lucide-react';
+import { Layers, Zap, Shield, Award, Sparkles, Folder, CheckCircle } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
 import WindowFrame from './MacOS/WindowFrame';
 
@@ -14,46 +14,64 @@ export default function AboutSection() {
     <section id="about" className="py-16 px-4 relative z-10 max-w-5xl mx-auto">
       <WindowFrame title="Finder — About Sanjiv Prasad" icon={Folder}>
         {/* Section Header */}
-        <div className="mb-8 pb-6 border-b border-white/10">
-          <span className="text-[11px] font-mono text-zinc-500 uppercase tracking-widest block mb-1">
-            Overview &amp; Philosophy
-          </span>
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
-            Discipline, Systems &amp; Real-World Software
-          </h2>
+        <div className="mb-8 pb-6 border-b border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <span className="text-[11px] font-mono text-zinc-500 uppercase tracking-widest block mb-1">
+              System Overview &amp; Philosophy
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
+              Discipline, Systems &amp; Real-World Software
+            </h2>
+          </div>
+          <div className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono inline-flex items-center gap-1.5 self-start sm:self-auto">
+            <CheckCircle className="w-3.5 h-3.5" />
+            <span>Full Stack Intern</span>
+          </div>
         </div>
 
-        {/* Story Card */}
+        {/* Story Card with Profile Photo */}
         <div className="p-6 sm:p-8 rounded-2xl bg-zinc-900/60 border border-white/10 mb-8 relative overflow-hidden">
-          <div className="flex flex-col md:flex-row items-start md:items-center gap-6 justify-between">
-            <div className="space-y-3 max-w-2xl">
-              <div className="inline-flex items-center gap-2 text-emerald-400 font-mono text-xs uppercase tracking-wider">
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>Journey &amp; Mindset</span>
+          <div className="flex flex-col lg:flex-row items-start lg:items-center gap-6 justify-between">
+            
+            {/* Avatar & Story Content */}
+            <div className="flex flex-col sm:flex-row items-start gap-5 max-w-2xl">
+              <div className="shrink-0 w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden border-2 border-white/15 shadow-xl bg-zinc-800">
+                <img
+                  src={portfolioData.personal.avatar}
+                  alt={portfolioData.personal.name}
+                  className="w-full h-full object-cover"
+                />
               </div>
-              <h3 className="text-xl font-semibold text-white leading-snug">
-                From Fitness Trainer to Full-Stack Developer &amp; Security Tooling Creator
-              </h3>
-              <p className="text-zinc-300 text-xs sm:text-sm leading-relaxed">
-                {portfolioData.personal.story}
-              </p>
-              <div className="flex flex-wrap gap-2 pt-2">
-                <span className="px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-zinc-300 text-xs font-mono">
-                  IIT Patna Intern
-                </span>
-                <span className="px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-zinc-300 text-xs font-mono">
-                  Code Alpha Intern
-                </span>
-                <span className="px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-zinc-300 text-xs font-mono">
-                  PyPI Author (Vigilo)
-                </span>
-                <span className="px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-zinc-300 text-xs font-mono">
-                  B.Tech CSE (AI/ML)
-                </span>
+
+              <div className="space-y-3">
+                <div className="inline-flex items-center gap-2 text-emerald-400 font-mono text-xs uppercase tracking-wider">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  <span>Engineering Journey &amp; Mindset</span>
+                </div>
+                <h3 className="text-xl font-semibold text-white leading-snug">
+                  From Fitness Trainer to Full Stack Intern &amp; Security Tooling Creator
+                </h3>
+                <p className="text-zinc-300 text-xs sm:text-sm leading-relaxed">
+                  {portfolioData.personal.story}
+                </p>
+                <div className="flex flex-wrap gap-2 pt-2">
+                  <span className="px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-zinc-300 text-xs font-mono">
+                    Full Stack Intern (2026 – 2026)
+                  </span>
+                  <span className="px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-zinc-300 text-xs font-mono">
+                    IIT Patna Intern
+                  </span>
+                  <span className="px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-zinc-300 text-xs font-mono">
+                    Code Alpha Intern
+                  </span>
+                  <span className="px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-zinc-300 text-xs font-mono">
+                    PyPI Creator (Vigilo)
+                  </span>
+                </div>
               </div>
             </div>
 
-            <div className="shrink-0 p-5 rounded-2xl bg-zinc-950 border border-white/10 text-center w-full md:w-auto">
+            <div className="shrink-0 p-5 rounded-2xl bg-zinc-950 border border-white/10 text-center w-full lg:w-48">
               <div className="text-zinc-500 font-mono text-[10px] uppercase tracking-widest mb-1">Motto</div>
               <div className="text-sm font-bold text-white font-mono">Build. Break. Fix. Repeat.</div>
             </div>
@@ -65,7 +83,7 @@ export default function AboutSection() {
           {portfolioData.stats.map((stat) => (
             <div
               key={stat.label}
-              className="p-4 rounded-xl bg-zinc-900/40 border border-white/10 text-left"
+              className="p-4 rounded-xl bg-zinc-900/40 border border-white/10 text-left hover:border-white/20 transition-all"
             >
               <div className="text-2xl sm:text-3xl font-bold text-white font-mono mb-0.5">
                 {stat.value}{stat.suffix}

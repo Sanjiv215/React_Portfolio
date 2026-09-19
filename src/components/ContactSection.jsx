@@ -83,7 +83,7 @@ export default function ContactSection() {
             <div className="p-5 rounded-xl bg-zinc-900/40 border border-white/10 space-y-4">
               <h3 className="text-sm font-semibold text-white">Contact Card</h3>
               <p className="text-zinc-400 text-xs leading-relaxed">
-                Open for software engineering opportunities, developer tooling collaborations, and technical discussions.
+                Open to Internship &amp; Freelance software engineering opportunities, developer tooling collaborations, and technical discussions.
               </p>
 
               {/* Direct Points */}
