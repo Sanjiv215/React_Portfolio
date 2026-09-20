@@ -32,12 +32,12 @@ export default function ProjectModal({ project, onClose }) {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 10 }}
           transition={{ duration: 0.2 }}
-          className="relative w-full max-w-2xl glass-panel border border-white/15 rounded-3xl p-6 sm:p-8 shadow-2xl overflow-hidden z-10 my-auto bg-zinc-950/95 text-zinc-200"
+          className="relative w-full max-w-2xl glass-panel border border-white/15 rounded-2xl sm:rounded-3xl p-4 sm:p-8 shadow-2xl overflow-hidden max-h-[88vh] overflow-y-auto z-10 my-auto bg-zinc-950/95 text-zinc-200"
         >
           {/* Close button */}
           <button
             onClick={onClose}
-            className="absolute top-5 right-5 p-2 rounded-full glass-card text-zinc-400 hover:text-white hover:border-white/20 transition-all"
+            className="absolute top-3.5 right-3.5 sm:top-5 sm:right-5 p-1.5 sm:p-2 rounded-full glass-card text-zinc-400 hover:text-white hover:border-white/20 transition-all z-20"
             aria-label="Close modal"
           >
             <X className="w-4 h-4" />
@@ -109,12 +109,12 @@ export default function ProjectModal({ project, onClose }) {
           </div>
 
           {/* Action CTAs */}
-          <div className="flex flex-wrap gap-3 pt-4 border-t border-white/10">
+          <div className="flex flex-wrap gap-2.5 sm:gap-3 pt-3.5 sm:pt-4 border-t border-white/10">
             <a
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 min-w-[130px] px-4 py-2.5 rounded-full bg-white text-zinc-950 font-semibold flex items-center justify-center gap-2 hover:bg-zinc-200 transition-all text-xs font-mono"
+              className="flex-1 min-w-[120px] px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-full bg-white text-zinc-950 font-semibold flex items-center justify-center gap-1.5 sm:gap-2 hover:bg-zinc-200 transition-all text-[11px] sm:text-xs font-mono"
             >
               <span>{project.id === 'vigilo' ? 'View on PyPI' : 'Open Link / Demo'}</span>
               <ExternalLink className="w-3.5 h-3.5" />
@@ -124,7 +124,7 @@ export default function ProjectModal({ project, onClose }) {
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 min-w-[130px] px-4 py-2.5 rounded-full glass-card border border-white/10 hover:border-white/20 text-zinc-300 hover:text-white font-medium flex items-center justify-center gap-2 transition-all text-xs font-mono"
+              className="flex-1 min-w-[120px] px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-full glass-card border border-white/10 hover:border-white/20 text-zinc-300 hover:text-white font-medium flex items-center justify-center gap-1.5 sm:gap-2 transition-all text-[11px] sm:text-xs font-mono"
             >
               <FaGithub className="w-3.5 h-3.5" />
               <span>Source Code</span>

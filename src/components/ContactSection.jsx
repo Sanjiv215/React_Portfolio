@@ -71,23 +71,23 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-16 px-4 relative z-10 max-w-4xl mx-auto">
+    <section id="contact" className="py-10 sm:py-16 px-3 sm:px-4 relative z-10 max-w-4xl mx-auto">
       <WindowFrame title="Mail.app — New Message to Sanjiv Prasad" icon={Mail}>
         {/* Section Header */}
-        <div className="mb-6 pb-4 border-b border-white/10">
-          <span className="text-[11px] font-mono text-zinc-500 uppercase tracking-widest block mb-1">
+        <div className="mb-5 sm:mb-6 pb-3.5 sm:pb-4 border-b border-white/10">
+          <span className="text-[10px] sm:text-[11px] font-mono text-zinc-500 uppercase tracking-widest block mb-1">
             Communication
           </span>
-          <h2 className="text-2xl font-bold tracking-tight text-white">
+          <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-white">
             Send Message
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-start">
           
           {/* Left Info Column */}
           <div className="lg:col-span-5 space-y-4">
-            <div className="p-5 rounded-xl bg-zinc-900/40 border border-white/10 space-y-4">
+            <div className="p-4 sm:p-5 rounded-xl bg-zinc-900/40 border border-white/10 space-y-3.5 sm:space-y-4">
               <h3 className="text-sm font-semibold text-white">Contact Card</h3>
               <p className="text-zinc-400 text-xs leading-relaxed">
                 Open to Internship &amp; Freelance software engineering opportunities, developer tooling collaborations, and technical discussions.

@@ -22,11 +22,11 @@ export default function HeroSection() {
   };
 
   return (
-    <section id="home" className="relative min-h-[90vh] pt-36 pb-20 flex items-center justify-center px-4 overflow-hidden">
+    <section id="home" className="relative min-h-[85vh] sm:min-h-[90vh] pt-16 sm:pt-24 md:pt-36 pb-12 sm:pb-20 flex items-center justify-center px-3 sm:px-4 overflow-hidden">
       {/* Subtle background ambient blur */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[300px] bg-white/[0.02] rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] max-w-full h-[300px] bg-white/[0.02] rounded-full blur-[100px] pointer-events-none" />
 
-      <div className="w-full max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+      <div className="w-full max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
         
         {/* Left Column: Profile, Heading & CTAs */}
         <motion.div
@@ -36,7 +36,7 @@ export default function HeroSection() {
           className="lg:col-span-7 flex flex-col items-start"
         >
           {/* Status Badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-900/90 border border-white/15 text-zinc-300 text-xs font-mono mb-6 shadow-sm">
+          <div className="inline-flex items-center gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-zinc-900/90 border border-white/15 text-zinc-300 text-[11px] sm:text-xs font-mono mb-4 sm:mb-6 shadow-sm">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
@@ -45,9 +45,9 @@ export default function HeroSection() {
           </div>
 
           {/* Profile Picture & Name Header */}
-          <div className="flex items-center gap-5 mb-4">
-            <div className="relative">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden border-2 border-white/20 shadow-xl bg-zinc-800">
+          <div className="flex items-center gap-3.5 sm:gap-5 mb-3 sm:mb-4">
+            <div className="relative shrink-0">
+              <div className="w-14 h-14 sm:w-20 sm:h-20 rounded-2xl overflow-hidden border-2 border-white/20 shadow-xl bg-zinc-800">
                 <img
                   src={portfolioData.personal.avatar}
                   alt={portfolioData.personal.name}
@@ -57,22 +57,22 @@ export default function HeroSection() {
                   }}
                 />
               </div>
-              <span className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-emerald-500 border-2 border-zinc-950 shadow" />
+              <span className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-emerald-500 border-2 border-zinc-950 shadow" />
             </div>
 
             <div>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white">
+              <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white">
                 {portfolioData.personal.name}
               </h1>
-              <p className="text-xs font-mono text-zinc-400 mt-1">
-                Full Stack Intern • @{portfolioData.personal.handle}
+              <p className="text-[11px] sm:text-xs font-mono text-zinc-400 mt-0.5 sm:mt-1">
+                Fullstack Developer Intern • @{portfolioData.personal.handle}
               </p>
             </div>
           </div>
 
           {/* Animated Tagline / Role */}
-          <div className="h-8 flex items-center mb-5 text-lg sm:text-xl font-medium text-zinc-300">
-            <div className="relative inline-block overflow-hidden h-8">
+          <div className="h-7 sm:h-8 flex items-center mb-4 sm:mb-5 text-base sm:text-xl font-medium text-zinc-300">
+            <div className="relative inline-block overflow-hidden h-7 sm:h-8">
               <AnimatePresence mode="wait">
                 <motion.span
                   key={roleIndex}
@@ -80,7 +80,7 @@ export default function HeroSection() {
                   animate={{ y: 0, opacity: 1 }}
                   exit={{ y: -20, opacity: 0 }}
                   transition={{ duration: 0.25 }}
-                  className="text-white font-mono block font-semibold"
+                  className="text-white font-mono block font-semibold text-sm sm:text-xl"
                 >
                   {portfolioData.personal.roles[roleIndex]}
                 </motion.span>
@@ -89,15 +89,15 @@ export default function HeroSection() {
           </div>
 
           {/* Bio text */}
-          <p className="text-zinc-400 text-sm sm:text-base max-w-xl mb-8 leading-relaxed">
+          <p className="text-zinc-400 text-xs sm:text-base max-w-xl mb-6 sm:mb-8 leading-relaxed">
             {portfolioData.personal.bio}
           </p>
 
           {/* Action CTAs */}
-          <div className="flex flex-wrap gap-3 items-center w-full sm:w-auto">
+          <div className="flex flex-wrap gap-2 sm:gap-3 items-center w-full">
             <a
               href="#projects"
-              className="px-5 py-2.5 rounded-full bg-white text-zinc-950 hover:bg-zinc-200 font-semibold flex items-center justify-center gap-2 transition-all text-xs font-mono shadow-md"
+              className="px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-white text-zinc-950 hover:bg-zinc-200 font-semibold flex items-center justify-center gap-1.5 sm:gap-2 transition-all text-xs font-mono shadow-md"
             >
               <span>Explore Projects</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -105,7 +105,7 @@ export default function HeroSection() {
 
             <a
               href="#freelance"
-              className="px-4 py-2.5 rounded-full glass-card border border-white/15 hover:border-white/30 text-zinc-200 hover:text-white font-medium flex items-center justify-center gap-2 transition-all text-xs font-mono"
+              className="px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-full glass-card border border-white/15 hover:border-white/30 text-zinc-200 hover:text-white font-medium flex items-center justify-center gap-1.5 sm:gap-2 transition-all text-xs font-mono"
             >
               <Sparkles className="w-3.5 h-3.5 text-violet-400" />
               <span>Freelance Work</span>
@@ -113,7 +113,7 @@ export default function HeroSection() {
 
             <a
               href="#vigilo-showcase"
-              className="px-4 py-2.5 rounded-full glass-card border border-white/15 hover:border-white/30 text-zinc-300 hover:text-white font-medium flex items-center justify-center gap-2 transition-all text-xs font-mono"
+              className="px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-full glass-card border border-white/15 hover:border-white/30 text-zinc-300 hover:text-white font-medium flex items-center justify-center gap-1.5 sm:gap-2 transition-all text-xs font-mono"
             >
               <Shield className="w-3.5 h-3.5 text-emerald-400" />
               <span>Vigilo Scanner</span>
@@ -121,7 +121,7 @@ export default function HeroSection() {
 
             <button
               onClick={handleCopyEmail}
-              className="px-4 py-2.5 rounded-full glass-card border border-white/15 hover:border-white/30 text-zinc-400 hover:text-white font-medium flex items-center justify-center gap-2 transition-all text-xs font-mono"
+              className="px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-full glass-card border border-white/15 hover:border-white/30 text-zinc-400 hover:text-white font-medium flex items-center justify-center gap-1.5 sm:gap-2 transition-all text-xs font-mono"
             >
               {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
               <span>{copied ? 'Copied' : 'Copy Email'}</span>
@@ -129,12 +129,12 @@ export default function HeroSection() {
           </div>
 
           {/* Social Icons & Badges */}
-          <div className="flex items-center gap-3 mt-8">
+          <div className="flex items-center gap-2.5 sm:gap-3 mt-6 sm:mt-8">
             <a
               href={portfolioData.personal.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2.5 rounded-full glass-card text-zinc-400 hover:text-white hover:border-white/30 transition-all text-xs"
+              className="p-2 sm:p-2.5 rounded-full glass-card text-zinc-400 hover:text-white hover:border-white/30 transition-all text-xs"
               aria-label="GitHub Profile"
               title="GitHub Profile"
             >

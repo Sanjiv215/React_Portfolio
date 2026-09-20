@@ -17,8 +17,8 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative z-10 border-t border-white/10 py-12 px-4 bg-zinc-950/80 backdrop-blur-md">
-      <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+    <footer className="relative z-10 border-t border-white/10 py-8 sm:py-12 px-3 sm:px-4 pb-24 sm:pb-28 bg-zinc-950/80 backdrop-blur-md">
+      <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6">
         
         {/* Left Brand */}
         <div className="flex items-center gap-2.5">

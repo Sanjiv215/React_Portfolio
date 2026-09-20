@@ -27,26 +27,26 @@ export default function SkillsSection() {
     : portfolioData.skills.filter(s => s.category === activeCategory);
 
   return (
-    <section id="skills" className="py-16 px-4 relative z-10 max-w-5xl mx-auto">
+    <section id="skills" className="py-10 sm:py-16 px-3 sm:px-4 relative z-10 max-w-5xl mx-auto">
       <WindowFrame title="System Profiler — Technical Stack &amp; Hardware/Software Specs" icon={Cpu}>
         {/* Header inside window */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-6 border-b border-white/10">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 mb-6 sm:mb-8 pb-4 sm:pb-6 border-b border-white/10">
           <div>
-            <span className="text-[11px] font-mono text-zinc-500 uppercase tracking-widest block mb-1">
+            <span className="text-[10px] sm:text-[11px] font-mono text-zinc-500 uppercase tracking-widest block mb-1">
               macOS System Profiler
             </span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+            <h2 className="text-xl sm:text-3xl font-bold text-white tracking-tight">
               Technical Architecture &amp; Arsenal
             </h2>
           </div>
 
           {/* Segmented Controller (macOS Style Tabs) */}
-          <div className="flex flex-wrap p-1 rounded-xl bg-zinc-900/90 border border-white/10 text-xs font-mono">
+          <div className="flex flex-wrap p-1 rounded-xl bg-zinc-900/90 border border-white/10 text-[11px] sm:text-xs font-mono gap-1">
             {portfolioData.skillCategories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`px-3 py-1.5 rounded-lg transition-all ${
+                className={`px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg transition-all ${
                   activeCategory === cat
                     ? 'bg-zinc-800 text-white font-semibold shadow-sm'
                     : 'text-zinc-400 hover:text-white'
@@ -61,7 +61,7 @@ export default function SkillsSection() {
         {/* Skills Grid */}
         <motion.div
           layout
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4"
         >
           <AnimatePresence>
             {filteredSkills.map((skill) => {

@@ -79,8 +79,8 @@ function DockIcon({ mouseX, item, isExternal = false, customIcon: CustomIcon = n
     return val - bounds.x - bounds.width / 2;
   });
 
-  // macOS dock magnification curve
-  const widthSync = useTransform(distance, [-120, 0, 120], [42, 64, 42]);
+  // macOS dock magnification curve (scales smoothly on hover, graceful fallback on mobile)
+  const widthSync = useTransform(distance, [-100, 0, 100], [38, 56, 38]);
   const width = useSpring(widthSync, { mass: 0.1, stiffness: 280, damping: 18 });
 
   const Icon = CustomIcon || item?.icon;
@@ -88,9 +88,9 @@ function DockIcon({ mouseX, item, isExternal = false, customIcon: CustomIcon = n
   const label = item?.label;
 
   return (
-    <div className="relative group flex flex-col items-center">
-      {/* Tooltip */}
-      <div className="absolute -top-11 px-2.5 py-1 rounded-md bg-zinc-900/90 text-white text-[11px] font-sans font-medium whitespace-nowrap border border-white/15 opacity-0 group-hover:opacity-100 transition-all pointer-events-none shadow-xl z-50">
+    <div className="relative group flex flex-col items-center shrink-0">
+      {/* Tooltip (hidden on touch/small devices) */}
+      <div className="hidden sm:block absolute -top-11 px-2.5 py-1 rounded-md bg-zinc-900/90 text-white text-[11px] font-sans font-medium whitespace-nowrap border border-white/15 opacity-0 group-hover:opacity-100 transition-all pointer-events-none shadow-xl z-50">
         {label}
       </div>
 
@@ -102,7 +102,7 @@ function DockIcon({ mouseX, item, isExternal = false, customIcon: CustomIcon = n
         rel={isExternal ? 'noopener noreferrer' : undefined}
         style={{ width, height: width }}
         whileTap={{ scale: 0.92 }}
-        className={`rounded-2xl ${
+        className={`rounded-xl sm:rounded-2xl ${
           customBg || `bg-gradient-to-br ${item?.gradient}`
         } border border-white/25 shadow-lg flex items-center justify-center ${
           item?.color || 'text-white'
@@ -122,19 +122,19 @@ export default function Dock() {
   const mouseX = useMotionValue(Infinity);
 
   return (
-    <div className="fixed bottom-3 inset-x-0 z-50 flex justify-center px-4 pointer-events-none">
+    <div className="fixed bottom-2 sm:bottom-3 inset-x-0 z-50 flex justify-center px-2 sm:px-4 pointer-events-none">
       <motion.div
         onMouseMove={(e) => mouseX.set(e.pageX)}
         onMouseLeave={() => mouseX.set(Infinity)}
-        className="pointer-events-auto rounded-[24px] bg-white/40 dark:bg-zinc-900/50 backdrop-blur-2xl border border-white/30 dark:border-white/15 px-3 py-2 flex items-end gap-2.5 shadow-2xl shadow-black/40"
-        style={{ minHeight: '62px' }}
+        className="pointer-events-auto max-w-[98vw] sm:max-w-none overflow-x-auto no-scrollbar rounded-2xl sm:rounded-[24px] bg-white/40 dark:bg-zinc-900/60 backdrop-blur-2xl border border-white/30 dark:border-white/15 px-2.5 sm:px-3.5 py-1.5 sm:py-2 flex items-end gap-1.5 sm:gap-2.5 shadow-2xl shadow-black/40"
+        style={{ minHeight: '52px' }}
       >
         {DOCK_ITEMS.map((item) => (
           <DockIcon key={item.id} mouseX={mouseX} item={item} />
         ))}
 
         {/* Divider */}
-        <div className="w-[1px] h-9 bg-black/15 dark:bg-white/20 mx-1 mb-2 self-center" />
+        <div className="w-[1px] h-7 sm:h-9 bg-black/15 dark:bg-white/20 mx-0.5 sm:mx-1 mb-2 self-center shrink-0" />
 
         {/* GitHub App Icon */}
         <DockIcon

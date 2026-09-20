@@ -124,6 +124,23 @@
   background: #3f3f46;
 }
 
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
 section[id] {
-  scroll-margin-top: 90px;
+  scroll-margin-top: 50px;
+}
+
+@media (min-width: 640px) {
+  section[id] {
+    scroll-margin-top: 90px;
+  }
 }

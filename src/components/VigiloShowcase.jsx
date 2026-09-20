@@ -141,15 +141,15 @@ export default function VigiloShowcase() {
   };
 
   return (
-    <section id="vigilo-showcase" className="py-16 px-4 relative z-10 max-w-5xl mx-auto">
+    <section id="vigilo-showcase" className="py-10 sm:py-16 px-3 sm:px-4 relative z-10 max-w-5xl mx-auto">
       <WindowFrame title="Vigilo.app — Python Static Security Scanner (PyPI)" icon={Shield}>
         {/* Section Header */}
-        <div className="mb-8 pb-6 border-b border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="mb-6 sm:mb-8 pb-4 sm:pb-6 border-b border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
           <div>
-            <span className="text-[11px] font-mono text-zinc-500 uppercase tracking-widest block mb-1">
+            <span className="text-[10px] sm:text-[11px] font-mono text-zinc-500 uppercase tracking-widest block mb-1">
               PyPI Security Tool
             </span>
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
+            <h2 className="text-xl sm:text-3xl font-bold tracking-tight text-white">
               Vigilo Security Scanner
             </h2>
             <p className="text-zinc-400 mt-1 text-xs sm:text-sm leading-relaxed">
@@ -158,8 +158,8 @@ export default function VigiloShowcase() {
           </div>
 
           {/* Quick Action Install Bar */}
-          <div className="flex items-center gap-2">
-            <div className="flex items-center justify-between gap-3 px-3 py-1.5 rounded-xl bg-zinc-900 border border-white/10 font-mono text-xs text-zinc-300">
+          <div className="flex flex-wrap items-center gap-2">
+            <div className="flex items-center justify-between gap-2.5 px-2.5 sm:px-3 py-1.5 rounded-xl bg-zinc-900 border border-white/10 font-mono text-[11px] sm:text-xs text-zinc-300">
               <span>pip install vigilo</span>
               <button
                 onClick={copyPipCommand}
@@ -174,7 +174,7 @@ export default function VigiloShowcase() {
               href="https://pypi.org/project/vigilo/"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 rounded-xl bg-zinc-900 border border-white/10 text-zinc-400 hover:text-white hover:border-white/20 transition-all text-xs"
+              className="p-1.5 sm:p-2 rounded-xl bg-zinc-900 border border-white/10 text-zinc-400 hover:text-white hover:border-white/20 transition-all text-xs"
               title="View on PyPI"
             >
               <ExternalLink className="w-3.5 h-3.5" />
@@ -184,7 +184,7 @@ export default function VigiloShowcase() {
               href="https://github.com/Sanjiv215/VIGILO-Python-Package"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 rounded-xl bg-zinc-900 border border-white/10 text-zinc-400 hover:text-white hover:border-white/20 transition-all text-xs"
+              className="p-1.5 sm:p-2 rounded-xl bg-zinc-900 border border-white/10 text-zinc-400 hover:text-white hover:border-white/20 transition-all text-xs"
               title="View GitHub Repository"
             >
               <FaGithub className="w-3.5 h-3.5" />

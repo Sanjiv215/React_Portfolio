@@ -212,16 +212,16 @@ Ready to engineer exceptional software together!`
   };
 
   return (
-    <section id="terminal" className="py-24 px-4 relative z-10 border-t border-white/5">
+    <section id="terminal" className="py-12 sm:py-24 px-3 sm:px-4 relative z-10 border-t border-white/5">
       <div className="max-w-4xl mx-auto">
         
         {/* Section Header */}
-        <div className="mb-10">
+        <div className="mb-6 sm:mb-10">
           <motion.span
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-zinc-500 font-mono text-xs uppercase tracking-widest block mb-2"
+            className="text-zinc-500 font-mono text-[10px] sm:text-xs uppercase tracking-widest block mb-1.5 sm:mb-2"
           >
             05 / Interactive CLI
           </motion.span>
@@ -230,7 +230,7 @@ Ready to engineer exceptional software together!`
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-3xl sm:text-4xl font-bold tracking-tight text-white"
+            className="text-2xl sm:text-4xl font-bold tracking-tight text-white"
           >
             Developer Console
           </motion.h2>
@@ -244,20 +244,20 @@ Ready to engineer exceptional software together!`
           className="glass-panel border border-white/10 rounded-2xl overflow-hidden shadow-2xl bg-zinc-950/90"
         >
           {/* Bar */}
-          <div className="bg-zinc-900/60 px-4 py-2.5 border-b border-white/10 flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-zinc-700" />
-              <span className="w-2.5 h-2.5 rounded-full bg-zinc-700" />
-              <span className="w-2.5 h-2.5 rounded-full bg-zinc-700" />
-              <span className="text-xs font-mono text-zinc-400 ml-2">sanjiv@darwin:~ (zsh)</span>
+          <div className="bg-zinc-900/60 px-3 sm:px-4 py-2 sm:py-2.5 border-b border-white/10 flex items-center justify-between">
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]" />
+              <span className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
+              <span className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
+              <span className="text-[11px] sm:text-xs font-mono text-zinc-400 ml-1.5 sm:ml-2 truncate max-w-[140px] sm:max-w-none">sanjiv@darwin:~ (zsh)</span>
             </div>
-            <span className="text-[10px] font-mono text-zinc-400 bg-white/5 px-2 py-0.5 rounded border border-white/10">
+            <span className="text-[9px] sm:text-[10px] font-mono text-zinc-400 bg-white/5 px-2 py-0.5 rounded border border-white/10 shrink-0">
               vigilo v1.2
             </span>
           </div>
 
           {/* Body */}
-          <div className="p-5 font-mono text-xs sm:text-sm bg-zinc-950/95 min-h-[300px] max-h-[400px] overflow-y-auto space-y-3">
+          <div className="p-3.5 sm:p-5 font-mono text-[11px] sm:text-sm bg-zinc-950/95 min-h-[260px] max-h-[380px] overflow-y-auto space-y-2.5 sm:space-y-3">
             {history.map((item, idx) => (
               <div key={idx} className="leading-relaxed">
                 {item.type === 'user' && (
@@ -267,10 +267,10 @@ Ready to engineer exceptional software together!`
                   <div className="text-zinc-500 border-l border-zinc-700 pl-3 my-1 whitespace-pre-wrap">{item.content}</div>
                 )}
                 {item.type === 'response' && (
-                  <pre className="text-zinc-300 whitespace-pre-wrap font-mono">{item.content}</pre>
+                  <pre className="text-zinc-300 whitespace-pre-wrap font-mono overflow-x-auto text-[11px] sm:text-xs">{item.content}</pre>
                 )}
                 {item.type === 'success' && (
-                  <div className="text-emerald-400 font-medium p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/20">{item.content}</div>
+                  <div className="text-emerald-400 font-medium p-2.5 sm:p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/20">{item.content}</div>
                 )}
                 {item.type === 'error' && (
                   <div className="text-red-400 font-mono">{item.content}</div>
@@ -281,14 +281,14 @@ Ready to engineer exceptional software together!`
           </div>
 
           {/* Form Input */}
-          <form onSubmit={handleCommand} className="bg-zinc-900/40 px-4 py-3 border-t border-white/10 flex items-center gap-3">
-            <span className="text-emerald-400 font-mono font-bold">$</span>
+          <form onSubmit={handleCommand} className="bg-zinc-900/40 px-3 sm:px-4 py-2.5 sm:py-3 border-t border-white/10 flex items-center gap-2 sm:gap-3">
+            <span className="text-emerald-400 font-mono font-bold text-xs sm:text-sm">$</span>
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder='Try typing "smartbuy", "vigilo", "projects", "skills", or "help"...'
-              className="flex-1 bg-transparent text-zinc-200 font-mono text-xs sm:text-sm focus:outline-none placeholder:text-zinc-600"
+              className="flex-1 bg-transparent text-zinc-200 font-mono text-xs sm:text-sm focus:outline-none placeholder:text-zinc-600 min-w-0"
             />
             <button
               type="submit"

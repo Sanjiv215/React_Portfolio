@@ -17,26 +17,26 @@ export default function ProjectsSection() {
   return (
     <>
       {/* Main Repositories Section */}
-      <section id="projects" className="py-16 px-4 relative z-10 max-w-5xl mx-auto">
+      <section id="projects" className="py-10 sm:py-16 px-3 sm:px-4 relative z-10 max-w-5xl mx-auto">
         <WindowFrame title="Repositories.app — Production Codebases & AI Platforms" icon={Code}>
           {/* Section Header */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 pb-6 border-b border-white/10 gap-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 sm:mb-8 pb-4 sm:pb-6 border-b border-white/10 gap-3 sm:gap-4">
             <div>
-              <span className="text-[11px] font-mono text-zinc-500 uppercase tracking-widest block mb-1">
+              <span className="text-[10px] sm:text-[11px] font-mono text-zinc-500 uppercase tracking-widest block mb-1">
                 Curated Production Codebases
               </span>
-              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
+              <h2 className="text-xl sm:text-3xl font-bold tracking-tight text-white">
                 Core Projects &amp; Repositories
               </h2>
             </div>
 
             {/* Segmented Filter */}
-            <div className="flex flex-wrap p-1 rounded-xl bg-zinc-900/90 border border-white/10 text-xs font-mono">
+            <div className="flex flex-wrap p-1 rounded-xl bg-zinc-900/90 border border-white/10 text-[11px] sm:text-xs font-mono gap-1">
               {portfolioData.projectCategories.map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
-                  className={`px-3 py-1.5 rounded-lg transition-all ${
+                  className={`px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg transition-all ${
                     activeCategory === cat
                       ? 'bg-zinc-800 text-white font-semibold shadow-sm'
                       : 'text-zinc-400 hover:text-white'
@@ -48,8 +48,8 @@ export default function ProjectsSection() {
             </div>
           </div>
 
-          {/* 4 Projects Grid */}
-          <motion.div layout className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* Projects Grid */}
+          <motion.div layout className="grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-4">
             <AnimatePresence>
               {filteredProjects.map((project) => (
                 <motion.div
@@ -59,7 +59,7 @@ export default function ProjectsSection() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.96 }}
                   transition={{ duration: 0.2 }}
-                  className="rounded-xl overflow-hidden border border-white/10 hover:border-white/20 transition-all flex flex-col group bg-zinc-900/50 p-5 justify-between"
+                  className="rounded-xl overflow-hidden border border-white/10 hover:border-white/20 transition-all flex flex-col group bg-zinc-900/50 p-4 sm:p-5 justify-between"
                 >
                   <div>
                     {/* Repo Header */}
@@ -155,30 +155,30 @@ export default function ProjectsSection() {
       </section>
 
       {/* Freelance Client Work Section */}
-      <section id="freelance" className="py-16 px-4 relative z-10 max-w-5xl mx-auto">
+      <section id="freelance" className="py-10 sm:py-16 px-3 sm:px-4 relative z-10 max-w-5xl mx-auto">
         <WindowFrame title="Freelance.app — Bespoke Client Deliverables" icon={Briefcase}>
           {/* Section Header */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 pb-6 border-b border-white/10 gap-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 sm:mb-8 pb-4 sm:pb-6 border-b border-white/10 gap-3 sm:gap-4">
             <div>
-              <div className="inline-flex items-center gap-1.5 text-violet-400 font-mono text-[11px] uppercase tracking-widest block mb-1">
+              <div className="inline-flex items-center gap-1.5 text-violet-400 font-mono text-[10px] sm:text-[11px] uppercase tracking-widest block mb-1">
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>Client Engagements &amp; Custom Portfolios</span>
               </div>
-              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
+              <h2 className="text-xl sm:text-3xl font-bold tracking-tight text-white">
                 Freelance Client Work
               </h2>
             </div>
-            <span className="px-3 py-1 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-300 text-xs font-mono self-start sm:self-auto">
+            <span className="px-3 py-1 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-300 text-[11px] sm:text-xs font-mono self-start sm:self-auto">
               2 Custom Portfolios Delivered
             </span>
           </div>
 
           {/* Freelance Projects Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-4">
             {portfolioData.freelanceProjects.map((fProject) => (
               <div
                 key={fProject.id}
-                className="rounded-xl overflow-hidden border border-white/10 hover:border-violet-500/30 transition-all flex flex-col group bg-zinc-900/50 p-5 justify-between"
+                className="rounded-xl overflow-hidden border border-white/10 hover:border-violet-500/30 transition-all flex flex-col group bg-zinc-900/50 p-4 sm:p-5 justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between gap-2 mb-2">

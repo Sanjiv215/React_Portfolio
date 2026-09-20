@@ -28,28 +28,37 @@ export default function MenuBar() {
   }, []);
 
   return (
-    <header className="fixed top-0 inset-x-0 z-50 h-7 bg-zinc-950/75 dark:bg-zinc-950/80 backdrop-blur-2xl border-b border-white/10 text-zinc-300 text-[12px] font-sans px-3 flex items-center justify-between select-none">
-      {/* Left Menu Section */}
-      <div className="flex items-center gap-3 relative">
-        {/* Custom 'S' Monogram Icon (replaces Apple logo) */}
-        <div className="relative">
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="w-5 h-5 flex items-center justify-center rounded hover:bg-white/10 text-white font-bold text-[13px] tracking-tighter font-mono transition-colors focus:outline-none"
-            aria-label="Sanjiv System Menu"
-            title="Sanjiv OS"
-          >
-            <div className="w-4 h-4 rounded-[4px] bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-[10px] font-black text-white shadow-sm border border-white/20">
-              S
-            </div>
-          </button>
+    <>
+      {/* Touch Backdrop to dismiss menu on mobile/tablets */}
+      {menuOpen && (
+        <div
+          onClick={() => setMenuOpen(false)}
+          className="fixed inset-0 z-40 bg-black/20"
+        />
+      )}
 
-          {/* System Dropdown */}
-          {menuOpen && (
-            <div
-              className="absolute top-7 left-0 w-60 rounded-xl bg-zinc-900/95 backdrop-blur-3xl border border-white/15 shadow-2xl p-1.5 text-xs text-zinc-200 z-50 animate-in fade-in zoom-in-95 duration-100"
-              onMouseLeave={() => setMenuOpen(false)}
+      <header className="fixed top-0 inset-x-0 z-50 h-7 bg-zinc-950/75 dark:bg-zinc-950/80 backdrop-blur-2xl border-b border-white/10 text-zinc-300 text-[12px] font-sans px-2.5 sm:px-3 flex items-center justify-between select-none">
+        {/* Left Menu Section */}
+        <div className="flex items-center gap-2 sm:gap-3 relative">
+          {/* Custom 'S' Monogram Icon (replaces Apple logo) */}
+          <div className="relative">
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="w-5 h-5 flex items-center justify-center rounded hover:bg-white/10 text-white font-bold text-[13px] tracking-tighter font-mono transition-colors focus:outline-none"
+              aria-label="Sanjiv System Menu"
+              title="Sanjiv OS"
             >
+              <div className="w-4 h-4 rounded-[4px] bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-[10px] font-black text-white shadow-sm border border-white/20">
+                S
+              </div>
+            </button>
+
+            {/* System Dropdown */}
+            {menuOpen && (
+              <div
+                className="absolute top-7 left-0 w-64 max-w-[90vw] rounded-xl bg-zinc-900/95 backdrop-blur-3xl border border-white/15 shadow-2xl p-1.5 text-xs text-zinc-200 z-50 animate-in fade-in zoom-in-95 duration-100"
+                onMouseLeave={() => setMenuOpen(false)}
+              >
               <div className="px-2.5 py-2 font-semibold text-white border-b border-white/10 flex items-center gap-2.5">
                 <img
                   src={portfolioData.personal.avatar}
@@ -197,5 +206,6 @@ export default function MenuBar() {
         </span>
       </div>
     </header>
+    </>
   );
 }
