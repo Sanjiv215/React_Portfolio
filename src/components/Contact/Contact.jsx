@@ -104,7 +104,7 @@ function Contact() {
                 {CONTACT_EMAIL ? (
                   <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
                 ) : (
-                  <p>Prasad.sanjiv@outlook.com</p>
+                  <p>Sanjivprasad360@gmail.com</p>
                 )}
               </div>
             </div>
@@ -123,7 +123,7 @@ function Contact() {
               <span className="contact-icon"><FaLocationDot /></span>
               <div>
                 <h3>Location</h3>
-                <p>Bangalore, Karnataka, India</p>
+                <p>Bengaluru, Karnataka, India</p>
               </div>
             </div>
           </div>

@@ -25,7 +25,7 @@ export default function AboutSection() {
           </div>
           <div className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono inline-flex items-center gap-1.5 self-start sm:self-auto">
             <CheckCircle className="w-3.5 h-3.5" />
-            <span>Full Stack Intern</span>
+            <span>Fullstack Developer Intern</span>
           </div>
         </div>
 
@@ -46,26 +46,29 @@ export default function AboutSection() {
               <div className="space-y-3">
                 <div className="inline-flex items-center gap-2 text-emerald-400 font-mono text-xs uppercase tracking-wider">
                   <Sparkles className="w-3.5 h-3.5" />
-                  <span>Engineering Journey &amp; Mindset</span>
+                  <span>Engineering Journey &amp; Focus</span>
                 </div>
                 <h3 className="text-xl font-semibold text-white leading-snug">
-                  From Fitness Trainer to Full Stack Intern &amp; Security Tooling Creator
+                  Full-Stack Development, Static Security Analysis &amp; AI Systems
                 </h3>
                 <p className="text-zinc-300 text-xs sm:text-sm leading-relaxed">
-                  {portfolioData.personal.story}
+                  {portfolioData.personal.bio}
                 </p>
                 <div className="flex flex-wrap gap-2 pt-2">
                   <span className="px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-zinc-300 text-xs font-mono">
-                    Full Stack Intern (2026 – 2026)
+                    SVYASA University (B-Tech)
                   </span>
                   <span className="px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-zinc-300 text-xs font-mono">
-                    IIT Patna Intern
+                    IIT Patna Intern (2026)
                   </span>
                   <span className="px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-zinc-300 text-xs font-mono">
-                    Code Alpha Intern
+                    Code Alpha Intern (2025)
                   </span>
                   <span className="px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-zinc-300 text-xs font-mono">
                     PyPI Creator (Vigilo)
+                  </span>
+                  <span className="px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-zinc-300 text-xs font-mono">
+                    SmartBuy-AI Creator
                   </span>
                 </div>
               </div>
@@ -73,7 +76,7 @@ export default function AboutSection() {
 
             <div className="shrink-0 p-5 rounded-2xl bg-zinc-950 border border-white/10 text-center w-full lg:w-48">
               <div className="text-zinc-500 font-mono text-[10px] uppercase tracking-widest mb-1">Motto</div>
-              <div className="text-sm font-bold text-white font-mono">Build. Break. Fix. Repeat.</div>
+              <div className="text-xs font-bold text-white font-mono leading-tight">Learn by building. Solve real-world problems.</div>
             </div>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, MapPin, Send, CheckCircle2, AlertCircle, Copy, Check } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, CheckCircle2, AlertCircle, Copy, Check } from 'lucide-react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import emailjs from '@emailjs/browser';
 import { portfolioData } from '../data/portfolioData';
@@ -13,6 +13,7 @@ const hasEmailConfig = Boolean(EMAILJS_SERVICE_ID && EMAILJS_TEMPLATE_ID && EMAI
 
 export default function ContactSection() {
   const [copied, setCopied] = useState(false);
+  const [copiedPhone, setCopiedPhone] = useState(false);
   const [sending, setSending] = useState(false);
   const [status, setStatus] = useState({ type: '', message: '' });
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
@@ -21,6 +22,12 @@ export default function ContactSection() {
     navigator.clipboard.writeText(portfolioData.personal.email);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleCopyPhone = () => {
+    navigator.clipboard.writeText(portfolioData.personal.phone);
+    setCopiedPhone(true);
+    setTimeout(() => setCopiedPhone(false), 2000);
   };
 
   const handleSubmit = async (e) => {
@@ -105,6 +112,28 @@ export default function ContactSection() {
                         title="Copy Email"
                       >
                         {copied ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Phone */}
+                <div className="flex items-center gap-2.5">
+                  <div className="w-7 h-7 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-zinc-300 shrink-0">
+                    <Phone className="w-3.5 h-3.5" />
+                  </div>
+                  <div className="overflow-hidden">
+                    <span className="text-[10px] font-mono text-zinc-500 uppercase block">Phone / WhatsApp</span>
+                    <div className="flex items-center gap-1.5">
+                      <a href={`tel:${portfolioData.personal.phone.replace(/\s+/g, '')}`} className="text-xs font-mono text-white hover:text-zinc-300 transition-colors truncate">
+                        {portfolioData.personal.phone}
+                      </a>
+                      <button
+                        onClick={handleCopyPhone}
+                        className="p-1 rounded text-zinc-400 hover:text-white"
+                        title="Copy Phone"
+                      >
+                        {copiedPhone ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
                       </button>
                     </div>
                   </div>

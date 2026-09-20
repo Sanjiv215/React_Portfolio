@@ -190,15 +190,15 @@ export default function HeroSection() {
             {/* Code Content */}
             <div className="p-5 font-mono text-xs leading-relaxed overflow-x-auto bg-zinc-950/95 text-zinc-300 space-y-2">
               <div className="text-zinc-500">## Hi, I’m Sanjiv Prasad 👋</div>
-              <div className="text-emerald-400 font-semibold">Full Stack Intern • Python • DevTools</div>
-              <div className="text-zinc-400">Flagship: <span className="text-white font-bold">Vigilo (PyPI)</span></div>
+              <div className="text-emerald-400 font-semibold">Fullstack Developer Intern • Python • FastAPI • React</div>
+              <div className="text-zinc-400">Flagship: <span className="text-white font-bold">SmartBuy-AI &amp; Vigilo (PyPI)</span></div>
               <div className="pt-2 border-t border-white/10 text-zinc-400 space-y-1">
-                <div><span className="text-zinc-500">- 💼 Role:</span> Full Stack Intern (2026 – 2026)</div>
-                <div><span className="text-zinc-500">- 🏢 Internships:</span> IIT Patna &amp; Code Alpha</div>
+                <div><span className="text-zinc-500">- 🎓 Education:</span> B.Tech CSE (AI/ML) @ SVYASA University</div>
+                <div><span className="text-zinc-500">- 🏢 Internships:</span> IIT Patna (2026) &amp; Code Alpha (2025)</div>
                 <div><span className="text-zinc-500">- 📦 PyPI Package:</span> pip install vigilo</div>
-                <div><span className="text-zinc-500">- 🚀 Client Work:</span> Jishnu &amp; Devendra Portfolios</div>
-                <div><span className="text-zinc-500">- 🟢 Availability:</span> Internship &amp; Freelance only</div>
-                <div><span className="text-zinc-500">- 💡 Motto:</span> Build. Break. Fix. Repeat.</div>
+                <div><span className="text-zinc-500">- 🤖 AI Platform:</span> SmartBuy-AI (Agentic Browser)</div>
+                <div><span className="text-zinc-500">- 🟢 Availability:</span> Full-Stack &amp; AI Internship Opportunities</div>
+                <div><span className="text-zinc-500">- 💡 Motto:</span> Learn by building. Solve real-world problems.</div>
               </div>
             </div>
           </div>

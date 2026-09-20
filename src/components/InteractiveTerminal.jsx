@@ -43,16 +43,17 @@ export default function InteractiveTerminal() {
           type: 'response',
           content: `Available commands:
   help         - Show this command manual
-  about        - View Sanjiv's background & engineering philosophy
-  projects     - List the 4 featured systems
+  about        - View Sanjiv's background & objective
+  projects     - List the core production systems
+  smartbuy     - SmartBuy-AI agentic browser architecture
   vigilo       - Execute simulated AST security vulnerability scan
   pysentra     - Python code diagnostics engine info
   iit-patna    - IIT Patna ERP Portal architecture details
-  thewoodwise  - The WoodWise full-stack e-commerce architecture
-  skills       - List technical capabilities & security tools
+  skills       - List technical capabilities (Python, FastAPI, React, etc.)
   experience   - Display career milestones & internship history
+  education    - Display university & academic timeline
   github       - View GitHub metrics and top repositories
-  contact      - Output communication channels
+  contact      - Output communication channels (email & phone)
   clear        - Clear terminal screen
   sudo hire-me - Launch recruitment protocol 🎉`
         });
@@ -63,12 +64,28 @@ export default function InteractiveTerminal() {
           type: 'response',
           content: `NAME: ${portfolioData.personal.name}
 ROLE: ${portfolioData.personal.roleTitle}
-EDUCATION: B.Tech Computer Science (AI & ML) @ UIT
+EDUCATION: B.Tech CSE (AI/ML) @ SVYASA University
 LOCATION: ${portfolioData.personal.location}
 STATUS: ${portfolioData.personal.availability}
 
-BACKGROUND & MINDSET:
-${portfolioData.personal.story}`
+OBJECTIVE:
+${portfolioData.personal.bio}`
+        });
+        break;
+
+      case 'smartbuy':
+      case 'smartbuy-ai':
+      case 'smartbuyai':
+        newHistory.push({
+          type: 'response',
+          content: `[SMARTBUY-AI — AGENTIC PRICE COMPARISON BROWSER]
+Category: AI & Agents
+Tech Stack: Python, FastAPI, React, AI Agents, Browser Automation, Web Scraping
+Description:
+  • Autonomous agentic browser for real-time product price comparison across e-commerce platforms.
+  • Interactive browser interface with instant filtering and deals normalization.
+  • FastAPI backend supporting asynchronous task orchestration and scraper pipelines.
+GitHub: https://github.com/Sanjiv215/SmartBuy-AI`
         });
         break;
 
@@ -93,18 +110,20 @@ GitHub: https://github.com/Sanjiv215/VIGILO-Python-Package`
           type: 'response',
           content: `[PYSENTRA DIAGNOSTIC ENGINE]
 License: Apache 2.0
-Description: Lightweight Python static code analyzer and AST diagnostic tool.
+Description: Intelligent Python-based platform for automated code analysis, AST inspection, and security monitoring.
 Repository: https://github.com/Sanjiv215/PySentra`
         });
         break;
 
       case 'iit-patna':
+      case 'erp':
+      case 'erp-portal':
         newHistory.push({
           type: 'response',
           content: `[IIT PATNA ERP & TASK MANAGER]
-Role: Full-Stack Development Intern
+Role: Fullstack developer intern
 Project: Enterprise Resource Planning (ERP) Portal & Task Manager
-Tech Stack: React, JavaScript, Node.js, Express, MongoDB, REST APIs
+Tech Stack: React, JavaScript, NodeJS, ExpressJS, MongoDB, RESTful APIs
 Key Contributions:
   • Architected role-based access control (RBAC) security system.
   • Built multi-tenant task assignment workflows & reporting dashboards.
@@ -112,23 +131,10 @@ Key Contributions:
         });
         break;
 
-      case 'thewoodwise':
-        newHistory.push({
-          type: 'response',
-          content: `[THE WOODWISE FULL-STACK E-COMMERCE]
-Tech Stack: React, Vite, Node.js, Express, MongoDB, Nodemailer, Axios
-Features:
-  • Email OTP user registration & password recovery.
-  • Persistent cart and wishlist state management.
-  • Dynamic product search, filtering, and pagination.
-  • Session-token authenticated REST endpoints.`
-        });
-        break;
-
       case 'projects':
         newHistory.push({
           type: 'response',
-          content: `FEATURED 4 SYSTEMS:
+          content: `CORE PRODUCTION SYSTEMS:
 ${portfolioData.projects.map(p => `  • ${p.title}\n    Category: ${p.category} | Tech: ${p.tech.join(', ')}\n    URL: ${p.liveUrl}`).join('\n\n')}`
         });
         break;
@@ -136,16 +142,24 @@ ${portfolioData.projects.map(p => `  • ${p.title}\n    Category: ${p.category}
       case 'skills':
         newHistory.push({
           type: 'response',
-          content: `TECHNICAL ARSENAL:
-${portfolioData.skills.map(s => `  • ${s.name.padEnd(30, ' ')} [${s.category}] - ${s.level}%`).join('\n')}`
+          content: `TECHNICAL ARSENAL (${portfolioData.skills.length} Stack Tools):
+${portfolioData.skills.map(s => `  • ${s.name.padEnd(20, ' ')} [${s.category}] - ${s.level}% (${s.desc})`).join('\n')}`
         });
         break;
 
       case 'experience':
         newHistory.push({
           type: 'response',
-          content: `CAREER & EDUCATION HISTORY:
-${portfolioData.experiences.map(e => `  [${e.period}] ${e.role} @ ${e.company} (${e.type})\n  ${e.description}`).join('\n\n')}`
+          content: `CAREER & INTERNSHIP HISTORY:
+${portfolioData.experiences.filter(e => e.type === 'Internship').map(e => `  [${e.period}] ${e.role} @ ${e.company}\n  ${e.description}`).join('\n\n')}`
+        });
+        break;
+
+      case 'education':
+        newHistory.push({
+          type: 'response',
+          content: `ACADEMIC TIMELINE:
+${portfolioData.experiences.filter(e => e.type === 'Education').map(e => `  [${e.period}] ${e.role} @ ${e.company}\n  ${e.description}`).join('\n\n')}`
         });
         break;
 
@@ -154,8 +168,8 @@ ${portfolioData.experiences.map(e => `  [${e.period}] ${e.role} @ ${e.company} (
           type: 'response',
           content: `GITHUB METRICS (@Sanjiv215):
   • Profile: ${portfolioData.personal.github}
-  • Featured 4: Vigilo-Python-Package, PySentra, ERP_PORTAL, TheWoodWise
-  • Focus: DevTools, Security AST, Full-Stack Architecture`
+  • Featured: SmartBuy-AI, Vigilo, ERP_PORTAL, PySentra, my_portfolio
+  • Focus: Python, FastAPI, React, AI Agents, AST Security Tools`
         });
         break;
 
@@ -164,6 +178,7 @@ ${portfolioData.experiences.map(e => `  [${e.period}] ${e.role} @ ${e.company} (
           type: 'response',
           content: `COMMUNICATION CHANNELS:
   Email:    ${portfolioData.personal.email}
+  Phone:    ${portfolioData.personal.phone}
   GitHub:   ${portfolioData.personal.github}
   LinkedIn: ${portfolioData.personal.linkedin}`
         });
@@ -272,7 +287,7 @@ Ready to engineer exceptional software together!`
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder='Try typing "vigilo", "thewoodwise", "projects", or "help"...'
+              placeholder='Try typing "smartbuy", "vigilo", "projects", "skills", or "help"...'
               className="flex-1 bg-transparent text-zinc-200 font-mono text-xs sm:text-sm focus:outline-none placeholder:text-zinc-600"
             />
             <button
