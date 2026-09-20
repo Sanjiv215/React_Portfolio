@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Cpu, Terminal, Shield, Code2, FileCode, Palette, Server, Layout, Box, GitBranch, Database, Cpu as DefaultIcon } from 'lucide-react';
+import { Cpu, Terminal, Shield, Code2, FileCode, Palette, Server, Layout, Box, GitBranch, Database, Zap, Cpu as DefaultIcon } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
 import WindowFrame from './MacOS/WindowFrame';
 
@@ -15,7 +15,8 @@ const skillIcons = {
   Shield,
   Box,
   GitBranch,
-  Database
+  Database,
+  Zap
 };
 
 export default function SkillsSection() {

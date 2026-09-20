@@ -16,9 +16,9 @@ export default function ProjectsSection() {
 
   return (
     <>
-      {/* Main 4 Repositories Section */}
+      {/* Main Repositories Section */}
       <section id="projects" className="py-16 px-4 relative z-10 max-w-5xl mx-auto">
-        <WindowFrame title="Repositories.app — 4 Core Production Systems" icon={Code}>
+        <WindowFrame title="Repositories.app — Production Codebases & AI Platforms" icon={Code}>
           {/* Section Header */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 pb-6 border-b border-white/10 gap-4">
             <div>
