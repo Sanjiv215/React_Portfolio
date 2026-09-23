@@ -10,10 +10,10 @@ export default function ExperienceSection() {
       <div className="mb-8 sm:mb-12 border-b border-white/10 pb-5">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full studio-pill text-cyan-400 text-xs font-mono uppercase tracking-wider mb-2">
           <Calendar className="w-3.5 h-3.5" />
-          <span>Timeline & Background</span>
+          <span>Timeline &amp; Background</span>
         </div>
         <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white">
-          Experience & Education
+          Experience &amp; Education
         </h2>
       </div>
 
