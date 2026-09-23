@@ -78,7 +78,7 @@ export default function ContactSection() {
           <span>Get in Touch</span>
         </div>
         <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white">
-          Let’s Connect & Collaborate
+          Let’s Connect &amp; Collaborate
         </h2>
         <p className="text-zinc-400 mt-1 text-xs sm:text-sm">
           Open to internship roles, software collaborations, and developer tooling discussions.
