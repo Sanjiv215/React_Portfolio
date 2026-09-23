@@ -2,7 +2,7 @@ import React from 'react';
 import { ThemeProvider } from '../context/ThemeContext';
 import BackgroundCanvas from '../components/BackgroundCanvas';
 import Navbar from '../components/Navbar';
-import HeroSection from '../components/HeroSection';
+import NeuralHero from '../components/NeuralHero';
 import AboutSection from '../components/AboutSection';
 import VigiloShowcase from '../components/VigiloShowcase';
 import ProjectsSection from '../components/ProjectsSection';
@@ -11,6 +11,7 @@ import InteractiveTerminal from '../components/InteractiveTerminal';
 import ExperienceSection from '../components/ExperienceSection';
 import ContactSection from '../components/ContactSection';
 import Footer from '../components/Footer';
+import Dock from '../components/MacOS/Dock';
 
 export default function Home() {
   return (
@@ -23,8 +24,8 @@ export default function Home() {
         <Navbar />
 
         {/* Main Content Telemetry Sections */}
-        <main className="pt-20 sm:pt-24 space-y-16 sm:space-y-28 pb-16">
-          <HeroSection />
+        <main className="pt-16 sm:pt-20 space-y-16 sm:space-y-28 pb-28 sm:pb-32">
+          <NeuralHero />
           <AboutSection />
           <VigiloShowcase />
           <ProjectsSection />
@@ -36,6 +37,9 @@ export default function Home() {
 
         {/* Cortex Minimal HUD Footer */}
         <Footer />
+
+        {/* Floating macOS Dock */}
+        <Dock />
       </div>
     </ThemeProvider>
   );
