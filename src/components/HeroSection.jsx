@@ -22,22 +22,18 @@ export default function HeroSection() {
   };
 
   return (
-    <section id="home" className="relative min-h-[85vh] sm:min-h-[90vh] pt-16 sm:pt-24 md:pt-36 pb-12 sm:pb-20 flex items-center justify-center px-3 sm:px-4 overflow-hidden">
-      {/* Subtle background ambient blur */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] max-w-full h-[300px] bg-white/[0.02] rounded-full blur-[100px] pointer-events-none" />
-
+    <section id="home" className="relative min-h-[80vh] sm:min-h-[85vh] pt-8 sm:pt-14 pb-8 sm:pb-16 flex items-center justify-center px-4 sm:px-6">
       <div className="w-full max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
         
         {/* Left Column: Profile, Heading & CTAs */}
         <motion.div
-          style={{ transformOrigin: '50% -60px', transformPerspective: 1200 }}
-          initial={{ opacity: 0, rotateX: 14, y: 35 }}
-          animate={{ opacity: 1, rotateX: 0, y: 0 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ opacity: 0, y: 25 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
           className="lg:col-span-7 flex flex-col items-start"
         >
           {/* Status Badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-900/90 border border-emerald-500/30 text-zinc-200 text-[11px] sm:text-xs font-mono mb-4 sm:mb-6 shadow-[0_0_15px_rgba(16,185,129,0.15)]">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full studio-pill text-zinc-200 text-[11px] sm:text-xs font-mono mb-5 shadow-sm">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
@@ -46,9 +42,9 @@ export default function HeroSection() {
           </div>
 
           {/* Profile Picture & Name Header */}
-          <div className="flex items-center gap-3.5 sm:gap-5 mb-3 sm:mb-4">
+          <div className="flex items-center gap-4 sm:gap-5 mb-4">
             <div className="relative shrink-0 group">
-              <div className="w-14 h-14 sm:w-20 sm:h-20 rounded-2xl overflow-hidden border-2 border-white/25 shadow-xl bg-zinc-800 transition-transform duration-300 group-hover:scale-105 group-hover:border-cyan-400/50">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden border border-white/20 shadow-xl bg-zinc-900 transition-transform duration-300 group-hover:scale-105">
                 <img
                   src={portfolioData.personal.avatar}
                   alt={portfolioData.personal.name}
@@ -58,30 +54,30 @@ export default function HeroSection() {
                   }}
                 />
               </div>
-              <span className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-emerald-500 border-2 border-zinc-950 shadow-[0_0_8px_rgba(16,185,129,0.8)]" />
+              <span className="absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full bg-emerald-500 border-2 border-zinc-950 shadow-[0_0_10px_rgba(16,185,129,0.8)]" />
             </div>
 
             <div>
-              <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white drop-shadow-sm">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
                 {portfolioData.personal.name}
               </h1>
-              <p className="text-[11px] sm:text-xs font-mono text-cyan-400/90 mt-0.5 sm:mt-1 font-medium">
+              <p className="text-xs sm:text-sm font-mono text-cyan-400 mt-1 font-medium">
                 Fullstack Developer Intern • @{portfolioData.personal.handle}
               </p>
             </div>
           </div>
 
           {/* Animated Tagline / Role */}
-          <div className="h-7 sm:h-8 flex items-center mb-4 sm:mb-5 text-base sm:text-xl font-medium text-zinc-200">
-            <div className="relative inline-block overflow-hidden h-7 sm:h-8">
+          <div className="h-8 flex items-center mb-4 text-lg sm:text-xl font-medium text-zinc-200">
+            <div className="relative inline-block overflow-hidden h-8">
               <AnimatePresence mode="wait">
                 <motion.span
                   key={roleIndex}
-                  initial={{ y: 20, opacity: 0 }}
+                  initial={{ y: 18, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  exit={{ y: -20, opacity: 0 }}
+                  exit={{ y: -18, opacity: 0 }}
                   transition={{ duration: 0.25 }}
-                  className="text-white font-mono block font-semibold text-sm sm:text-xl text-gradient-silver"
+                  className="text-white font-mono block font-semibold text-base sm:text-xl text-gradient-silver"
                 >
                   {portfolioData.personal.roles[roleIndex]}
                 </motion.span>
@@ -90,39 +86,39 @@ export default function HeroSection() {
           </div>
 
           {/* Bio text */}
-          <p className="text-zinc-300 text-xs sm:text-base max-w-xl mb-6 sm:mb-8 leading-relaxed font-normal">
+          <p className="text-zinc-300 text-sm sm:text-base max-w-xl mb-7 leading-relaxed font-normal">
             {portfolioData.personal.bio}
           </p>
 
           {/* Action CTAs */}
-          <div className="flex flex-wrap gap-2 sm:gap-3 items-center w-full">
+          <div className="flex flex-wrap gap-2.5 sm:gap-3 items-center w-full">
             <a
               href="#projects"
-              className="px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-white text-zinc-950 hover:bg-zinc-100 font-semibold flex items-center justify-center gap-1.5 sm:gap-2 transition-all text-xs font-mono shadow-[0_4px_20px_rgba(255,255,255,0.2)] hover:shadow-[0_6px_25px_rgba(255,255,255,0.3)] hover:-translate-y-0.5"
+              className="px-5 py-2.5 rounded-full bg-white text-zinc-950 hover:bg-zinc-100 font-bold flex items-center justify-center gap-2 transition-all text-xs font-mono shadow-[0_0_20px_rgba(255,255,255,0.25)] hover:-translate-y-0.5"
             >
               <span>Explore Projects</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </a>
 
             <a
-              href="#freelance"
-              className="px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-full glass-card border border-violet-500/30 hover:border-violet-400 text-zinc-200 hover:text-white font-medium flex items-center justify-center gap-1.5 sm:gap-2 transition-all text-xs font-mono shadow-[0_0_15px_rgba(139,92,246,0.1)] hover:-translate-y-0.5"
-            >
-              <Sparkles className="w-3.5 h-3.5 text-violet-400" />
-              <span>Freelance Work</span>
-            </a>
-
-            <a
               href="#vigilo-showcase"
-              className="px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-full glass-card border border-emerald-500/30 hover:border-emerald-400 text-zinc-200 hover:text-white font-medium flex items-center justify-center gap-1.5 sm:gap-2 transition-all text-xs font-mono shadow-[0_0_15px_rgba(16,185,129,0.1)] hover:-translate-y-0.5"
+              className="px-4 py-2.5 rounded-full studio-card border border-emerald-500/30 hover:border-emerald-400 text-zinc-200 hover:text-white font-medium flex items-center justify-center gap-2 transition-all text-xs font-mono hover:-translate-y-0.5"
             >
               <Shield className="w-3.5 h-3.5 text-emerald-400" />
               <span>Vigilo Scanner</span>
             </a>
 
+            <a
+              href="#freelance"
+              className="px-4 py-2.5 rounded-full studio-card border border-indigo-500/30 hover:border-indigo-400 text-zinc-200 hover:text-white font-medium flex items-center justify-center gap-2 transition-all text-xs font-mono hover:-translate-y-0.5"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
+              <span>Freelance Work</span>
+            </a>
+
             <button
               onClick={handleCopyEmail}
-              className="px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-full glass-card border border-white/15 hover:border-white/30 text-zinc-300 hover:text-white font-medium flex items-center justify-center gap-1.5 sm:gap-2 transition-all text-xs font-mono hover:-translate-y-0.5"
+              className="px-4 py-2.5 rounded-full studio-card text-zinc-300 hover:text-white font-medium flex items-center justify-center gap-2 transition-all text-xs font-mono hover:-translate-y-0.5"
             >
               {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
               <span>{copied ? 'Copied' : 'Copy Email'}</span>
@@ -130,14 +126,14 @@ export default function HeroSection() {
           </div>
 
           {/* Social Icons & Badges */}
-          <div className="flex items-center gap-2.5 sm:gap-3 mt-6 sm:mt-8">
+          <div className="flex items-center gap-3 mt-7">
             <a
               href={portfolioData.personal.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2.5 rounded-full glass-card text-zinc-300 hover:text-white hover:border-white/30 hover:shadow-[0_0_15px_rgba(255,255,255,0.15)] transition-all text-xs"
+              className="p-2.5 rounded-full studio-card text-zinc-300 hover:text-white hover:border-white/30 transition-all text-xs"
               aria-label="GitHub Profile"
-              title="GitHub Profile"
+              title="GitHub Profile (@Sanjiv215)"
             >
               <FaGithub className="w-4 h-4" />
             </a>
@@ -145,7 +141,7 @@ export default function HeroSection() {
               href={portfolioData.personal.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2.5 rounded-full glass-card text-zinc-300 hover:text-white hover:border-blue-400/40 hover:shadow-[0_0_15px_rgba(59,130,246,0.2)] transition-all text-xs"
+              className="p-2.5 rounded-full studio-card text-zinc-300 hover:text-white hover:border-blue-400/50 transition-all text-xs"
               aria-label="LinkedIn Profile"
               title="LinkedIn Profile"
             >
@@ -155,7 +151,7 @@ export default function HeroSection() {
               href="https://pypi.org/project/vigilo/"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2.5 rounded-full glass-card text-zinc-300 hover:text-white hover:border-emerald-400/40 hover:shadow-[0_0_15px_rgba(16,185,129,0.2)] transition-all text-xs"
+              className="p-2.5 rounded-full studio-card text-zinc-300 hover:text-white hover:border-emerald-400/50 transition-all text-xs"
               title="PyPI Package (vigilo)"
               aria-label="PyPI Package"
             >
@@ -164,45 +160,62 @@ export default function HeroSection() {
           </div>
         </motion.div>
 
-        {/* Right Column: macOS Terminal Window */}
+        {/* Right Column: Studio Developer Overview Card */}
         <motion.div
-          style={{ transformOrigin: '50% -80px', transformPerspective: 1200 }}
-          initial={{ opacity: 0, rotateX: 18, y: 40 }}
-          animate={{ opacity: 1, rotateX: 0, y: 0 }}
-          transition={{ duration: 0.75, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ opacity: 0, y: 25 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           className="lg:col-span-5"
         >
-          <div className="glass-panel rounded-2xl border border-white/20 overflow-hidden bg-zinc-950/95 shadow-[0_20px_70px_rgba(0,0,0,0.6)] relative group hover:border-white/30 transition-all">
-            <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent" />
-            {/* Terminal Window Header */}
-            <div className="bg-zinc-900/90 px-4 py-2.5 border-b border-white/10 flex items-center justify-between backdrop-blur-md">
-              <div className="flex items-center gap-2">
-                <span className="w-3 h-3 rounded-full bg-[#FF5F56] inline-block shadow-sm" />
-                <span className="w-3 h-3 rounded-full bg-[#FFBD2E] inline-block shadow-sm" />
-                <span className="w-3 h-3 rounded-full bg-[#27C93F] inline-block shadow-sm" />
+          <div className="studio-card rounded-3xl p-6 sm:p-7 border border-white/10 shadow-2xl relative overflow-hidden bg-zinc-950/80">
+            {/* Top subtle highlight */}
+            <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-500/40 to-transparent" />
+            
+            {/* Card Header */}
+            <div className="flex items-center justify-between pb-4 mb-4 border-b border-white/10">
+              <div className="flex items-center gap-2 text-xs font-mono text-zinc-300">
+                <Terminal className="w-4 h-4 text-cyan-400" />
+                <span className="font-semibold text-white">System Profile</span>
               </div>
-              <div className="flex items-center gap-1.5 text-xs font-mono text-zinc-300">
-                <Terminal className="w-3.5 h-3.5 text-zinc-400" />
-                <span>README.md — macOS Tahoe</span>
-              </div>
-              <span className="text-[10px] font-mono text-zinc-400 bg-white/5 px-2 py-0.5 rounded border border-white/10">
-                v15.0
+              <span className="text-[10px] font-mono text-emerald-400 studio-pill px-2.5 py-0.5 rounded-full">
+                Active
               </span>
             </div>
 
-            {/* Code Content */}
-            <div className="p-5 font-mono text-xs leading-relaxed overflow-x-auto bg-zinc-950/95 text-zinc-300 space-y-2">
-              <div className="text-zinc-500">## Hi, I’m Sanjiv Prasad 👋</div>
-              <div className="text-emerald-400 font-semibold">Fullstack Developer Intern • Python • FastAPI • React</div>
-              <div className="text-zinc-300">Flagship: <span className="text-white font-bold">SmartBuy-AI &amp; Vigilo (PyPI)</span></div>
-              <div className="pt-2 border-t border-white/10 text-zinc-400 space-y-1">
-                <div><span className="text-zinc-500">- 🎓 Education:</span> B.Tech CSE (AI/ML) @ SVYASA University</div>
-                <div><span className="text-zinc-500">- 🏢 Internships:</span> IIT Patna (2026) &amp; Code Alpha (2025)</div>
-                <div><span className="text-zinc-500">- 📦 PyPI Package:</span> pip install vigilo</div>
-                <div><span className="text-zinc-500">- 🤖 AI Platform:</span> SmartBuy-AI (Agentic Browser)</div>
-                <div><span className="text-zinc-500">- 🟢 Availability:</span> Full-Stack &amp; AI Internship Opportunities</div>
-                <div><span className="text-zinc-500">- 💡 Motto:</span> Learn by building. Solve real-world problems.</div>
+            {/* Profile Spec Rows */}
+            <div className="font-mono text-xs leading-relaxed space-y-3 text-zinc-300">
+              <div className="flex items-start justify-between gap-2">
+                <span className="text-zinc-500">Full Name</span>
+                <span className="text-white font-medium text-right">Sanjiv Prasad</span>
               </div>
+              <div className="flex items-start justify-between gap-2">
+                <span className="text-zinc-500">Education</span>
+                <span className="text-zinc-200 text-right">B.Tech CSE (AI/ML) @ SVYASA</span>
+              </div>
+              <div className="flex items-start justify-between gap-2">
+                <span className="text-zinc-500">Internships</span>
+                <span className="text-cyan-300 text-right font-medium">IIT Patna (2026), Code Alpha</span>
+              </div>
+              <div className="flex items-start justify-between gap-2">
+                <span className="text-zinc-500">PyPI Release</span>
+                <span className="text-emerald-400 font-semibold text-right">pip install vigilo</span>
+              </div>
+              <div className="flex items-start justify-between gap-2">
+                <span className="text-zinc-500">Flagship AI</span>
+                <span className="text-indigo-300 font-medium text-right">SmartBuy-AI Agent</span>
+              </div>
+              <div className="flex items-start justify-between gap-2">
+                <span className="text-zinc-500">Location</span>
+                <span className="text-zinc-300 text-right">Bengaluru, India</span>
+              </div>
+            </div>
+
+            {/* Motto Box */}
+            <div className="mt-5 p-3.5 rounded-2xl bg-white/[0.03] border border-white/5">
+              <span className="text-[10px] font-mono uppercase text-zinc-500 block mb-1">Philosophy</span>
+              <p className="text-xs text-white font-medium leading-normal">
+                "Learn by building. Solve real-world problems."
+              </p>
             </div>
           </div>
         </motion.div>

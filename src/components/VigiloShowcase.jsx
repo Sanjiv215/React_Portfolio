@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Shield, Terminal, Copy, Check, Play, AlertTriangle, CheckCircle, Bug, Sparkles, ExternalLink, RefreshCw } from 'lucide-react';
+import { Shield, Terminal, Copy, Check, Play, AlertTriangle, CheckCircle, ExternalLink, RefreshCw, Sparkles } from 'lucide-react';
 import { FaGithub, FaPython } from 'react-icons/fa';
-import WindowFrame from './MacOS/WindowFrame';
 
 const SAMPLE_SNIPPETS = [
   {
     id: 'eval',
-    name: 'Arbitrary Code Execution',
+    name: 'Arbitrary Eval Injection',
     code: `def calculate_user_input(user_formula: str):
     # Insecure dynamic evaluation of untrusted expression
     result = eval(user_formula)
@@ -24,7 +23,7 @@ const SAMPLE_SNIPPETS = [
   },
   {
     id: 'sqli',
-    name: 'Raw SQL Injection Concatenation',
+    name: 'Raw SQL Interpolation',
     code: `def get_user_account(db, username: str):
     # Vulnerable direct SQL string interpolation
     query = f"SELECT * FROM users WHERE username = '{username}'"
@@ -41,7 +40,7 @@ const SAMPLE_SNIPPETS = [
   },
   {
     id: 'secret',
-    name: 'Hardcoded API Credential',
+    name: 'Hardcoded Credentials',
     code: `class CloudClient:
     API_KEY = "sk_live_99812491a82f8194b19401"
     
@@ -131,7 +130,7 @@ export default function VigiloShowcase() {
 
       setScanResult(findings);
       setScanning(false);
-    }, 400);
+    }, 350);
   };
 
   const copyPipCommand = () => {
@@ -141,219 +140,216 @@ export default function VigiloShowcase() {
   };
 
   return (
-    <section id="vigilo-showcase" className="py-10 sm:py-16 px-3 sm:px-4 relative z-10 max-w-5xl mx-auto">
-      <WindowFrame title="Vigilo.app — Python Static Security Scanner (PyPI)" icon={Shield}>
-        {/* Section Header */}
-        <div className="mb-6 sm:mb-8 pb-4 sm:pb-6 border-b border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
-          <div>
-            <span className="text-[10px] sm:text-[11px] font-mono text-zinc-500 uppercase tracking-widest block mb-1">
-              PyPI Security Tool
-            </span>
-            <h2 className="text-xl sm:text-3xl font-bold tracking-tight text-white">
-              Vigilo Security Scanner
-            </h2>
-            <p className="text-zinc-400 mt-1 text-xs sm:text-sm leading-relaxed">
-              Compile-time AST security analysis detecting CWE vulnerabilities in Python codebases.
-            </p>
+    <section id="vigilo-showcase" className="py-8 sm:py-14 px-4 sm:px-6 relative z-10 max-w-5xl mx-auto">
+      {/* Section Header */}
+      <div className="mb-8 sm:mb-12 flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-white/10 pb-5">
+        <div>
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full studio-pill text-emerald-400 text-xs font-mono uppercase tracking-wider mb-2">
+            <Shield className="w-3.5 h-3.5" />
+            <span>PyPI Security Package</span>
           </div>
-
-          {/* Quick Action Install Bar */}
-          <div className="flex flex-wrap items-center gap-2">
-            <div className="flex items-center justify-between gap-2.5 px-2.5 sm:px-3 py-1.5 rounded-xl bg-zinc-900 border border-white/10 font-mono text-[11px] sm:text-xs text-zinc-300">
-              <span>pip install vigilo</span>
-              <button
-                onClick={copyPipCommand}
-                className="p-1 rounded text-zinc-400 hover:text-white transition-colors"
-                title="Copy install command"
-              >
-                {copiedPip ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
-              </button>
-            </div>
-
-            <a
-              href="https://pypi.org/project/vigilo/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-1.5 sm:p-2 rounded-xl bg-zinc-900 border border-white/10 text-zinc-400 hover:text-white hover:border-white/20 transition-all text-xs"
-              title="View on PyPI"
-            >
-              <ExternalLink className="w-3.5 h-3.5" />
-            </a>
-
-            <a
-              href="https://github.com/Sanjiv215/VIGILO-Python-Package"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-1.5 sm:p-2 rounded-xl bg-zinc-900 border border-white/10 text-zinc-400 hover:text-white hover:border-white/20 transition-all text-xs"
-              title="View GitHub Repository"
-            >
-              <FaGithub className="w-3.5 h-3.5" />
-            </a>
-          </div>
+          <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white">
+            Vigilo Static Security Scanner
+          </h2>
+          <p className="text-zinc-400 mt-1 text-xs sm:text-sm">
+            High-speed Abstract Syntax Tree (AST) analysis engine for detecting CWE vulnerabilities.
+          </p>
         </div>
 
-        {/* Interactive Scanner Simulator */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start perspective-container">
-          
-          {/* Left: Code Editor & Samples */}
-          <motion.div
-            style={{ transformOrigin: '50% -40px', transformPerspective: 1000 }}
-            initial={{ opacity: 0, rotateX: 10, y: 25 }}
-            whileInView={{ opacity: 1, rotateX: 0, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-7 rounded-xl border border-white/15 overflow-hidden bg-zinc-950/95 shadow-xl hover:border-emerald-500/30 transition-all"
+        {/* Quick Install Bar */}
+        <div className="flex flex-wrap items-center gap-2">
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full studio-pill font-mono text-xs text-zinc-300">
+            <span>pip install vigilo</span>
+            <button
+              onClick={copyPipCommand}
+              className="p-1 rounded text-zinc-400 hover:text-white transition-colors"
+              title="Copy install command"
+            >
+              {copiedPip ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+            </button>
+          </div>
+
+          <a
+            href="https://pypi.org/project/vigilo/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-2 rounded-full studio-card text-zinc-400 hover:text-white transition-all text-xs"
+            title="View on PyPI"
           >
-            {/* Window header */}
-            <div className="bg-zinc-900/90 px-3.5 py-2.5 border-b border-white/10 flex items-center justify-between backdrop-blur-md">
-              <div className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/70" />
-                <span className="text-xs font-mono text-zinc-300">target_snippet.py</span>
-              </div>
+            <ExternalLink className="w-3.5 h-3.5" />
+          </a>
 
-              <button
-                onClick={handleRunScan}
-                disabled={scanning}
-                className="px-3.5 py-1.5 rounded-md bg-emerald-400 hover:bg-emerald-300 text-zinc-950 font-bold text-xs flex items-center gap-1.5 shadow-[0_0_15px_rgba(16,185,129,0.3)] hover:shadow-[0_0_20px_rgba(16,185,129,0.5)] transition-all font-mono disabled:opacity-50 hover:scale-105 active:scale-95"
-              >
-                {scanning ? (
-                  <>
-                    <RefreshCw className="w-3 h-3 animate-spin" />
-                    <span>Scanning AST...</span>
-                  </>
-                ) : (
-                  <>
-                    <Play className="w-3 h-3 fill-zinc-950" />
-                    <span>Run AST Scan</span>
-                  </>
-                )}
-              </button>
-            </div>
-
-            {/* Sample Selector Pills */}
-            <div className="p-2.5 bg-zinc-900/60 border-b border-white/10 flex flex-wrap gap-1.5">
-              <span className="text-[10px] font-mono text-zinc-400 self-center mr-1">Presets:</span>
-              {SAMPLE_SNIPPETS.map((sample) => (
-                <button
-                  key={sample.id}
-                  onClick={() => handleSelectSample(sample)}
-                  className={`px-2.5 py-1 rounded-md text-[11px] font-mono transition-all ${
-                    selectedSample.id === sample.id
-                      ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-semibold shadow-[0_0_10px_rgba(16,185,129,0.15)]'
-                      : 'bg-zinc-900/80 text-zinc-400 hover:text-zinc-200 border border-white/5 hover:border-white/15'
-                  }`}
-                >
-                  {sample.name}
-                </button>
-              ))}
-            </div>
-
-            {/* Code Input Area */}
-            <div className="p-4 bg-zinc-950">
-              <textarea
-                value={customCode}
-                onChange={(e) => setCustomCode(e.target.value)}
-                rows={8}
-                className="w-full bg-transparent font-mono text-xs sm:text-sm text-zinc-200 focus:outline-none leading-relaxed resize-none selection:bg-emerald-500/30"
-                placeholder="# Type or paste Python code to scan for CWE vulnerabilities..."
-              />
-            </div>
-
-            <div className="px-3.5 py-2 bg-zinc-950/90 border-t border-white/10 flex items-center justify-between text-[10px] font-mono text-zinc-400">
-              <span>AST Parsing Engine • Python 3.12 AST</span>
-              <span>Edit snippet or choose preset above</span>
-            </div>
-          </motion.div>
-
-          {/* Right: Diagnostics Output */}
-          <motion.div
-            style={{ transformOrigin: '50% -40px', transformPerspective: 1000 }}
-            initial={{ opacity: 0, rotateX: 10, y: 25 }}
-            whileInView={{ opacity: 1, rotateX: 0, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-5 p-5 rounded-xl bg-zinc-900/70 border border-white/15 space-y-3.5 shadow-xl"
+          <a
+            href="https://github.com/Sanjiv215/VIGILO-Python-Package"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-2 rounded-full studio-card text-zinc-400 hover:text-white transition-all text-xs"
+            title="View GitHub Repository"
           >
-            <div className="flex items-center justify-between pb-2.5 border-b border-white/10">
-              <div className="flex items-center gap-2">
-                <Terminal className="w-3.5 h-3.5 text-emerald-400" />
-                <h3 className="font-mono text-xs font-semibold text-white">Diagnostics Report</h3>
-              </div>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 font-medium">
-                Live AST Matcher
-              </span>
+            <FaGithub className="w-3.5 h-3.5" />
+          </a>
+        </div>
+      </div>
+
+      {/* Interactive Scanner Simulator */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+        
+        {/* Left: Code Editor & Samples */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="lg:col-span-7 studio-card rounded-3xl overflow-hidden border border-white/10"
+        >
+          {/* Header */}
+          <div className="bg-zinc-950/90 px-4 py-3 border-b border-white/10 flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
+              <span className="text-xs font-mono text-zinc-300">target_security_test.py</span>
             </div>
 
-            {/* Status Indicator */}
-            <AnimatePresence mode="wait">
+            <button
+              onClick={handleRunScan}
+              disabled={scanning}
+              className="px-4 py-1.5 rounded-full bg-emerald-400 hover:bg-emerald-300 text-zinc-950 font-bold text-xs flex items-center gap-1.5 shadow-[0_0_15px_rgba(16,185,129,0.3)] transition-all font-mono disabled:opacity-50"
+            >
               {scanning ? (
-                <motion.div
-                  key="scanning"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="py-8 flex flex-col items-center justify-center text-center space-y-2"
-                >
-                  <RefreshCw className="w-5 h-5 text-zinc-400 animate-spin" />
-                  <p className="font-mono text-xs text-zinc-300">Parsing AST nodes...</p>
-                </motion.div>
-              ) : scanResult && scanResult.length > 0 ? (
-                <motion.div
-                  key="results"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="space-y-2.5 max-h-[290px] overflow-y-auto pr-1"
-                >
-                  <div className="flex items-center gap-2 p-2 rounded-lg bg-red-950/30 border border-red-500/20 text-red-300 text-xs font-mono">
-                    <AlertTriangle className="w-3.5 h-3.5 shrink-0 text-red-400" />
-                    <span>{scanResult.length} Security Finding(s)</span>
-                  </div>
-
-                  {scanResult.map((finding, idx) => (
-                    <div
-                      key={idx}
-                      className="p-3 rounded-lg bg-zinc-950 border border-white/10 space-y-1 text-xs"
-                    >
-                      <div className="flex items-center justify-between gap-2">
-                        <span className="px-1.5 py-0.5 rounded bg-red-500/15 text-red-400 font-mono font-bold text-[10px]">
-                          {finding.cwe}
-                        </span>
-                        <span className="text-[10px] font-mono text-zinc-400">Line {finding.line}</span>
-                        <span className="px-1.5 py-0.2 rounded bg-zinc-800 text-zinc-300 font-mono text-[9px] uppercase">
-                          {finding.severity}
-                        </span>
-                      </div>
-
-                      <h4 className="font-medium text-white text-xs leading-snug">{finding.name}</h4>
-                      
-                      <div className="pt-1 border-t border-white/5 text-zinc-400 text-[11px] leading-relaxed">
-                        <span className="text-zinc-200 font-mono">Remediation: </span>
-                        {finding.advice}
-                      </div>
-                    </div>
-                  ))}
-                </motion.div>
+                <>
+                  <RefreshCw className="w-3 h-3 animate-spin" />
+                  <span>Scanning...</span>
+                </>
               ) : (
-                <motion.div
-                  key="clean"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="py-6 flex flex-col items-center justify-center text-center space-y-2"
-                >
-                  <div className="w-8 h-8 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
-                    <CheckCircle className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-emerald-300 text-xs">No Vulnerabilities Detected</h4>
-                    <p className="text-[11px] text-zinc-500">AST matches clean code policy.</p>
-                  </div>
-                </motion.div>
+                <>
+                  <Play className="w-3 h-3 fill-zinc-950" />
+                  <span>Run AST Scan</span>
+                </>
               )}
-            </AnimatePresence>
-          </motion.div>
+            </button>
+          </div>
 
-        </div>
-      </WindowFrame>
+          {/* Sample Selector Pills */}
+          <div className="p-3 bg-white/[0.02] border-b border-white/10 flex flex-wrap gap-1.5">
+            <span className="text-[10px] font-mono text-zinc-500 self-center mr-1">Presets:</span>
+            {SAMPLE_SNIPPETS.map((sample) => (
+              <button
+                key={sample.id}
+                onClick={() => handleSelectSample(sample)}
+                className={`px-3 py-1 rounded-full text-xs font-mono transition-all ${
+                  selectedSample.id === sample.id
+                    ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-semibold'
+                    : 'studio-pill text-zinc-400 hover:text-zinc-200'
+                }`}
+              >
+                {sample.name}
+              </button>
+            ))}
+          </div>
+
+          {/* Code Input Area */}
+          <div className="p-4 sm:p-5 bg-zinc-950/60">
+            <textarea
+              value={customCode}
+              onChange={(e) => setCustomCode(e.target.value)}
+              rows={7}
+              className="w-full bg-transparent font-mono text-xs sm:text-sm text-zinc-200 focus:outline-none leading-relaxed resize-none selection:bg-emerald-500/30"
+              placeholder="# Enter Python code to scan..."
+            />
+          </div>
+
+          <div className="px-4 py-2 bg-zinc-950/90 border-t border-white/10 flex items-center justify-between text-[11px] font-mono text-zinc-400">
+            <span>AST Python 3.12 Rules</span>
+            <span>Editable in realtime</span>
+          </div>
+        </motion.div>
+
+        {/* Right: Diagnostics Output */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          className="lg:col-span-5 p-5 sm:p-6 studio-card rounded-3xl border border-white/10 space-y-4"
+        >
+          <div className="flex items-center justify-between pb-3 border-b border-white/10">
+            <div className="flex items-center gap-2">
+              <Terminal className="w-4 h-4 text-emerald-400" />
+              <h3 className="font-mono text-xs font-semibold text-white">Diagnostics Output</h3>
+            </div>
+            <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full studio-pill text-emerald-300 font-medium">
+              Live AST
+            </span>
+          </div>
+
+          {/* Status Indicator */}
+          <AnimatePresence mode="wait">
+            {scanning ? (
+              <motion.div
+                key="scanning"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="py-10 flex flex-col items-center justify-center text-center space-y-2"
+              >
+                <RefreshCw className="w-5 h-5 text-zinc-400 animate-spin" />
+                <p className="font-mono text-xs text-zinc-300">Parsing AST nodes...</p>
+              </motion.div>
+            ) : scanResult && scanResult.length > 0 ? (\
+              <motion.div
+                key="results"
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="space-y-3 max-h-[290px] overflow-y-auto pr-1"
+              >
+                <div className="flex items-center gap-2 p-2.5 rounded-xl bg-red-950/30 border border-red-500/20 text-red-300 text-xs font-mono">
+                  <AlertTriangle className="w-3.5 h-3.5 shrink-0 text-red-400" />
+                  <span>{scanResult.length} Vulnerability Detected</span>
+                </div>
+
+                {scanResult.map((finding, idx) => (
+                  <div
+                    key={idx}
+                    className="p-3.5 rounded-xl bg-zinc-950/80 border border-white/10 space-y-1.5 text-xs"
+                  >
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="px-2 py-0.5 rounded bg-red-500/15 text-red-400 font-mono font-bold text-[10px]">
+                        {finding.cwe}
+                      </span>
+                      <span className="text-[10px] font-mono text-zinc-400">Line {finding.line}</span>
+                      <span className="px-2 py-0.5 rounded studio-pill text-zinc-300 font-mono text-[9px] uppercase">
+                        {finding.severity}
+                      </span>
+                    </div>
+
+                    <h4 className="font-semibold text-white text-xs leading-snug">{finding.name}</h4>
+                    
+                    <div className="pt-1.5 border-t border-white/5 text-zinc-400 text-[11px] leading-relaxed">
+                      <span className="text-zinc-200 font-mono">Fix: </span>
+                      {finding.advice}
+                    </div>
+                  </div>
+                ))}
+              </motion.div>
+            ) : (
+              <motion.div
+                key="clean"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="py-8 flex flex-col items-center justify-center text-center space-y-2"
+              >
+                <div className="w-9 h-9 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+                  <CheckCircle className="w-4 h-4" />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-emerald-300 text-xs">No Security Issues Detected</h4>
+                  <p className="text-[11px] text-zinc-500">AST matches clean code security policy.</p>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
+
+      </div>
     </section>
   );
 }
