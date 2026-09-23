@@ -294,7 +294,7 @@ export default function VigiloShowcase() {
                 <RefreshCw className="w-5 h-5 text-zinc-400 animate-spin" />
                 <p className="font-mono text-xs text-zinc-300">Parsing AST nodes...</p>
               </motion.div>
-            ) : scanResult && scanResult.length > 0 ? (\
+            ) : scanResult && scanResult.length > 0 ? (
               <motion.div
                 key="results"
                 initial={{ opacity: 0, y: 8 }}
