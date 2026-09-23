@@ -238,20 +238,25 @@ Ready to engineer exceptional software together!`
 
         {/* Terminal Window */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          style={{ transformOrigin: '50% -80px', transformPerspective: 1200 }}
+          initial={{ opacity: 0, rotateX: 16, y: 40 }}
+          whileInView={{ opacity: 1, rotateX: 0, y: 0 }}
           viewport={{ once: true }}
-          className="glass-panel border border-white/10 rounded-2xl overflow-hidden shadow-2xl bg-zinc-950/90"
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="glass-panel border border-white/20 rounded-2xl overflow-hidden shadow-[0_20px_70px_rgba(0,0,0,0.6)] bg-zinc-950/95 relative group hover:border-white/30 transition-all"
         >
+          {/* Top highlight bar */}
+          <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+
           {/* Bar */}
-          <div className="bg-zinc-900/60 px-3 sm:px-4 py-2 sm:py-2.5 border-b border-white/10 flex items-center justify-between">
+          <div className="bg-zinc-900/90 px-3.5 sm:px-4 py-2 sm:py-2.5 border-b border-white/10 flex items-center justify-between backdrop-blur-md">
             <div className="flex items-center gap-1.5 sm:gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]" />
-              <span className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
-              <span className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
-              <span className="text-[11px] sm:text-xs font-mono text-zinc-400 ml-1.5 sm:ml-2 truncate max-w-[140px] sm:max-w-none">sanjiv@darwin:~ (zsh)</span>
+              <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f56] shadow-sm" />
+              <span className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e] shadow-sm" />
+              <span className="w-2.5 h-2.5 rounded-full bg-[#27c93f] shadow-sm" />
+              <span className="text-[11px] sm:text-xs font-mono text-zinc-300 ml-1.5 sm:ml-2 truncate max-w-[140px] sm:max-w-none">sanjiv@darwin:~ (zsh)</span>
             </div>
-            <span className="text-[9px] sm:text-[10px] font-mono text-zinc-400 bg-white/5 px-2 py-0.5 rounded border border-white/10 shrink-0">
+            <span className="text-[9px] sm:text-[10px] font-mono text-cyan-300 bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/20 shrink-0 font-semibold">
               vigilo v1.2
             </span>
           </div>
@@ -261,19 +266,22 @@ Ready to engineer exceptional software together!`
             {history.map((item, idx) => (
               <div key={idx} className="leading-relaxed">
                 {item.type === 'user' && (
-                  <div className="text-white font-medium">{item.content}</div>
+                  <div className="text-white font-semibold flex items-center gap-2">
+                    <span className="text-emerald-400">➜</span>
+                    <span>{item.content}</span>
+                  </div>
                 )}
                 {item.type === 'system' && (
-                  <div className="text-zinc-500 border-l border-zinc-700 pl-3 my-1 whitespace-pre-wrap">{item.content}</div>
+                  <div className="text-zinc-400 border-l-2 border-cyan-500/50 pl-3 my-1 whitespace-pre-wrap">{item.content}</div>
                 )}
                 {item.type === 'response' && (
-                  <pre className="text-zinc-300 whitespace-pre-wrap font-mono overflow-x-auto text-[11px] sm:text-xs">{item.content}</pre>
+                  <pre className="text-zinc-200 whitespace-pre-wrap font-mono overflow-x-auto text-[11px] sm:text-xs bg-zinc-900/30 p-2.5 rounded-lg border border-white/5">{item.content}</pre>
                 )}
                 {item.type === 'success' && (
-                  <div className="text-emerald-400 font-medium p-2.5 sm:p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/20">{item.content}</div>
+                  <div className="text-emerald-300 font-medium p-2.5 sm:p-3 rounded-xl bg-emerald-950/40 border border-emerald-500/30 shadow-[0_0_15px_rgba(16,185,129,0.15)]">{item.content}</div>
                 )}
                 {item.type === 'error' && (
-                  <div className="text-red-400 font-mono">{item.content}</div>
+                  <div className="text-red-400 font-mono bg-red-950/30 p-2 rounded border border-red-500/20">{item.content}</div>
                 )}
               </div>
             ))}
@@ -281,18 +289,18 @@ Ready to engineer exceptional software together!`
           </div>
 
           {/* Form Input */}
-          <form onSubmit={handleCommand} className="bg-zinc-900/40 px-3 sm:px-4 py-2.5 sm:py-3 border-t border-white/10 flex items-center gap-2 sm:gap-3">
+          <form onSubmit={handleCommand} className="bg-zinc-900/60 px-3 sm:px-4 py-2.5 sm:py-3 border-t border-white/10 flex items-center gap-2 sm:gap-3">
             <span className="text-emerald-400 font-mono font-bold text-xs sm:text-sm">$</span>
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder='Try typing "smartbuy", "vigilo", "projects", "skills", or "help"...'
-              className="flex-1 bg-transparent text-zinc-200 font-mono text-xs sm:text-sm focus:outline-none placeholder:text-zinc-600 min-w-0"
+              className="flex-1 bg-transparent text-zinc-100 font-mono text-xs sm:text-sm focus:outline-none placeholder:text-zinc-500 min-w-0"
             />
             <button
               type="submit"
-              className="p-1.5 rounded-lg bg-white/10 text-zinc-300 hover:text-white hover:bg-white/20 transition-all"
+              className="p-1.5 rounded-lg bg-white/15 text-zinc-200 hover:text-white hover:bg-cyan-500/30 transition-all hover:scale-105"
             >
               <Send className="w-3.5 h-3.5" />
             </button>
