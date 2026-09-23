@@ -49,38 +49,40 @@ export default function ProjectsSection() {
           </div>
 
           {/* Projects Grid */}
-          <motion.div layout className="grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-4">
+          <motion.div layout className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 perspective-container">
             <AnimatePresence>
-              {filteredProjects.map((project) => (
+              {filteredProjects.map((project, idx) => (
                 <motion.div
                   key={project.id}
                   layout
-                  initial={{ opacity: 0, scale: 0.96 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.96 }}
-                  transition={{ duration: 0.2 }}
-                  className="rounded-xl overflow-hidden border border-white/10 hover:border-white/20 transition-all flex flex-col group bg-zinc-900/50 p-4 sm:p-5 justify-between"
+                  style={{ transformOrigin: '50% -50px', transformPerspective: 1000 }}
+                  initial={{ opacity: 0, rotateX: 14, y: 30, scale: 0.96 }}
+                  whileInView={{ opacity: 1, rotateX: 0, y: 0, scale: 1 }}
+                  viewport={{ once: true, margin: '-40px' }}
+                  transition={{ duration: 0.6, delay: idx * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  className="rounded-xl overflow-hidden border border-white/15 hover:border-cyan-400/40 transition-all flex flex-col group bg-zinc-900/70 p-4 sm:p-5 justify-between shadow-lg hover:shadow-[0_15px_40px_rgba(0,0,0,0.5),0_0_20px_rgba(56,189,248,0.12)] relative hover:-translate-y-1"
                 >
                   <div>
                     {/* Repo Header */}
-                    <div className="flex items-center justify-between gap-2 mb-2">
+                    <div className="flex items-center justify-between gap-2 mb-2.5">
                       <div className="flex items-center gap-2 overflow-hidden">
-                        <Code className="w-4 h-4 text-zinc-400 shrink-0" />
+                        <Code className="w-4 h-4 text-cyan-400 shrink-0" />
                         <h3
                           onClick={() => setSelectedProject(project)}
-                          className="text-sm font-semibold text-white group-hover:text-zinc-200 transition-colors cursor-pointer truncate font-mono"
+                          className="text-sm font-semibold text-white group-hover:text-cyan-300 transition-colors cursor-pointer truncate font-mono"
                         >
                           {project.repoName || project.title}
                         </h3>
                       </div>
 
-                      <span className="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-zinc-400 text-[10px] font-mono shrink-0">
+                      <span className="px-2 py-0.5 rounded-full bg-white/10 border border-white/15 text-zinc-300 text-[10px] font-mono shrink-0">
                         Public
                       </span>
                     </div>
 
                     {/* Description */}
-                    <p className="text-zinc-400 text-xs leading-relaxed mb-4">
+                    <p className="text-zinc-300 text-xs leading-relaxed mb-4">
                       {project.shortDescription}
                     </p>
                   </div>
@@ -91,7 +93,7 @@ export default function ProjectsSection() {
                       {project.tech.map((t) => (
                         <span
                           key={t}
-                          className="px-2 py-0.5 rounded-md bg-zinc-950 border border-white/5 text-zinc-300 text-[11px] font-mono"
+                          className="px-2 py-0.5 rounded-md bg-zinc-950/80 border border-white/10 text-zinc-300 text-[11px] font-mono"
                         >
                           {t}
                         </span>
@@ -103,14 +105,14 @@ export default function ProjectsSection() {
                       <div className="flex items-center gap-2.5">
                         <div className="flex items-center gap-1.5">
                           <span
-                            className="w-2.5 h-2.5 rounded-full inline-block"
+                            className="w-2.5 h-2.5 rounded-full inline-block shadow-sm"
                             style={{ backgroundColor: project.languageColor || '#3572A5' }}
                           />
-                          <span className="text-[11px]">{project.primaryLanguage}</span>
+                          <span className="text-[11px] text-zinc-300">{project.primaryLanguage}</span>
                         </div>
 
                         {project.badge && (
-                          <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                          <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 font-medium">
                             {project.badge}
                           </span>
                         )}
@@ -168,20 +170,25 @@ export default function ProjectsSection() {
                 Freelance Client Work
               </h2>
             </div>
-            <span className="px-3 py-1 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-300 text-[11px] sm:text-xs font-mono self-start sm:self-auto">
+            <span className="px-3 py-1 rounded-full bg-violet-500/15 border border-violet-500/30 text-violet-300 text-[11px] sm:text-xs font-mono self-start sm:self-auto font-medium shadow-[0_0_12px_rgba(139,92,246,0.2)]">
               2 Custom Portfolios Delivered
             </span>
           </div>
 
           {/* Freelance Projects Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-4">
-            {portfolioData.freelanceProjects.map((fProject) => (
-              <div
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 perspective-container">
+            {portfolioData.freelanceProjects.map((fProject, idx) => (
+              <motion.div
                 key={fProject.id}
-                className="rounded-xl overflow-hidden border border-white/10 hover:border-violet-500/30 transition-all flex flex-col group bg-zinc-900/50 p-4 sm:p-5 justify-between"
+                style={{ transformOrigin: '50% -50px', transformPerspective: 1000 }}
+                initial={{ opacity: 0, rotateX: 14, y: 30, scale: 0.96 }}
+                whileInView={{ opacity: 1, rotateX: 0, y: 0, scale: 1 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ duration: 0.6, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                className="rounded-xl overflow-hidden border border-white/15 hover:border-violet-500/50 transition-all flex flex-col group bg-zinc-900/70 p-4 sm:p-5 justify-between shadow-lg hover:shadow-[0_15px_40px_rgba(0,0,0,0.5),0_0_20px_rgba(139,92,246,0.15)] hover:-translate-y-1"
               >
                 <div>
-                  <div className="flex items-center justify-between gap-2 mb-2">
+                  <div className="flex items-center justify-between gap-2 mb-2.5">
                     <div className="flex items-center gap-2 overflow-hidden">
                       <Briefcase className="w-4 h-4 text-violet-400 shrink-0" />
                       <h3
@@ -192,12 +199,12 @@ export default function ProjectsSection() {
                       </h3>
                     </div>
 
-                    <span className="px-2 py-0.5 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-300 text-[10px] font-mono shrink-0">
+                    <span className="px-2 py-0.5 rounded-full bg-violet-500/15 border border-violet-500/30 text-violet-300 text-[10px] font-mono shrink-0 font-medium">
                       Client Work
                     </span>
                   </div>
 
-                  <p className="text-zinc-400 text-xs leading-relaxed mb-4">
+                  <p className="text-zinc-300 text-xs leading-relaxed mb-4">
                     {fProject.shortDescription}
                   </p>
                 </div>
@@ -208,7 +215,7 @@ export default function ProjectsSection() {
                     {fProject.tech.map((t) => (
                       <span
                         key={t}
-                        className="px-2 py-0.5 rounded-md bg-zinc-950 border border-white/5 text-zinc-300 text-[11px] font-mono"
+                        className="px-2 py-0.5 rounded-md bg-zinc-950/80 border border-white/10 text-zinc-300 text-[11px] font-mono"
                       >
                         {t}
                       </span>
@@ -218,8 +225,8 @@ export default function ProjectsSection() {
                   {/* Footer */}
                   <div className="flex items-center justify-between pt-3 border-t border-white/10 text-xs text-zinc-400 font-mono">
                     <div className="flex items-center gap-2">
-                      <span className="w-2.5 h-2.5 rounded-full bg-amber-400 inline-block" />
-                      <span className="text-[11px]">Client: {fProject.client}</span>
+                      <span className="w-2.5 h-2.5 rounded-full bg-amber-400 inline-block shadow-[0_0_8px_rgba(251,191,36,0.6)]" />
+                      <span className="text-[11px] text-zinc-300">Client: {fProject.client}</span>
                     </div>
 
                     <div className="flex items-center gap-1.5">
@@ -243,7 +250,7 @@ export default function ProjectsSection() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </WindowFrame>
