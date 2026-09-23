@@ -17,10 +17,10 @@ export default function SkillsSection() {
         <div>
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full studio-pill text-cyan-400 text-xs font-mono uppercase tracking-wider mb-2">
             <Cpu className="w-3.5 h-3.5" />
-            <span>Tech Stack & Arsenal</span>
+            <span>Tech Stack &amp; Arsenal</span>
           </div>
           <h2 className="text-2xl sm:text-4xl font-bold text-white tracking-tight">
-            Skills & Capabilities
+            Skills &amp; Capabilities
           </h2>
         </div>
 
