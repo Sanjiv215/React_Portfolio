@@ -16,8 +16,8 @@ import Footer from '../components/Footer';
 export default function Home() {
   return (
     <ThemeProvider>
-      <div className="relative min-h-screen bg-[#08090a] text-zinc-100 selection:bg-white selection:text-black font-sans pb-24">
-        {/* Subtle Canvas Particles */}
+      <div className="relative min-h-screen bg-[#0a0d14] text-zinc-100 selection:bg-cyan-500/30 selection:text-white font-sans pb-28 perspective-container">
+        {/* Subtle Canvas Particles & Radiant Aura */}
         <BackgroundCanvas />
         
         {/* macOS Top Menu Bar */}
