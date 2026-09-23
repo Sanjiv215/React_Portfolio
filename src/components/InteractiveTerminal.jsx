@@ -257,7 +257,7 @@ Ready to engineer exceptional software together!`
                     <span>{item.content}</span>
                   </div>
                 )}
-                {item.type === 'system' && (\
+                {item.type === 'system' && (
                   <div className="text-zinc-400 border-l-2 border-cyan-500/50 pl-3 my-1 whitespace-pre-wrap">{item.content}</div>
                 )}
                 {item.type === 'response' && (
