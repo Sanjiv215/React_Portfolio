@@ -17,10 +17,10 @@ export default function AboutSection() {
         <div>
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full studio-pill text-cyan-400 text-xs font-mono uppercase tracking-wider mb-2">
             <Sparkles className="w-3 h-3" />
-            <span>Overview & Philosophy</span>
+            <span>Overview &amp; Philosophy</span>
           </div>
           <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white">
-            Engineering & Problem Solving
+            Engineering &amp; Problem Solving
           </h2>
         </div>
         <div className="flex items-center gap-2 studio-pill px-3.5 py-1.5 rounded-full text-emerald-400 text-xs font-mono self-start sm:self-auto">
@@ -53,7 +53,7 @@ export default function AboutSection() {
 
               <div className="space-y-3">
                 <h3 className="text-lg sm:text-xl font-bold text-white leading-snug">
-                  Full-Stack Architecture, Security Tooling & AI Agents
+                  Full-Stack Architecture, Security Tooling &amp; AI Agents
                 </h3>
                 <p className="text-zinc-300 text-xs sm:text-sm leading-relaxed">
                   {portfolioData.personal.bio}
@@ -87,7 +87,7 @@ export default function AboutSection() {
 
         {/* Stats Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
-          {portfolioData.stats.map((stat, idx) => (\
+          {portfolioData.stats.map((stat, idx) => (
             <motion.div
               key={stat.label}
               initial={{ opacity: 0, y: 15 }}
