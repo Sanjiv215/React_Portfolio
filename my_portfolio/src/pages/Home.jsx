@@ -15,14 +15,14 @@ import Footer from '../components/Footer';
 export default function Home() {
   return (
     <ThemeProvider>
-      <div className="relative min-h-screen bg-[#090a0f] text-zinc-100 selection:bg-cyan-500/30 selection:text-white font-sans antialiased overflow-x-hidden">
-        {/* Ambient Canvas & Mesh Aura */}
+      <div className="relative min-h-screen bg-[#040711] text-zinc-100 selection:bg-cyan-500/30 selection:text-cyan-300 font-sans antialiased overflow-x-hidden">
+        {/* Ambient Canvas & Neural Synaptic Grid */}
         <BackgroundCanvas />
         
-        {/* Floating Capsule Header */}
+        {/* Floating Cortex HUD Capsule Header */}
         <Navbar />
 
-        {/* Main Content Sections */}
+        {/* Main Content Telemetry Sections */}
         <main className="pt-20 sm:pt-24 space-y-16 sm:space-y-28 pb-16">
           <HeroSection />
           <AboutSection />
@@ -34,7 +34,7 @@ export default function Home() {
           <ContactSection />
         </main>
 
-        {/* Studio Minimal Footer */}
+        {/* Cortex Minimal HUD Footer */}
         <Footer />
       </div>
     </ThemeProvider>
