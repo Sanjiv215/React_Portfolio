@@ -1,8 +1,7 @@
 import React from 'react';
 import { ThemeProvider } from '../context/ThemeContext';
 import BackgroundCanvas from '../components/BackgroundCanvas';
-import MenuBar from '../components/MacOS/MenuBar';
-import Dock from '../components/MacOS/Dock';
+import Navbar from '../components/Navbar';
 import HeroSection from '../components/HeroSection';
 import AboutSection from '../components/AboutSection';
 import VigiloShowcase from '../components/VigiloShowcase';
@@ -16,15 +15,15 @@ import Footer from '../components/Footer';
 export default function Home() {
   return (
     <ThemeProvider>
-      <div className="relative min-h-screen bg-[#0a0d14] text-zinc-100 selection:bg-cyan-500/30 selection:text-white font-sans pb-28 perspective-container">
-        {/* Subtle Canvas Particles & Radiant Aura */}
+      <div className="relative min-h-screen bg-[#090a0f] text-zinc-100 selection:bg-cyan-500/30 selection:text-white font-sans antialiased overflow-x-hidden">
+        {/* Ambient Canvas & Mesh Aura */}
         <BackgroundCanvas />
         
-        {/* macOS Top Menu Bar */}
-        <MenuBar />
+        {/* Floating Capsule Header */}
+        <Navbar />
 
-        {/* Desktop Main Content Canvas */}
-        <main className="pt-8">
+        {/* Main Content Sections */}
+        <main className="pt-20 sm:pt-24 space-y-16 sm:space-y-28 pb-16">
           <HeroSection />
           <AboutSection />
           <VigiloShowcase />
@@ -35,10 +34,7 @@ export default function Home() {
           <ContactSection />
         </main>
 
-        {/* macOS Bottom Dock */}
-        <Dock />
-
-        {/* Minimal Footer */}
+        {/* Studio Minimal Footer */}
         <Footer />
       </div>
     </ThemeProvider>
