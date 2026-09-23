@@ -25,7 +25,7 @@ export default function ProjectsSection() {
               <span>Production Codebases</span>
             </div>
             <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white">
-              Featured Projects & Systems
+              Featured Projects &amp; Systems
             </h2>
           </div>
 
@@ -90,7 +90,7 @@ export default function ProjectsSection() {
                 <div>
                   {/* Tech Stack Tags */}
                   <div className="flex flex-wrap gap-1.5 mb-5">
-                    {project.tech.map((t) => (\
+                    {project.tech.map((t) => (
                       <span
                         key={t}
                         className="px-2.5 py-1 rounded-md bg-zinc-950/80 border border-white/5 text-zinc-300 text-[11px] font-mono"
@@ -165,7 +165,7 @@ export default function ProjectsSection() {
               <span>Client Deliverables</span>
             </div>
             <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white">
-              Freelance & Bespoke Client Work
+              Freelance &amp; Bespoke Client Work
             </h2>
           </div>
           <span className="px-3.5 py-1.5 rounded-full studio-pill text-indigo-300 text-xs font-mono self-start sm:self-auto font-medium">
